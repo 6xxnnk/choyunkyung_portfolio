@@ -1,10 +1,6 @@
 @charset "UTF-8";
 
-
-
-
-
-/* ===== Global: 1rem = 10px ===== */
+/* ===== Global ===== */
 :root{
   --maxw: 120rem;
   --radius-pill: 999rem;
@@ -27,12 +23,17 @@ body{
 }
 img{ max-width:100%; display:block; }
 .wrap{ min-height:100dvh; display:flex; flex-direction:column; }
-
-/* ===== Utilities ===== */
 .container{ width:min(100%, var(--maxw)); margin:0 auto; padding:0 2rem; }
 .section{ padding:10rem 0; }
+
 .section__title{ font-size: clamp(2.8rem, 2.4vw, 4.2rem); margin:0 0 2rem; }
-.lead{ color:#374151; font-size: clamp(1.6rem, 1.2vw, 1.8rem); margin:0 0 3rem; }
+.section__title.climate,
+.section__title--xxl.climate{
+  font-family:"Climate Crisis", system-ui, sans-serif;
+  text-align:center; letter-spacing:.5px; line-height:1.05;
+  font-size:clamp(3.6rem,5.4vw,7.2rem);
+  margin:0 0 3.2rem;
+}
 .btn{
   display:inline-block; border:0; background:var(--accent); color:#fff;
   font-weight:700; font-size:1.6rem; padding:1.2rem 2.4rem; border-radius:var(--radius-pill);
@@ -41,11 +42,10 @@ img{ max-width:100%; display:block; }
 .btn--ghost{ background:#fff; color:#111; border:.1rem solid #111; box-shadow:none; }
 .btn + .btn{ margin-left:1rem; }
 
-/* ===== Hero ===== */
+/* ===== Hero (100vh, 중앙 정렬) ===== */
 .hero{
-  min-height: 100vh;             /* 섹션2가 안 보이게 고정 */
-  display:grid;
-  place-items:center;
+  min-height: 100vh;
+  display:grid; place-items:center;
   padding:6rem 2rem 4rem;
   position:relative;
   transition: opacity .36s ease, transform .36s ease;
@@ -54,20 +54,15 @@ img{ max-width:100%; display:block; }
   content:""; position:absolute; inset:-20%;
   background: radial-gradient(80% 60% at 50% 30%, rgba(13,110,253,.08), transparent 60%);
 }
-.hero.hero--leaving{
-  opacity:.02;
-  transform: translateY(-1.2rem);
-}
-
 .hero__inner{
   width:100%; max-width:var(--maxw);
-  display:flex; flex-direction:column; align-items:center;
-  gap:0.6rem;
+  display:flex; flex-direction:column; align-items:center; gap:.6rem;
 }
 
+/* 로고, 서치바 */
 .logo{
   font-size: clamp(5.6rem, 7vw, 12.4rem);
-  font-weight:800; letter-spacing:-.02em; display:flex; gap:.04em;
+  font-weight:400; letter-spacing:-.02em; display:flex; gap:.04em;
   animation:breathe 6s ease-in-out infinite;
 }
 .logo .p{ color:#e11d48 } .logo .o1{ color:#0ea5e9 } .logo .r{ color:#f59e0b }
@@ -86,10 +81,7 @@ img{ max-width:100%; display:block; }
   border:.2rem solid #111; border-radius:5.6rem; padding:.8rem;
   box-shadow:0 1rem 3rem rgba(0,0,0,.25); background:#fff;
 }
-.input-area{
-  position:relative; flex:1; padding:.4rem 1.2rem;
-  display:flex; align-items:center; gap:.8rem; border-radius:4rem;
-}
+.input-area{ position:relative; flex:1; padding:.4rem 1.2rem; display:flex; align-items:center; gap:.8rem; border-radius:4rem; }
 .input-area input{
   width:100%; border:0; outline:0; background:transparent; padding:.8rem 0;
   font-size: clamp(1.6rem, 1.2vw, 2.2rem);
@@ -99,7 +91,6 @@ img{ max-width:100%; display:block; }
   color:#9aa0a6; pointer-events:none; white-space:nowrap; overflow:hidden;
   font-size: clamp(1.6rem, 1.2vw, 2.2rem);
 }
-.typing-ghost.hidden{ display:none; }
 .select{ display:flex; align-items:center; gap:.6rem; padding:.6rem 1rem; border-left:.1rem solid #e5e7eb; }
 .select select{
   appearance:none; border:0; background:transparent; outline:0; cursor:pointer; color:#374151;
@@ -107,231 +98,163 @@ img{ max-width:100%; display:block; }
 }
 .caret{ width:0; height:0; border-left:.6rem solid transparent; border-right:.6rem solid transparent; border-top:.8rem solid #6b7280; }
 
-.hero__subcopy{
-  margin-top:1.6rem;
-  font-size:1.8rem; color:#374151; letter-spacing:.02em; opacity:.9;
-  animation:fadeIn .9s ease both .4s;
-}
+.hero__hint{ color:var(--muted); font-size:1.5rem; margin:1.2rem 0 0; text-align:center; }
+@keyframes breathe{ 0%,100%{ transform:translateY(0) scale(1); opacity:1; } 50%{ transform:translateY(-.2rem) scale(1.005); opacity:.98; } }
 
-.hero__hint{
-  color:var(--muted); font-size:1.5rem; margin:1.2rem 0 0; text-align:center;
-  transition:color .3s ease, opacity .3s ease;
-}
-.hero__hint:hover{ color:#111; opacity:.9; }
-.hero__hint .divider{
-  display:inline-block; width:4rem; height:.1rem; background:#e5e7eb;
-  margin:0 1rem .2rem;
-}
-
-/* 부드러운 호흡 애니메이션 */
-@keyframes breathe{
-  0%,100%{ transform:translateY(0) scale(1); opacity:1; }
-  50%{ transform:translateY(-.2rem) scale(1.005); opacity:.98; }
-}
-@keyframes fadeIn{
-  from{ opacity:0; transform:translateY(.6rem); }
-  to{ opacity:1; transform:none; }
-}
-@media (prefers-reduced-motion: reduce){
-  .logo, .search-wrap, .hero__subcopy{ animation:none !important; }
-}
-
-/* ===== About (섹션2) ===== */
 /* =========================
-   SECTION 2: ABOUT ME DIAGRAM
+   SECTION 2: ABOUT (100vh 그리드)
 ========================= */
-
-
+/* =========================
+   SECTION 2: ABOUT (100vh, 중앙 수납)
+========================= */
 .about-cvmap {
   position: relative;
-  padding: 10rem 0 12rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-/* 중앙 박스 */
-.cv-center {
-  position: relative;
-  z-index: 2;
-}
-
-.ink-title {
-  font-family: "Butterfly Kids", cursive;
-  font-size: clamp(4.2rem, 6vw, 6.8rem);
-  margin: 0 0 1rem;
-  color: #111;
-}
-
-.bio {
-  font-family: "Cabin", "Noto Sans KR", sans-serif;
-  font-size: 1.6rem;
-  line-height: 1.7;
-  color: #222;
-}
-
-.social-list {
-  list-style: none;
-  margin: 0.8rem 0 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;   /* 화면 정중앙 */
   padding: 0;
 }
-.social-list li {
-  margin: 0.2rem 0;
+
+/* 컨테이너 자체도 중앙 배치 */
+.about-cvmap .container {
+  width: min(100%, var(--maxw));
+  margin: 0 auto;
+  display: grid;
+  gap: 1.6rem;
+  align-content: center; /* 수직 중앙 */
+  justify-items: center; /* 수평 중앙 */
 }
-.bio a {
-  color: #111;
-  text-decoration: underline;
-  text-underline-offset: 0.2rem;
-  transition: opacity 0.2s ease;
-}
-.bio a:hover {
-  opacity: 0.6;
-}
-/* ========== 반복 리빌 기본 상태/보임 상태 ========== */
+
+/* 리빌(초기/보임) — 섹션2 전용 */
 .about-cvmap [data-reveal],
-.about-cvmap .cv-center {
+.about-cvmap .cv-center{
   opacity: 0;
-  transform: translateY(12px);
+  transform: translateY(14px);
   transition: opacity .6s ease, transform .6s ease;
 }
 .about-cvmap [data-reveal].is-visible,
-.about-cvmap .cv-center.is-visible {
+.about-cvmap .cv-center.is-visible{
   opacity: 1;
   transform: none;
 }
 
-/* ========== ink-title 손글씨 드로잉 ========== */
-.ink-title-svg {
+/* 타이틀 SVG 크기/안정화 */
+.ink-title-svg{
+  width: min(92vw, 110rem);
+  height: clamp(120px, 18vh, 220px);
   display: block;
-  width: min(80rem, 86vw);
-  height: auto;
-  margin: 0 auto 1.2rem;
   overflow: visible;
 }
-
-/* 실제 글자 스타일: 손글씨 펜 스트로크 → 채우기 */
-.ink-title-stroke {
-  font-family: "Butterfly Kids", cursive;
-  font-weight: 400;
-  font-size: 120px;                 /* 필요하면 조정 */
-  letter-spacing: .02em;
-
-  fill: transparent;                /* 처음엔 채움 없음 */
-  stroke: #0f172a;                  /* 펜 색 */
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-
-  /* JS에서 stroke-dasharray/offset 주입됨 */
-  transition: fill .45s ease .9s;   /* 드로잉 후 살짝 채우기 */
+.ink-title-stroke{
+  font-family:"Butterfly Kids", cursive;
+  font-weight:400; font-size:120px; letter-spacing:.02em;
+  fill:transparent; stroke:#0f172a; stroke-width:2.4;
+  stroke-linecap:round; stroke-linejoin:round;
+  vector-effect: non-scaling-stroke; /* 스케일 시 두께 유지 */
 }
 
-/* 드로잉 재생 트리거 */
-.ink-title-svg.is-drawn .ink-title-stroke {
-  animation: ink-draw 1.1s ease forwards;
-}
-/* 드로잉이 시작되면 fill도 채워짐 */
-.ink-title-svg.is-drawn .ink-title-stroke {
-  fill: #0f172a0f;                  /* 아주 옅은 잉크가 번진 느낌(옵션) */
-}
-@keyframes ink-draw {
-  to { stroke-dashoffset: 0; }
-}
-/* 공통 버블 */
-.bubble {
-  position: absolute;
-  border: 1.6px solid #000;
-  border-radius: 50%;
-  background: transparent;
-  display: flex;
-  flex-direction: column;       /* label을 상단으로 밀기 */
-  justify-content: flex-start;  /* label이 위로 */
-  align-items: center;
-  text-align: center;
-  font-family: "Cabin", sans-serif;
-  color: #111;
-  letter-spacing: 0.02em;
-  z-index: 1;
-  padding-top: 1.2rem; /* label 위쪽 여백 */
+/* 3x3 그리드 (한 화면 수납) */
+.cv-map-grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto 1fr 1fr;
+  gap: 2.2rem;
+  align-items:center;
+  justify-items:center;
+  margin-top: 1rem;
 }
 
-/* 버블 라벨 */
-.bubble__label {
-  font-family: "Londrina Solid", cursive;
-  font-weight: 400;
-  font-size: clamp(1.8rem, 1.4vw, 2.4rem);
-  text-transform: lowercase;
-  margin: 0 0 0.4rem;
+/* 버블 공통 */
+.bubble{
+  border:1.6px solid #000; border-radius:50%;
+  background:transparent;
+  display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+  text-align:center; color:#111; letter-spacing:.02em; padding:1.4rem 1.2rem 1.6rem;
+}
+.bubble__label{
+  font-family:"Londrina Solid", cursive;
+  font-weight:400; font-size:2.4rem; margin:0 0 .8rem; text-transform:lowercase;
+}
+.list-plain{ list-style:none; margin:0; padding:0; color:#374151; }
+.list-plain li{ margin:.3rem 0; font-size:1.6rem; }
+
+/* 버블 크기(100vh 수납용) */
+.bubble--bio   { width:30rem; height:13rem; grid-column:2; grid-row:1; }
+.bubble--edu   { width:30rem; height:16rem; grid-column:1; grid-row:2; }
+.bubble--char  { width:24rem; height:28rem; grid-column:3; grid-row:2; }
+.bubble--exp   { width:22rem; height:32rem; grid-column:3; grid-row:3; }
+.bubble--social{ width:22rem; height:12rem; grid-column:1; grid-row:3; }
+.bubble--skills{ width:30rem; height:12rem; grid-column:2; grid-row:3; }
+/* ===============================
+   PROJECTS
+=============================== */
+.project-list.column{ display:grid; grid-template-columns:1fr; gap:5rem; }
+.device__meta{ text-align:center; margin:1.2rem 0 0; }
+.device__title{ font-size:2.2rem; margin:0 0 .3rem; font-weight:800; }
+.device__desc{ font-size:1.5rem; color:#6b7280; margin:0; }
+
+/* iMac Mockup */
+.device--imac{ display:grid; justify-items:center; }
+.imac{ width:min(120rem,92vw); aspect-ratio:16/10; position:relative; }
+.imac__bezel{
+  position:absolute; inset:0 0 7%;
+  border-radius:2rem; background:#0b0e11;
+  box-shadow:0 2.2rem 4rem rgba(0,0,0,.25);
+  display:grid; place-items:center;
+}
+.imac__screen{
+  width:94%; height:86%; background:#000; border-radius:1.2rem; overflow:hidden;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);
+}
+.imac__screen img{ width:100%; height:100%; object-fit:cover; }
+
+/* iPhone Mockup (세로길이 축소) */
+.device--iphone{ display:grid; justify-items:center; }
+.iphone{ width:min(48rem,80vw); aspect-ratio:9/18; position:relative; } /* 9/18로 살짝 짧게 */
+.iphone__frame{
+  position:absolute; inset:0; border-radius:3.2rem; background:#0b0e11;
+  box-shadow:0 2rem 3.6rem rgba(0,0,0,.28);
+  padding:10px; display:grid; place-items:center;
+}
+.iphone__screen{
+  width:100%; height:100%; border-radius:2.4rem; overflow:hidden; background:#000;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.iphone__screen img{ width:100%; height:100%; object-fit:cover; }
+.iphone__shadow{
+  position:absolute; inset:auto 8% -3% 8%; height:12%;
+  filter:blur(18px);
+  background:radial-gradient(50% 60% at 50% 40%, rgba(0,0,0,.3), transparent 70%);
+  z-index:-1;
 }
 
-/* 각 타원의 크기·위치 */
-.bubble--edu {
-  top: 10%;
-  left: 12%;
-  width: 32rem;
-  height: 14rem;
+/* Zigzag: iPhone 4대 그리드 + 소형 스케일 */
+.iphone-grid-card{ display:grid; gap:1.6rem; justify-items:center; }
+.iphone-grid{
+  width:100%;
+  display:grid; grid-template-columns:repeat(4, 1fr); gap:1.6rem;
 }
+.device--iphone.small .iphone{ width:100%; aspect-ratio:9/18; } /* 그리드 셀 안에서 꽉 채움 */
 
-.bubble--char {
-  top: 12%;
-  right: 14%;
-  width: 28rem;
-  height: 12rem;
+/* ===============================
+   INSTAGRAM COLLABS
+=============================== */
+.collabs .collab-grid{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:2rem;
 }
-
-.bubble--exp {
-  right: 6%;
-  top: 32%;
-  width: 20rem;
-  height: 38rem;
+.collab-tile{
+  background:#fff; border:1px solid #e5e7eb; border-radius:1.2rem;
+  box-shadow:0 1.2rem 2.6rem rgba(0,0,0,.08);
+  overflow:hidden; cursor:pointer;
+  transition:transform .18s ease, box-shadow .18s ease;
 }
-
-.bubble--social {
-  bottom: 18%;
-  left: 18%;
-  width: 18rem;
-  height: 9rem;
+.collab-tile:hover{
+  transform:translateY(-4px);
+  box-shadow:0 1.8rem 3.2rem rgba(0,0,0,.12);
 }
-
-.bubble--skills {
-  bottom: -2rem;                  /* 아래로 더 내린 상태 */
-  left: 50%;
-  transform: translateX(-10%);
-  width: 16rem;
-  height: 10rem;
+.tile__inner{ padding:1.6rem; height:18rem; display:grid; align-content:space-between; }
+.tile__label{ font-weight:800; font-size:1.6rem; }
+.tile__slot{
+  height:12rem; border:1px dashed #cbd5e1; border-radius:.8rem;
+  display:grid; place-items:center; color:#94a3b8; font-size:1.3rem;
 }
-/* ===== Tabs (Projects / Seeding) ===== */
-.tabset{ margin-top:2rem; }
-.tabset__nav{ display:flex; gap:.8rem; border-bottom:.1rem solid var(--card-bd); }
-.tabset__btn{
-  border:0; background:#f3f4f6; padding:1.2rem 2rem;
-  font-weight:700; border-radius:1rem 1rem 0 0; cursor:pointer;
-  font-size:1.6rem;
-}
-.tabset__btn.is-active{
-  background:#fff; border:.1rem solid var(--card-bd); border-bottom-color:#fff;
-}
-.tabset__panel{
-  display:none; border:.1rem solid var(--card-bd); border-top:0;
-  padding:2rem; background:#fff;
-}
-.tabset__panel.is-active{ display:block; }
-
-.list--bullets{ margin:0; padding-left:2rem; font-size:1.6rem; }
-.list--bullets li{ margin:.8rem 0; }
-.list-plain{ list-style: none; }
-.feeds{ display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
-.feed{ border:.1rem solid var(--card-bd); border-radius:1.2rem; overflow:hidden; background:#fff; box-shadow:var(--shadow); }
-.feed img{ width:100%; aspect-ratio:1/1; object-fit:cover; }
-.feed__body{ padding:1.6rem; }
-.feed__body h3{ margin:0 0 .6rem; font-size:1.6rem; }
-.feed__body p{ margin:0; font-size:1.4rem; color:#374151; }
-
-/* ===== Contact ===== */
-.contact{ background:var(--bg-soft); text-align:center; }
-.contact__cta{ display:flex; justify-content:center; gap:1rem; }
-
-/* ===== Reveal Animations ===== */
-[data-reveal]{ opacity:0; transform:translateY(1.2rem); }
-[data-reveal].is-visible{ opacity:1; transform:none; transition:.6s ease; }

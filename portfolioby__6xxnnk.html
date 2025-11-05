@@ -4,293 +4,294 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portfolio</title>
-  <link rel="stylesheet" href="css/portfolioby__6xxnnk.css" />
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Butterfly+Kids&family=Cabin:ital,wght@0,400..700;1,400..700&family=Londrina+Solid&display=swap" rel="stylesheet"></head>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Butterfly Kids, Cabin, Londrina Solid, Climate Crisis -->
+  <link href="https://fonts.googleapis.com/css2?family=Butterfly+Kids&family=Cabin:ital,wght@0,400..700;1,400..700&family=Londrina+Solid&family=Climate+Crisis&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/portfolioby__6xxnnk.css" />
+</head>
 <body>
   <div class="wrap">
-<!-- =========================
-  01. HERO
-========================= -->
 
+    <!-- =========================
+      01. HERO (중앙 정렬, 100vh)
+    ========================= -->
     <header class="hero" aria-labelledby="heroTitle">
-  <div class="hero__inner">
-    <h1 id="heroTitle" class="logo" aria-label="portfolio">
-      <span class="p">p</span><span class="o1">o</span><span class="r">r</span><span class="t">t</span>
-      <span class="f">f</span><span class="o2">o</span><span class="l">l</span><span class="i">i</span><span class="o3">o</span>
-    </h1>
+      <div class="hero__inner">
+        <h1 id="heroTitle" class="logo" aria-label="portfolio">
+          <span class="p">p</span><span class="o1">o</span><span class="r">r</span><span class="t">t</span>
+          <span class="f">f</span><span class="o2">o</span><span class="l">l</span><span class="i">i</span><span class="o3">o</span>
+        </h1>
 
-    <!-- ✅ .hero__inner 안으로 이동 -->
-    <form class="search-wrap" id="searchForm" role="search">
-      <div class="search-bar">
-        <div class="input-area">
-          <input id="q" name="q" type="text" aria-label="검색어 입력" autocomplete="off" />
-          <div id="typingGhost" class="typing-ghost"></div>
-        </div>
-        <div class="select" aria-label="카테고리 선택">
-          <select id="cat" name="cat" aria-label="All Categories">
-            <option>All Categories</option>
-            <option>Branding</option>
-            <option>UI/UX</option>
-            <option>Web Publishing</option>
-            <option>Photography</option>
-            <option>Motion</option>
-          </select>
-          <span class="caret" aria-hidden="true"></span>
-        </div>
-        <button class="btn" type="submit">Search</button>
+        <form class="search-wrap" id="searchForm" role="search">
+          <div class="search-bar">
+            <div class="input-area">
+              <input id="q" name="q" type="text" aria-label="검색어 입력" autocomplete="off" />
+              <div id="typingGhost" class="typing-ghost"></div>
+            </div>
+            <div class="select" aria-label="카테고리 선택">
+              <select id="cat" name="cat" aria-label="All Categories">
+                <option>All Categories</option>
+                <option>Branding</option>
+                <option>UI/UX</option>
+                <option>Web Publishing</option>
+                <option>Photography</option>
+                <option>Motion</option>
+              </select>
+              <span class="caret" aria-hidden="true"></span>
+            </div>
+            <button class="btn" type="submit">Search</button>
+          </div>
+        </form>
+
+        <p class="hero__hint">
+          <span class="divider"></span>
+          © 2026 Yunkyung Cho
+          <span class="divider"></span>
+        </p>
       </div>
-    </form>
-
-    <p class="hero__hint">
-      <span class="divider"></span>
-      © 2026 Yunkyung Cho
-      <span class="divider"></span>
-    </p>
-  </div>
     </header>
 
-
-<!-- =========================
-  02. ABOUT ME 
-========================= -->
-
-<section class="about section about-cvmap" id="about" aria-labelledby="aboutTitle">
-  <div class="container cv-map">
-    <!-- 중앙 타이틀/프로필 -->
-    <div class="cv-center" role="group" aria-label="About me summary" data-reveal>
-      <h2 id="aboutTitle" class="ink-title" aria-label="About me">About me</h2>
-
-      <div class="bio">
-        <p><strong>조윤경</strong> Yunkyung Cho</p>
-        <ul>
-          <li>" 감각을 논리로 감정은 디자인으로 "</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- 상단-좌 : education (가로 타원) -->
-    <article class="bubble oval bubble--edu" aria-labelledby="eduTitle" data-reveal>
-      <h3 id="eduTitle" class="bubble__label">education</h3>
-      <ul class="list-plain">
-      <li>
-        단국대학교 법학과 졸업
-      </li>
-      <li>
-        그린컴퓨터아카데미 : UI/UX반응형 웹제작을 위한 웹퍼블리셔(디자인&코딩) 프론트엔드 과정 수료
-      </li>
-      </ul>
-    </article>
-
-    <!-- 상단-우 : character (가로 타원) -->
-    <article class="bubble oval bubble--char" aria-labelledby="charTitle" data-reveal>
-      <h3 id="charTitle" class="bubble__label">character</h3>
-      <ul class="list-plain">
-        <li >Curiosity: 탐구하는 호기심</li>
-        <li>Perfection: 디테일의 완성도</li>
-        <li>Positivity: 긍정적 사고</li>
-        <li>Growth: 지속적인 성장</li>
-      </ul>
-    </article>
-
-    <!-- 우측 : experience (세로 큰 타원) -->
-    <article class="bubble oval bubble--exp" aria-labelledby="expTitle" data-reveal>
-      <h3 id="expTitle" class="bubble__label">experience</h3>
-      <ul class="list-plain">
-        <li>와이폴라리스: 사무보조/마케팅</li>
-        <li>기아오토큐 동김해: 문서관리/고객응대</li>
-        <li> IT기업 마케팅 담당 국제인공지능대전, 리테일테크쇼 등 전시 기획 / 콘텐츠 운영</li>
-        <li> sns 협업 콘텐츠, SNS 캠페인</li>
-      </ul>
-    </article>
-
-    <!-- 하단-좌 : social (가로 작은 타원) -->
-    <article class="bubble oval bubble--social" aria-labelledby="socialTitle" data-reveal>
-      <h3 id="socialTitle" class="bubble__label">social</h3>
-      <ul class="social-list">
-          <li>• Email <a href="mailto:wholovesthesun@naver.com">wholovesthesun@naver.com</a></li>
-          <li>• instagram <a href="https://instagram.com/6xxnnk" target="_blank" rel="noopener">@6xxnnk</a></li>
-
-      </ul>
-    </article>
-
-    <!-- 하단-중앙우 : skills (가로 작은 타원) -->
-    <article class="bubble oval bubble--skills" aria-labelledby="skillsTitle" data-reveal>
-      <h3 id="skillsTitle" class="bubble__label">skills</h3>
-      <ul class="list-plain">
-        <li>Photoshop</li>
-        <li>Figma</li>
-        <li>HTML/CSS/JS</li>
-      </ul>
-    </article>
-  </div>
-</section>
-
-
-<!-- =========================
-  03. PROJECTS (카드 + 필터 준비)
-========================= -->
-<section class="projects section" id="works" aria-labelledby="projectsTitle">
-  <div class="container">
-    <h2 id="projectsTitle" class="section__title">Projects</h2>
-    <p class="lead">한눈에 스캔되고, 필요한 케이스만 빠르게 필터링.</p>
-
-    <!-- 필터(후속 js 연결 예정) -->
-    <div class="filters" data-reveal>
-      <button class="filter is-active" data-filter="all">All</button>
-      <button class="filter" data-filter="responsive">Responsive Web</button>
-      <button class="filter" data-filter="figma">Figma Design</button>
-      <button class="filter" data-filter="app">Mobile App</button>
-      <button class="filter" data-filter="retouch">Photoshop</button>
-    </div>
-
-    <div class="cards cards--projects">
-      <!-- Nespresso -->
-      <article class="card project" data-type="responsive" data-reveal>
-        <div class="card__thumb"><img src="img/thumb-nespresso.jpg" alt="Nespresso Redesign" /></div>
-        <div class="card__body">
-          <h3 class="card__title">Nespresso Website Redesign</h3>
-          <p class="card__meta">Responsive Web · HTML/CSS/JS</p>
-          <p class="card__desc">프리미엄 톤&인터랙션 강화 · 반응형</p>
-          <div class="badges"><span class="badge">Responsive</span><span class="badge">Interaction</span></div>
-          <div class="card__cta">
-            <a href="#" class="btn btn--ghost">Case Study</a>
-            <a href="#" class="btn">Live Demo</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Tamburins -->
-      <article class="card project" data-type="figma" data-reveal>
-        <div class="card__thumb"><img src="img/thumb-tamburins.jpg" alt="Tamburins Redesign" /></div>
-        <div class="card__body">
-          <h3 class="card__title">Tamburins Web Redesign</h3>
-          <p class="card__meta">Figma · 컴포넌트/스타일가이드</p>
-          <p class="card__desc">향의 감정을 시각화한 웹 리디자인</p>
-          <div class="badges"><span class="badge">Figma</span><span class="badge">Styleguide</span></div>
-          <div class="card__cta">
-            <a href="#" class="btn btn--ghost">Figma File</a>
-            <a href="#" class="btn">Case Study</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Glossier App -->
-      <article class="card project" data-type="app" data-reveal>
-        <div class="card__thumb"><img src="img/thumb-glossier.jpg" alt="Glossier App" /></div>
-        <div class="card__body">
-          <h3 class="card__title">Glossier Mobile App</h3>
-          <p class="card__meta">Figma + Front-end</p>
-          <p class="card__desc">모바일 IA/플로우 + 프론트 연결</p>
-          <div class="badges"><span class="badge">App</span><span class="badge">Prototype</span></div>
-          <div class="card__cta">
-            <a href="#" class="btn btn--ghost">Prototype</a>
-            <a href="#" class="btn">Code</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Zigzag -->
-      <article class="card project" data-type="app" data-reveal>
-        <div class="card__thumb"><img src="img/thumb-zigzag.jpg" alt="Zigzag Redesign" /></div>
-        <div class="card__body">
-          <h3 class="card__title">Zigzag App Redesign</h3>
-          <p class="card__meta">Product Thinking</p>
-          <p class="card__desc">탐색→결제 전환율 중심 IA 재구성</p>
-          <div class="badges"><span class="badge">App</span><span class="badge">UX Flow</span></div>
-          <div class="card__cta">
-            <a href="#" class="btn btn--ghost">Before/After</a>
-            <a href="#" class="btn">Case Study</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Photoshop -->
-      <article class="card project" data-type="retouch" data-reveal>
-        <div class="card__thumb"><img src="img/thumb-ps.jpg" alt="Photoshop Works" /></div>
-        <div class="card__body">
-          <h3 class="card__title">Photoshop Mini Works</h3>
-          <p class="card__meta">Retouch · Composite</p>
-          <p class="card__desc">간단하지만 톤앤무드가 분명한 제작물</p>
-          <div class="badges"><span class="badge">Retouch</span></div>
-          <div class="card__cta">
-            <a href="#" class="btn btn--ghost">Gallery</a>
-          </div>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-    <!-- 04. TABS (탭 기반 UX) : Projects / Instagram Seeding -->
-    <section class="tabs section" id="tabs" aria-labelledby="tabsTitle">
+    <!-- =========================
+      02. ABOUT ME (전체가 100vh에 들어오게 그리드 재배치)
+    ========================= -->
+    <section class="about section about-cvmap" id="about" aria-labelledby="aboutTitle">
       <div class="container">
-        <h2 id="tabsTitle" class="section__title">Deep Dives</h2>
 
-        <div class="tabset" data-tabset>
-          <div class="tabset__nav" role="tablist">
-            <button class="tabset__btn is-active" role="tab" data-tab-target="projects">Projects</button>
-            <button class="tabset__btn" role="tab" data-tab-target="seeding">Instagram Seeding</button>
-          </div>
+        <!-- 손글씨 타이틀 (별 삭제됨) -->
+        <div class="cv-center" role="group" aria-label="About me heading" data-reveal>
+          <svg class="ink-title-svg" viewBox="0 0 1200 220" aria-labelledby="aboutTitle">
+            <title id="aboutTitle">About me</title>
+            <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" class="ink-title-stroke">About me</text>
+          </svg>
+        </div>
 
-          <!-- Tab: Projects -->
-          <div class="tabset__panel is-active" id="tab-projects" role="tabpanel" data-tab-panel="projects">
-            <ul class="list list--bullets">
-              <li>Nespresso: 반응형 구현 & 인터랙션</li>
-              <li>Tamburins: Figma 컴포넌트 & 스타일가이드</li>
-              <li>Glossier: 모바일 IA/플로우 + 프론트 연결</li>
-              <li>Zigzag: 온보딩 & 검색 최적화 기획</li>
+        <!-- 3x3 그리드로 모든 요소 한 화면에 배치 -->
+        <div class="cv-map-grid">
+          <article class="bubble oval bubble--bio" aria-labelledby="bioTitle" data-reveal>
+            <h3 id="bioTitle" class="bubble__label">bio</h3>
+            <ul class="list-plain">
+              <li><strong>조윤경</strong> Yunkyung Cho</li>
+              <li>“ 감각을 논리로, 감정은 디자인으로 ”</li>
             </ul>
-          </div>
+          </article>
 
-          <!-- Tab: Instagram Seeding -->
-          <div class="tabset__panel" id="tab-seeding" role="tabpanel" data-tab-panel="seeding">
-            <div class="feeds">
-              <!-- 협찬 피드 카드 예시 -->
-              <article class="feed">
-                <img src="img/feed-1.jpg" alt="Seeding Feed 1" />
-                <div class="feed__body">
-                  <h3>ERA Denim – Ad/Seeding</h3>
-                  <p>룩앤필 설계, 촬영/보정, 캡션 카피라이팅까지 일련의 제작.</p>
-                </div>
-              </article>
-              <article class="feed">
-                <img src="img/feed-2.jpg" alt="Seeding Feed 2" />
-                <div class="feed__body">
-                  <h3>Beauty Collab – Ad/Seeding</h3>
-                  <p>브랜드 감도에 맞춘 페일톤/자연광 무드, 전환 유도 해시태그.</p>
-                </div>
-              </article>
-              <!-- 필요 수량만큼 반복 -->
-            </div>
-            <a href="https://instagram.com/6xxnnk" target="_blank" class="btn">See Instagram</a>
-          </div>
+          <article class="bubble oval bubble--edu" aria-labelledby="eduTitle" data-reveal>
+            <h3 id="eduTitle" class="bubble__label">education</h3>
+            <ul class="list-plain">
+              <li>단국대학교 법학과 졸업</li>
+              <li>그린컴퓨터아카데미 UI/UX 반응형 웹제작<br>디자인&코딩 프론트엔드 수료</li>
+            </ul>
+          </article>
+
+          <article class="bubble oval bubble--char" aria-labelledby="charTitle" data-reveal>
+            <h3 id="charTitle" class="bubble__label">character</h3>
+            <ul class="list-plain">
+              <li>Curiosity: 탐구하는 호기심</li>
+              <li>Perfection: 디테일의 완성도</li>
+              <li>Positivity: 긍정적 사고</li>
+              <li>Growth: 지속적인 성장</li>
+            </ul>
+          </article>
+
+          <article class="bubble oval bubble--exp" aria-labelledby="expTitle" data-reveal>
+            <h3 id="expTitle" class="bubble__label">experience</h3>
+            <ul class="list-plain">
+              <li>~ 2022 와이폴라리스 : IT기업 마케팅 사원
+                <br>(국제인공지능대전/리테일테크쇼 등 전시 기획·콘텐츠 운영)</li>
+              <li>~ 2024 기아오토큐 동김해서비스 : 고객응대 & 문서관리</li>
+              <li>브랜드 간 SNS 협업 콘텐츠 다수 제작</li>
+            </ul>
+          </article>
+
+          <article class="bubble oval bubble--social" aria-labelledby="socialTitle" data-reveal>
+            <h3 id="socialTitle" class="bubble__label">social</h3>
+            <ul class="list-plain">
+              <li>Email <a href="mailto:wholovesthesun@naver.com">wholovesthesun@naver.com</a></li>
+              <li>Instagram <a href="https://instagram.com/6xxnnk" target="_blank" rel="noopener">@6xxnnk</a></li>
+            </ul>
+          </article>
+
+          <article class="bubble oval bubble--skills" aria-labelledby="skillsTitle" data-reveal>
+            <h3 id="skillsTitle" class="bubble__label">skills</h3>
+            <ul class="list-plain">
+              <li>Photoshop</li>
+              <li>Figma</li>
+              <li>HTML/CSS/JS</li>
+            </ul>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- 05. CONTACT -->
-    <section class="contact section" id="contact" aria-labelledby="contactTitle">
+    <!-- 섹션 간격은 제거(히어로 바로 다음이 섹션2가 보이도록) -->
+
+    <!-- =========================
+      03. PROJECTS (세로 1열 큰 카드 + 지그재그 아이폰 4대)
+    ========================= -->
+    <section class="projects section" id="works" aria-labelledby="projectsTitle">
       <div class="container">
-        <h2 id="contactTitle" class="section__title">Contact</h2>
-        <p class="lead">Let’s create something meaningful together.</p>
-        <div class="contact__cta">
-          <a href="mailto:your@email.com" class="btn">Email</a>
-          <a href="#" class="btn btn--ghost">PDF Resume</a>
-          <a href="https://instagram.com/6xxnnk" target="_blank" class="btn btn--ghost">Instagram</a>
+        <h2 id="projectsTitle" class="section__title section__title--xxl climate">Projects</h2>
+
+        <div class="project-list column">
+          <!-- Nespresso — iMac -->
+          <article class="imac-card device device--imac"
+                   data-images="img/nespresso-1.jpg,img/nespresso-2.jpg,img/nespresso-3.jpg">
+            <div class="imac">
+              <div class="imac__bezel">
+                <div class="device__screen imac__screen">
+                  <img src="img/nespresso-1.jpg" alt="Nespresso Redesign Preview">
+                </div>
+              </div>
+              <div class="imac__stand"></div>
+            </div>
+            <div class="device__meta">
+              <h3 class="device__title">Nespresso Website Redesign</h3>
+              <p class="device__desc">Responsive Web · HTML/CSS/JS</p>
+            </div>
+          </article>
+
+          <!-- Tamburins — iMac -->
+          <article class="imac-card device device--imac"
+                   data-images="img/tamburins-1.jpg,img/tamburins-2.jpg">
+            <div class="imac">
+              <div class="imac__bezel">
+                <div class="device__screen imac__screen">
+                  <img src="img/tamburins-1.jpg" alt="Tamburins Redesign Preview">
+                </div>
+              </div>
+              <div class="imac__stand"></div>
+            </div>
+            <div class="device__meta">
+              <h3 class="device__title">Tamburins Web Redesign</h3>
+              <p class="device__desc">Figma · Styleguide</p>
+            </div>
+          </article>
+
+          <!-- Glossier — iPhone (1대) -->
+          <article class="iphone-card device device--iphone"
+                   data-images="img/glossier-1.jpg,img/glossier-2.jpg,img/glossier-3.jpg">
+            <div class="iphone">
+              <div class="iphone__frame">
+                <div class="device__screen iphone__screen">
+                  <img src="img/glossier-1.jpg" alt="Glossier App Preview">
+                </div>
+              </div>
+              <div class="iphone__shadow" aria-hidden="true"></div>
+            </div>
+            <div class="device__meta">
+              <h3 class="device__title">Glossier Mobile App</h3>
+              <p class="device__desc">Figma + Front-end</p>
+            </div>
+          </article>
+
+          <!-- Zigzag — iPhone 4대 그리드 -->
+          <article class="iphone-grid-card">
+            <div class="device__meta">
+              <h3 class="device__title">Zigzag App Redesign</h3>
+              <p class="device__desc">UX Flow · Product Thinking</p>
+            </div>
+
+            <div class="iphone-grid">
+              <!-- 아이폰 목업 1 -->
+              <div class="device device--iphone small" data-images="img/zigzag-1.jpg">
+                <div class="iphone">
+                  <div class="iphone__frame">
+                    <div class="device__screen iphone__screen">
+                      <img src="img/zigzag-1.jpg" alt="Zigzag Screen 1">
+                    </div>
+                  </div>
+                  <div class="iphone__shadow" aria-hidden="true"></div>
+                </div>
+              </div>
+              <!-- 아이폰 목업 2 -->
+              <div class="device device--iphone small" data-images="img/zigzag-2.jpg">
+                <div class="iphone">
+                  <div class="iphone__frame">
+                    <div class="device__screen iphone__screen">
+                      <img src="img/zigzag-2.jpg" alt="Zigzag Screen 2">
+                    </div>
+                  </div>
+                  <div class="iphone__shadow" aria-hidden="true"></div>
+                </div>
+              </div>
+              <!-- 아이폰 목업 3 -->
+              <div class="device device--iphone small" data-images="img/zigzag-3.jpg">
+                <div class="iphone">
+                  <div class="iphone__frame">
+                    <div class="device__screen iphone__screen">
+                      <img src="img/zigzag-3.jpg" alt="Zigzag Screen 3">
+                    </div>
+                  </div>
+                  <div class="iphone__shadow" aria-hidden="true"></div>
+                </div>
+              </div>
+              <!-- 아이폰 목업 4 -->
+              <div class="device device--iphone small" data-images="img/zigzag-4.jpg">
+                <div class="iphone">
+                  <div class="iphone__frame">
+                    <div class="device__screen iphone__screen">
+                      <img src="img/zigzag-4.jpg" alt="Zigzag Screen 4">
+                    </div>
+                  </div>
+                  <div class="iphone__shadow" aria-hidden="true"></div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+      04. INSTAGRAM COLLABS
+    ========================= -->
+    <section class="collabs section" id="collabs" aria-labelledby="collabsTitle">
+      <div class="container">
+        <h2 id="collabsTitle" class="section__title section__title--xxl climate">Instagram Collab</h2>
+
+        <div class="collab-grid">
+          <article class="collab-tile" data-brand="ERA Denim">
+            <div class="tile__inner">
+              <div class="tile__label">ERA Denim</div>
+              <div class="tile__slot">Content Slot</div>
+            </div>
+          </article>
+          <article class="collab-tile" data-brand="ABIB">
+            <div class="tile__inner">
+              <div class="tile__label">ABIB</div>
+              <div class="tile__slot">Content Slot</div>
+            </div>
+          </article>
+          <article class="collab-tile" data-brand="KIRSH">
+            <div class="tile__inner">
+              <div class="tile__label">KIRSH</div>
+              <div class="tile__slot">Content Slot</div>
+            </div>
+          </article>
+          <article class="collab-tile" data-brand="PORTER">
+            <div class="tile__inner">
+              <div class="tile__label">PORTER</div>
+              <div class="tile__slot">Content Slot</div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
   </div>
 
-  <!-- 섹션별 스크립트 -->
-<script src="js/hero.js" defer></script>
-<script src="js/about-cvmap.js" defer></script>
-<script src="js/about-ink.js" defer></script>
-<script src="js/projects.js" defer></script>
-<script src="js/scroll.js" defer></script>
-<script src="js/tabs.js" defer></script>
+  <!-- JS (분리 유지) -->
+  <script src="js/hero.js" defer></script>
+  <script src="js/about-cvmap.js" defer></script>
+  <script src="js/about-ink.js" defer></script>
+  <script src="js/projects.js" defer></script>
+  <script src="js/projects-devices.js" defer></script>
+  <script src="js/collabs.js" defer></script>
 </body>
 </html>

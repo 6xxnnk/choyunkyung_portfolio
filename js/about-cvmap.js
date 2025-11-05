@@ -1,72 +1,38 @@
 // js/about-cvmap.js
 document.addEventListener('DOMContentLoaded', () => {
-  /* ========= 1) 반복 재생되는 버블 리빌 ========= */
-  const revealTargets = [
-    ...document.querySelectorAll('.about-cvmap .cv-center'),
-    ...document.querySelectorAll('.about-cvmap .bubble')
+  const section = document.querySelector('.about-cvmap');
+  if (!section) return;
+
+  const targets = [
+    ...section.querySelectorAll('.cv-center'),
+    ...section.querySelectorAll('.bubble')
   ];
+  if (!targets.length) return;
 
-  if (revealTargets.length) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        const el = entry.target;
-        if (entry.isIntersecting) {
-          // 들어올 때 보이게
-          el.classList.add('is-visible');
-        } else {
-          // 나갈 때 초기화 → 다시 들어오면 애니메이션 재생
-          el.classList.remove('is-visible');
-        }
-      });
-    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.2 });
-
-    revealTargets.forEach((el) => io.observe(el));
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) {
+    targets.forEach(el => el.classList.add('is-visible'));
+    return;
   }
 
-  /* ========= 2) ink-title 손글씨 드로잉 (반복 재생) =========
-     - .ink-title(H2)을 동등한 SVG로 치환
-     - stroke-dash 애니메이션 → 채우기(fill) 순서로 진행
-  */
-  const title = document.querySelector('.about-cvmap .ink-title');
-  if (title) {
-    const text = (title.textContent || '').trim() || 'About me';
+  // 초기 상태 정리
+  targets.forEach(el => el.classList.remove('is-visible'));
 
-    // SVG 생성
-    const SVG_NS = 'http://www.w3.org/2000/svg';
-    const svg = document.createElementNS(SVG_NS, 'svg');
-    svg.setAttribute('class', 'ink-title-svg');
-    svg.setAttribute('viewBox', '0 0 1200 200'); // 가변 레이아웃용 큰 캔버스
-
-    const t = document.createElementNS(SVG_NS, 'text');
-    t.setAttribute('x', '50%');
-    t.setAttribute('y', '50%');
-    t.setAttribute('dominant-baseline', 'middle');
-    t.setAttribute('text-anchor', 'middle');
-    t.setAttribute('class', 'ink-title-stroke');
-    t.textContent = text;
-    svg.appendChild(t);
-
-    // 먼저 DOM에 붙여서 길이 계산
-    title.replaceWith(svg);
-
-    // 길이 계산 후 대시 적용
-    // getComputedTextLength는 요소가 렌더된 뒤에 정확함 → rAF로 보장
-    requestAnimationFrame(() => {
-      const len = t.getComputedTextLength ? t.getComputedTextLength() : 1400;
-      t.style.strokeDasharray = `${len}`;
-      t.style.strokeDashoffset = `${len}`;
-    });
-
-    // IO로 뷰포트 진입/이탈 시 애니메이션 토글 (반복 재생)
-    const inkIO = new IntersectionObserver(([entry]) => {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const el = entry.target;
       if (entry.isIntersecting) {
-        svg.classList.add('is-drawn');
+        el.classList.add('is-visible');
       } else {
-        // 초기화 → 다시 들어오면 처음부터 그려짐
-        svg.classList.remove('is-drawn');
+        // 화면에서 벗어나면 다시 숨김 → 재스크롤 시 재생
+        el.classList.remove('is-visible');
       }
-    }, { rootMargin: '-10% 0px -10% 0px', threshold: 0.2 });
+    });
+  }, {
+    root: null,
+    threshold: 0.05,            // 트리거 빠르게
+    rootMargin: '0px 0px -5% 0px'
+  });
 
-    inkIO.observe(svg);
-  }
+  targets.forEach(el => io.observe(el));
 });
