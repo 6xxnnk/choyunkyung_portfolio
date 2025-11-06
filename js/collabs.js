@@ -22,34 +22,3 @@
   io.observe(phone);
 })();
 
-/* ===== Zigzag: 간단 슬라이더(4장) ===== */
-(function(){
-  const track = document.getElementById('zigzagTrack');
-  const prev = document.getElementById('prevZ');
-  const next = document.getElementById('nextZ');
-  if(!track || !prev || !next) return;
-
-  const total = track.children.length;
-  function go(idx){
-    const max = total - 1;
-    if(idx < 0) idx = 0;
-    if(idx > max) idx = max;
-    track.dataset.index = idx;
-    track.style.transform = `translateX(${idx * -100}%)`;
-  }
-  prev.addEventListener('click', ()=> go(+track.dataset.index - 1));
-  next.addEventListener('click', ()=> go(+track.dataset.index + 1));
-
-  // 스와이프(모바일)
-  let startX = null;
-  track.addEventListener('pointerdown', (e)=>{ startX = e.clientX; track.setPointerCapture(e.pointerId); });
-  track.addEventListener('pointerup', (e)=>{
-    if(startX==null) return;
-    const dx = e.clientX - startX;
-    if(Math.abs(dx) > 40){
-      if(dx < 0) go(+track.dataset.index + 1);
-      else go(+track.dataset.index - 1);
-    }
-    startX = null;
-  });
-})();
