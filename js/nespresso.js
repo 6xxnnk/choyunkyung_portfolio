@@ -38,4 +38,12 @@ document.addEventListener("DOMContentLoaded", () => {
     ro = new ResizeObserver(fit);
     wraps.forEach(w => ro.observe(w));
   }
+
+   (function(){
+    const VER = '20251106a'; // 수정마다 갱신
+    document.querySelectorAll('iframe.site-embed').forEach($f=>{
+      const base = $f.getAttribute('src').split('?')[0];
+      $f.setAttribute('src', `${base}?v=${VER}`);
+    });
+  })();
 });
