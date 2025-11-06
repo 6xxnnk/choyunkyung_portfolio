@@ -111,7 +111,7 @@ html{
 
 
 
-.wrap{ min-height:100dvh; display:flex; flex-direction:column; }
+.wrap{ min-height:100dvh; display:flex; flex-direction:column;}
 
 /* ===== Utilities ===== */
 
@@ -461,29 +461,40 @@ html{
   border-radius:50%; background: radial-gradient(#2c2b33,#111);
 }
 .imac-shell .display-panel{
-  width:100%; height:100%; position:relative; background:#121212; border-radius:10px; overflow:hidden;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06), inset 0 0 40px rgba(0,0,0,.55);
+  position:absolute;
+  inset:33px 29px;           /* top/right/bottom/left 패딩과 동일하게 */
+  overflow:hidden;
+  background:#000;
+  border-radius:10px;
 }
-.imac-shell .display-panel img{
-  width:100%; height:auto; object-fit:cover; transform:translateY(0); transition:transform 11s linear;
-}
-.imac-shell .display-panel::before{
-  content:""; position:absolute; inset:0;
-  background: linear-gradient(to bottom, rgba(255,255,255,.08), rgba(255,255,255,0) 18%),
-              radial-gradient(60% 35% at 50% 0%, rgba(255,255,255,.06), transparent 70%);
-  pointer-events:none;
-}
-.imac-shell .display-panel::after{
-  content:""; position:absolute; inset:0; border-radius:10px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
-  pointer-events:none;
-}
-/* hover 시 자동 스크롤 */
-.imac-shell:hover .display-panel img{ transform: translateY(-42%); transition:transform 12.5s linear; }
-.imac-shell:not(:hover) .display-panel img{ transform: translateY(0); transition: transform 9s ease; }
 
-@media (prefers-reduced-motion: reduce){
-  .imac-shell .display-panel img{ transition:none !important; transform:none !important; }
+/* 스케일 계산용 래퍼(iframe의 기준 좌표계) */
+.embed-scale-wrap{
+  position:absolute;
+  inset:0;
+  transform-origin: top left;
 }
+
+/* iframe 기본 크기(디자인 기준)만 지정 — 스케일은 JS가 담당 */
+.site-embed{
+  position:absolute;
+  left:0; top:0;
+  width:1440px;              /* 기본값: data-design 없으면 1440x900 가정 */
+  height:900px;
+  border:0; outline:0;
+}
+.display-panel .embed-fallback{
+  position:absolute; inset:0;
+  display:none; align-items:center; justify-content:center;
+  flex-direction:column; gap:.8rem;
+  color:#fff; background:rgba(0,0,0,.55);
+  font-size:1.4rem; text-align:center;
+}
+.display-panel .embed-fallback a{
+  display:inline-block; padding:.6rem 1rem; border:1px solid #fff; border-radius:.6rem; color:#fff; text-decoration:none;
+}
+
+
 
 .imac-shell .bottom-panel{
   position:relative; width:100%; height:76px; border-radius:0 0 27px 27px;
@@ -523,6 +534,8 @@ html{
   background:linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
   border-radius:999px; pointer-events:none;
 }
+
+
 
 
 /* iMac 카드 메타 */
