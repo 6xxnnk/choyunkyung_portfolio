@@ -415,7 +415,7 @@ html{
   --accent:#0d6efd;
 }
 .projects {
-  margin:50rem auto
+  margin:50rem 0;
 }
 
 .projects-title {
@@ -443,7 +443,7 @@ html{
 .imac-shell .top-panel{
   position:relative;
   width:100%;
-  height:650px;                 /* 487px → 650px */          /* 33px 29px → 44px 38px (inset과 반드시 동일) */
+  height: 650px;                 /* 487px → 650px */          /* 33px 29px → 44px 38px (inset과 반드시 동일) */
   border-radius:27px 27px 0 0;
   background:#070707;
   box-shadow:
@@ -481,10 +481,11 @@ html{
   position:absolute;
   inset:0;
   transform-origin: top left;
+  overflow:hidden;  
 }
 
-/* iframe 기본 크기(디자인 기준)만 지정 — 스케일은 JS가 담당 */
-.site-embed, .figma-embed{
+
+.site-embed {
   position:absolute;
   left:0; top:0;
   width: 100%;
@@ -493,6 +494,16 @@ html{
   inset: 0;
 }
 
+/* Figma: 원본 해상도 고정 */
+.figma-embed{
+  width:1920px;
+  height:1080px;
+  border:0;
+  outline:0;
+  display:block;
+  transform-origin: top left; /* JS에서 scale 적용 */
+  will-change: transform;
+}
 
 .display-panel .embed-fallback{
   position:absolute; inset:0;
@@ -547,6 +558,12 @@ html{
 }
 
 
+/* (선택) 뷰포트 밖일 때 렌더 비용 절약 */
+@supports (content-visibility: auto){
+  .imac-shell .figma-embed,
+  .imac-shell .site-embed { content-visibility: auto; }
+}
+
 
 /* iMac 카드 메타 */
 .device-meta{
@@ -554,8 +571,10 @@ html{
   display:grid; grid-template-columns: 1fr auto; gap:1rem; align-items:center;
   border:1px solid var(--bd); border-radius:1.2rem;
 }
-.device-meta h3{margin:0; font-size:1.8rem}
-.device-meta p{margin:.2rem 0 0; color:var(--muted); font-size:1.4rem}
+.device-meta h3{
+  font-family: butterfly kids, cursive;
+  margin:0; font-size:3rem}
+.device-meta p{margin:.2rem 0 0;font-size:1.4rem}
 .device-meta .link{ display:inline-block; padding:.8rem 1.2rem; border:1px solid var(--bd); border-radius:.8rem; text-decoration:none; font-weight:700; }
 
 /* ===============================
@@ -594,7 +613,6 @@ html{
    Section 3 — iMac 두 카드
 =============================== */
 .projects-grid{ display:grid; gap:6rem }
-@media (min-width:960px){ .projects-grid{ gap:7rem } }
 
 /* ===============================
    Section 4 — Phones (Glossier / Zigzag)
@@ -608,7 +626,7 @@ html{
 }
 
 /* 공통 레이아웃 */
-.phones-grid{ display:grid; gap:4rem; }
+.phones-grid{ display:grid; gap:4rem; margin: 0rem 0;}
 .phone-row{ display:grid; gap:2rem; align-items:center; }
 @media (min-width:980px){
   .phone-row{ grid-template-columns: 360px 1fr; }
@@ -720,19 +738,18 @@ html{
   overflow: hidden;
   aspect-ratio: 9 / 19;
   border-radius: 1.4rem;
-  box-shadow: 0 8px 20px rgba(255, 189, 104, 0.1);
   transition: transform .25s ease, box-shadow .25s ease, outline-color .25s;
   outline: 2px solid transparent;
+  border: 2px solid #a6a7ab;
 
 }
 
 .zz-thumb:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 26px rgba(255, 184, 77, 0.18);
 }
 
 .zz-thumb.is-active {
-  outline-color: #000000;
+  border: 5px dotted #a6a7ab;
 }
 
 .zz-thumb img {
@@ -745,31 +762,6 @@ html{
 
 .zz-thumb:hover img {
   transform: scale(1.02);
-}
-
-/* 넘버(dot) */
-.zz-thumb .dot {
-  position: absolute;
-  left: 12px;
-  top: 12px;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: rgba(255, 205, 130, 0.4);
-  color: #fff9f1;
-  font: 700 13px/1 "Manrope", sans-serif;
-  border: 1px solid rgba(255, 200, 110, 0.6);
-  transition: all .25s ease;
-}
-
-.zz-thumb.is-active .dot {
-  background: #ffb95e;
-  color: #fffdf9;
-  box-shadow:
-    0 6px 14px rgba(255, 184, 77, .26),
-    0 0 12px 6px rgba(255, 205, 130, .24);
 }
 
 /* ===============================
