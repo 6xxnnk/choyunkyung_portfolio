@@ -609,6 +609,32 @@ html{
 .lenz.left{ position:absolute; width:4px; height:4px; left:2px; top:2px; background:#245; border-radius:50%}
 .lenz.right{ position:absolute; width:5px; height:5px; left:2px; top:1px; background:#245; border-radius:50%}
 
+
+/* Glossier: 이미지 스택 자동 스크롤은 live 모드에선 비활성화 */
+.phone-glossier.live .stack { display: none !important; }
+
+/* 임베드 스케일 컨테이너 */
+.phone-embed-wrap{
+  position:absolute;
+  inset:0;                 /* 프레임 안을 꽉 채움 */
+  overflow:hidden;         /* 프레임 밖은 잘라냄(진짜 기기처럼) */
+  background:#000;
+  transform-origin: top left;
+}
+
+/* 실제 사이트는 고정 해상도로 두고, JS가 scale만 조정 */
+.phone-embed{
+  width:390px;             /* iPhone 가로 기준 */
+  height:844px;            /* iPhone 세로 기준 */
+  border:0; outline:0; display:block;
+  transform-origin: top left;
+  will-change: transform;
+}
+
+/* 마우스가 들어오면 페이지 스크롤이 잘 되도록 포커스 암시(선택) */
+.phone-embed:focus { outline: none; }
+
+
 /* ===============================
    Section 3 — iMac 두 카드
 =============================== */

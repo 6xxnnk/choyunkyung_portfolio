@@ -246,48 +246,33 @@
     <div class="phones-grid">
 
       <!-- Glossier: 세로 스크롤(스크린 안에서 위로 자동 이동) -->
-      <div class="phone-row">
-        <div class="phone phone-glossier">
-          <div class="frame-base">
-            <div class="frame-base-light"></div>
-            <div class="side-button mute"></div>
-            <div class="side-button volume-up"></div>
-            <div class="side-button volume-down"></div>
-            <div class="side-button hold"></div>
-            <div class="stripe top"></div>
-            <div class="stripe bottom"></div>
-            <div class="port"></div>
-
-            <div class="layer2">
-              <div class="layer2-light"></div>
-              <div class="layer2-light light-right"></div>
-
-              <div class="screen">
-                <div class="mask">
-                  <div class="left-pie"></div>
-                  <div class="right-pie"></div>
-                  <div class="speaker"></div>
-                  <div class="camera"><div class="lenz left"></div><div class="lenz right"></div></div>
-                </div>
-
-                <div class="screen-inner">
-                  <div class="stack" id="glossierStack">
-                    <img src="img/glossier-1.jpg" alt="">
-                    <img src="img/glossier-2.jpg" alt="">
-                    <img src="img/glossier-3.jpg" alt="">
-                  </div>
-                </div>
-              </div><!-- .screen -->
-            </div><!-- .layer2 -->
-          </div><!-- .frame-base -->
-        </div>
-        <div class="phone-meta">
-          <h3>Glossier Mobile App</h3>
-          <p>Figma + Front-end</p>
-          <a class="link" href="https://example.com/glossier" target="_blank" rel="noopener">홈페이지 보기 →</a>
+      <div class="phone phone-glossier live">
+  <div class="frame-base">
+    <div class="layer2">
+      <div class="screen">
+        <div class="screen-inner">
+          <!-- 디자인 기준 뷰포트: iPhone(390×844) -->
+          <div class="phone-embed-wrap" data-design="390x844">
+            <iframe
+              class="phone-embed"
+              src="https://6xxnnk.github.io/glossier.renewal/"
+              title="Glossier — mobile"
+              loading="lazy"
+              allow="fullscreen *; autoplay *; clipboard-write *; geolocation *"
+              sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox"
+            ></iframe>
+          </div>
         </div>
       </div>
-
+    </div>
+  </div>
+  <!-- (선택) 메타 카드 -->
+  <div class="phone-meta">
+    <h3>Glossier Mobile</h3>
+    <p>Live site in iPhone frame</p>
+    <a class="link" href="https://6xxnnk.github.io/glossier.renewal/" target="_blank" rel="noopener">사이트 열기 →</a>
+  </div>
+</div>
 
 <!-- 3 zigzag -->
 <section class="proj proj--zigzag-v2" id="zigzag">
@@ -523,13 +508,7 @@
           </footer>
         </div>
       </article>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-pagination"></div>
-      </div>
-    </div>
-  </div>
-</section>
+ 
 
 
 
@@ -607,7 +586,12 @@
             <span class="hashtag">#gifted</span>
           </footer>
         </div>
-      </article>
+      </article>  
+
+
+    </div>
+  </div>
+</section>
     </div>
   </div>
 
@@ -617,7 +601,11 @@
 
     <div class="ig-lb__stage">
       <div id="lbSwiper" class="swiper ig-lb__swiper">
-        <div class="swiper-wrapper"></div>
+        <div class="swiper-wrapper"></div>      
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-pagination"></div>
+      </div>
 
 
 
