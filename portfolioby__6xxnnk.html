@@ -70,7 +70,8 @@
         <!-- 손글씨 타이틀 -->
         <div class="cv-center" role="group" aria-label="About me heading" data-reveal>
           <svg class="ink-title-svg" viewBox="0 0 1200 220" aria-labelledby="aboutTitle">
-            <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" class="ink-title-stroke">About me*</text>
+            <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" 
+            class="ink-title-stroke">  About me~*</text>
           </svg>
         </div>
 
@@ -141,17 +142,18 @@
       </div>
     </section>
 
-    <!-- =========================
-      03. PROJECTS (세로 1열 큰 카드 + 지그재그 아이폰 4대)
-    ========================= -->
-<section class="section" id="projects">
 
+    
+<!-- =========================
+03 PROJECTS (세로 1열 큰 카드 + 지그재그 아이폰 4대)
+========================= -->  
+<section class="projects">
   <div class="container">
-    <h2 class="projects">Projects.</h2>
-    <div class="projects-grid">
+<strong class="projects-title">Table of contents...</strong>
+<div class="projects-grid">
 
-      <!-- iMac 1: Nespresso -->
-      <!-- iMac 1: Nespresso -->
+
+<!-- 1: Nespresso -->
 <div class="imac-shell">
   <div class="top-panel">
     <div class="facetime"></div>
@@ -172,35 +174,49 @@
   </div>
   <div class="bottom-panel"><div class="apple-logo"></div></div>
   <div class="stand"><div class="stand-right"></div><div class="stand-left"></div></div>
+
+  <div class="device-meta">
+    <h3>Nespresso Website</h3>
+    <p>Figma + Front-end</p>
+    <a class="link" href="https://6xxnnk.github.io/index/" target="_blank" rel="noopener">홈페이지 보기 →</a>
+  </div>
 </div>
 
-<!-- iMac 2: Tamburins (원하면 같은 주소 임시로 사용 가능) -->
+<!-- iMac 2: Tamburins (Figma Prototype Embed) -->
 <div class="imac-shell">
   <div class="top-panel">
     <div class="facetime"></div>
     <div class="display-panel">
       <div class="embed-scale-wrap" data-design="1920x1080">
-        <iframe
-          class="site-embed"
-          src="https://6xxnnk.github.io/index/"
-          title="Nespresso Website — by 6xxnnk"
-          loading="lazy"
-        ></iframe>
-        <div class="embed-fallback">
-          <p>브라우저가 임베드를 차단했어요.</p>
-          <a href="https://6xxnnk.github.io/index/" target="_blank" rel="noopener">새 탭으로 열기 →</a>
-        </div>
+      <iframe
+        class="figma-embed"
+        src="https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/proto/ITm4CrIOfPwxeZ9xGSLQDV/%EC%A1%B0%EC%9C%A4%EA%B2%BD_TAMBURINS%ED%94%BC%EA%B7%B8%EB%A7%88%ED%99%94%EB%A9%B4?node-id=1-7&t=9vRkTfg28ClEPhNe-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&hide-ui=1&zoom=1.1"
+        allowfullscreen
+        loading="lazy"
+        title="Tamburins Website — Prototype"
+      ></iframe></div>
+
+      <div class="embed-fallback">
+        <p>브라우저가 Figma 임베드를 차단했어요.</p>
+        <a href="https://www.figma.com/proto/ITm4CrIOfPwxeZ9xGSLQDV/%EC%A1%B0%EC%9C%A4%EA%B2%BD_TAMBURINS%ED%94%BC%EA%B7%B8%EB%A7%88%ED%99%94%EB%A9%B4?node-id=1-7&t=9vRkTfg28ClEPhNe-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1"
+           target="_blank" rel="noopener">새 탭으로 열기 →</a>
       </div>
     </div>
   </div>
   <div class="bottom-panel"><div class="apple-logo"></div></div>
   <div class="stand"><div class="stand-right"></div><div class="stand-left"></div></div>
+  <div class="device-meta">
+    <h3>Tamburins Website</h3>
+    <p>Figma Prototype</p>
+    <a class="link" href="https://www.figma.com/proto/ITm4CrIOfPwxeZ9xGSLQDV/%EC%A1%B0%EC%9C%A4%EA%B2%BD_TAMBURINS%ED%94%BC%EA%B7%B8%EB%A7%88%ED%99%94%EB%A9%B4?node-id=1-7&t=9vRkTfg28ClEPhNe-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1"
+       target="_blank" rel="noopener">프로토타입 보기 →</a>
+  </div>
 </div>
 </section>
 
 
-      <!-- Glossier — iPhone (1대) -->
-      <section class="section" id="phones">
+<!-- 2: Glossier — iPhone (1대) -->
+      <section class="phones" id="phones">
   <div class="container">
     <div class="phones-grid">
 
@@ -247,8 +263,10 @@
         </div>
       </div>
 
+
+<!-- 3 zigzag -->
 <section class="proj proj--zigzag-v2" id="zigzag">
-  <h2 class="proj__title">Zigzag App Redesign</h2>
+  <h2 class="proj__title">Visual redesign</h2>
   <p class="kicker">기존 홈/탐색/상세/체크아웃 플로우의 밀도·가독성·전환 요소를 재배치 <br>
         스크롤 피로를 낮추고, 필터/정렬 접근성을 높임 <br>
         상세에서 비주얼–리뷰–옵션 순서를 재구성해 CTA 도달률을 개선
@@ -329,7 +347,11 @@
     </div>
   </div>
 </section>
-<!--  -->
+
+
+
+
+<!--4. 29cm -->
 <section class="cm-section-29" id="cm29">
   <div class="cm-head">
     <h2 class="cm-title">29CM — Mobile App Mockups</h2>
@@ -386,9 +408,11 @@
     </figure>
   </div>
 </section>
-<!-- =========================
-     06. INSTAGRAM 
-========================= -->
+
+<!-- 
+=========================
+      04. instagram (갤러리 + 라이트박스)
+    ========================= -->
 <section id="instagram" class="ig section" aria-labelledby="igTitle">
   <div class="ig__title">
     <strong><br>
@@ -568,9 +592,18 @@
   </div>
 </section>
 
+<!-- 05 Contact Section -->
+<section class="contact">
+    <div class="container">
+      <h2>Contact Me</h2>
+      <p>I'm open to new opportunities and collaborations. Feel free to reach out!</p>
+      <ul class="contact-info">
+        <li>Email: <a href="mailto:your-email@example.com">your-email@example.com</a></li>
+      </ul>
+    </div>
+</section>
 
-
-  </div>
+  </div><!--  -->
 
   <!-- JS (분리 유지) -->
   <script src="js/cursor-sun.js" defer></script>

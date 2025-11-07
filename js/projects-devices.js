@@ -45,4 +45,27 @@
     pane.addEventListener('touchstart', ()=> onEnter(pane), {passive:true});
     pane.addEventListener('touchend', ()=> onLeave(pane));
   });
+
+  // iMac Exhibit — small, scoped helpers
+document.addEventListener('DOMContentLoaded', () => {
+  // 1) 캐시버스트: 깃허브 페이지 수정 즉시 반영
+  document.querySelectorAll('.imx-site-embed[data-cache-bust="true"]').forEach((ifr) => {
+    try {
+      const u = new URL(ifr.src);
+      u.searchParams.set('_v', Date.now().toString());
+      ifr.src = u.toString();
+    } catch (e) {}
+  });
+
+  // 2) 접근성: iframe 포커스시 내부 하이라이트
+  document.addEventListener('focusin', (e) => {
+    const p = e.target.closest('.imx-display');
+    if (p) p.style.boxShadow = '0 0 0 3px rgba(255,210,74,.65) inset';
+  });
+  document.addEventListener('focusout', (e) => {
+    const p = e.target.closest('.imx-display');
+    if (p) p.style.boxShadow = '';
+  });
+});
+
 })();
