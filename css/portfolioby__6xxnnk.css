@@ -226,7 +226,7 @@ html{
    SECTION 2: ABOUT ME
 ========================= */
 .about-cvmap {
-  min-height: 30vh; 
+  min-height: 55vh; 
   position: relative;
   display: flex;
   justify-content: center;
@@ -246,7 +246,7 @@ html{
 .ink-title-svg {
   display: block;
   height: auto;
-  margin: 0 auto 2rem;
+  margin: 0 auto 3rem;
   overflow: visible;
 }
 
@@ -299,11 +299,13 @@ html{
    2. 리스트 공통
 ========================= */
 .list-plain {
-  list-style: none;
-  margin: 0.8rem 0 0;
-  padding: 0;
-  color: #374151;
-  width: max-content;
+  list-style:none; 
+  margin:.8rem auto 0; 
+  padding:0;
+  color:#374151;
+  max-width: 85%;              
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 .list-plain li {
   margin: 0.2rem 0;
@@ -315,7 +317,7 @@ html{
 ========================= */
 .bubble {
   position: absolute;
-  border: 1.6px solid #000;
+  border: 1px solid #555555;
   border-radius: 50%;
   background: transparent;
   display: flex;
@@ -327,10 +329,14 @@ html{
   color: #111;
   letter-spacing: 0.02em;
   z-index: 1;
-  padding-top: 1.4rem;
+  padding-top: 2.5rem;
   opacity: 0;
   transform: translateY(12px);
   transition: opacity 0.6s ease, transform 0.6s ease;
+  background: radial-gradient(circle at 50% 50%, #f8fbff 0%, #ffffff 80%);
+  border: 1.6px solid rgba(0,0,0,0.15);
+  box-shadow: inset 0 0 10px rgba(13,110,253,0.08),
+              0 2px 14px rgba(0,0,0,0.06);
 }
 .bubble.is-visible {
   opacity: 1;
@@ -351,57 +357,176 @@ html{
 
 /* 새 bio 버블 */
 .bubble--bio {
-  top: -20%;
+  top: -8%;
   left: 50%;
   transform: translateX(-50%);
-  width: 39rem;
-  height: 19rem;
+  width: 40rem; height: 16rem;
+  z-index: 7;
+  background-color:#fff;
+
+}
+.bubble--bio .list-plain li{
+  font-size:2rem;
+}
+.bubble--bio2{
+  top: 2%;
+  left: 59%;
+  width: 60rem; height: 25rem;
+  background-color:#fff;
+  
 }
 
 /* 교육 */
 .bubble--edu {
   top: 10%;
-  left: 12%;
-  width: 48rem;
-  height: 19rem;
+  left: 18%;
+  width: 52rem; height: 33rem;
 }
 
 /* 성격 */
 .bubble--char {
-  top: 3%;
-  right: 23%;
-  width: 28rem;
-  height: 26rem;
-  background-color: #fff;
+  top: 80%;
+  right: 40%;
+  width:60rem; height: 28rem;
+  background-color:#fff;
 }
 
 /* 경력 */
 .bubble--exp {
-  right: 10%;
-  top: 38%;
-  width: 48rem;
-  height: 33rem;
+  top: 45%;
+  right: 8%;
+  width: 55rem; height: 40rem;
+
 }
 
 /* 소셜 */
 .bubble--social {
-  bottom: -10%;
-  left: 18%;
-  width: 33rem;
-  height: 19rem;
+  bottom: -4%;
+  left: 12%;
+  width: 36rem; height: 20rem;
+}
+.bubble--social .list-plain li a{
+  color: #000;
+}
+.bubble--social .list-plain li a:hover{
+  text-decoration: underline;
+}
+/* =========================
+   말풍선 공통 스타일
+========================= */
+.tooltip-email::after,
+.tooltip-insta::after {
+  position: absolute;
+  z-index: 999;
+  content: "";
+  display: none;
+  top: 0;
+  left: 100%;
+  transform: translate(10px, -30%);
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  font-size: 1.6rem;
+  background: #fff;
+  color: #111;
+  border: 1.5px solid #ddd;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* 말풍선 꼬리 */
+.tooltip-email::before,
+.tooltip-insta::before {
+  position: absolute;
+  content: "";
+  display: none;
+  top: 50%;
+  left: calc(100% + 2px);
+  transform: translateY(-50%);
+  border: 6px solid transparent;
+  border-right-color: #fff;
+}
+
+/* 이메일용 */
+.tooltip-email::after {
+  content: "📧 이메일 보내기";
+}
+
+/* 인스타그램용 */
+.tooltip-insta::after {
+  content: "📷 인스타그램 방문하기";
+}
+
+/* hover 시 활성화 */
+.tooltip-email:hover::after,
+.tooltip-email:hover::before,
+.tooltip-insta:hover::after,
+.tooltip-insta:hover::before {
+  display: block;
+  animation: pop 0.25s ease forwards;
+}
+
+/* 귀여운 팝업 애니메이션 */
+@keyframes pop {
+  0% { opacity: 0; transform: translate(10px, -40%) scale(0.9); }
+  100% { opacity: 1; transform: translate(10px, -30%) scale(1); }
+}
+
+/* 살짝 컬러 강조 */
+.tooltip-email:hover { color: #0d6efd; }
+.tooltip-insta:hover { color: #ff4d4d; }
+
+/* 위치 기준을 위해 a 태그는 relative */
+.tooltip-email,
+.tooltip-insta {
+  position: relative;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 /* 스킬 */
 .bubble--skills {
-  bottom: -2rem;
-  left: 50%;
+  bottom: -30%;
+  left: 30%;
   transform: translateX(-10%);
-  width: 20rem;
-  height: 20rem;
+  width: 25rem; height: 23rem;
 }
 
 
+/* 별 기본 스타일 */
+.bubble::before,
+.bubble::after {
+  content: "✷ ";
+  position: absolute;
+  font-size: 1.2rem;
+  opacity: 0.65;
+  animation: twinkle 3s infinite ease-in-out alternate;
+}
 
+/* 파랑별 */
+.bubble::before {
+  color: #2bbef8;            /* 파랑 */
+  top: -1.2rem;
+  left: -1.4rem;
+  transform: rotate(10deg);
+  animation-delay: 0.2s;
+}
+
+/* 빨강별 */
+.bubble::after {
+  color: #ff6810;            /* 빨강 */
+  bottom: -1rem;
+  right: -1.4rem;
+  transform: rotate(-8deg);
+  animation-delay: 1s;
+}
+
+
+@keyframes twinkle {
+  0% { opacity: 0.5; transform: scale(1.2) rotate(0deg); }
+  100% { opacity: 1; transform: scale(1.7) rotate(15deg); }
+}
 /* ===============================
    SECTION 3: PROJECTS (iMac / iPhone)
 =============================== */
