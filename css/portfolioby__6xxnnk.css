@@ -943,252 +943,132 @@ button:hover ~ #cursorSun,
 ================================ */
 
 /* 안전 토큰(없으면 기본값) */
+/* ===== Tokens ===== */
 :root{
-  --card-bd: #e5e7eb;
-  --shadow: 0 1rem 3rem rgba(0,0,0,.12);
-  --bg-soft: #fafafa;
+  --card-bd:#e5e7eb;
+  --ink:#111;
+  --muted:#6b7280;
+  --soft:#fafafa;
+  --wrap:1080px;
 }
 
-/* Section */
-.ig{ padding-top:4rem; }
-.ig__title strong{
-  font-family:'Gasoek One', sans-serif; font-size:10rem; color:#000; font-weight:100;
-}
-.ig__title p{
-  font-family:'Gasoek One', sans-serif; font-size:10rem; color:#000; font-weight:100; text-decoration:underline;
-}
+/* ===== Section / Title / Container ===== */
+.ig{ padding-top:4rem; color:var(--ink); }
+.ig__title strong{ font-family:'Gasoek One',sans-serif; font-size:10rem; font-weight:100; }
+.ig__title p{ font-family:'Gasoek One',sans-serif; font-size:10rem; font-weight:100; text-decoration:underline; }
 
-/* 좌우 여백 컨테이너 */
 .ig__container{
-  max-width:1080px;
+  max-width:var(--wrap);
   margin:0 auto;
   padding:0 1.6rem;
   display:grid;
   gap:2rem;
 }
 
-/* Header */
-.ig--profile .ig__container{ max-width:1080px; margin:0 auto; padding:0 16px; }
-
+/* ===== Header (프로필) ===== */
 .ig-hd{
-  display:grid;
-  grid-template-columns: 176px 1fr;
-  gap: 24px;
-  align-items:start;
-  padding-top: 12px;
+  display:grid; grid-template-columns:176px 1fr;
+  gap:24px; align-items:start; padding-top:12px;
 }
-.ig-hd__avatar{
-  width: 176px; height: 176px; border-radius: 50%;
-  display:grid; place-items:center;
-}
-.ig-hd__avatar img{
-  width:100%; height:100%; object-fit:cover; border-radius:50%;
-  border:1px solid #e5e7eb;
-}
+.ig-hd__avatar{ width:176px; height:176px; border-radius:50%; overflow:hidden; }
+.ig-hd__avatar img{ width:100%; height:100%; object-fit:cover; border-radius:50%; border:1px solid var(--card-bd); }
 
-.ig-hd__main{ display:grid; gap: 10px; }
-
-.ig-hd__row{
-  display:flex; align-items:center; justify-content:space-between; gap:12px;
-}
-.ig-hd__username{
-  display:flex; align-items:center; gap:8px;
-  font-size:28px; font-weight:600; margin:0;
-}
+.ig-hd__main{ display:grid; gap:10px; }
+.ig-hd__row{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.ig-hd__username{ display:flex; align-items:center; gap:8px; font-size:28px; font-weight:600; margin:0; }
 .ig-verified{
   width:18px; height:18px; display:inline-block;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%230096ff' d='M12 2l2.4 2.1 3.2-.4 1.3 3 3 1.3-.4 3.2L22 12l.5 3.8-3 1.3-1.3 3-3.2-.4L12 22l-2.4-2.1-3.2.4-1.3-3-3-1.3L2 12l-.5-3.8 3-1.3 1.3-3 3.2.4L12 2z'/%3E%3Cpath fill='%23fff' d='M10.2 12.8l-1.7-1.7-1.4 1.4 3.1 3.1 5.8-5.8-1.4-1.4z'/%3E%3C/svg%3E") center/contain no-repeat;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%230096ff' d='M12 2l2.4 2.1 3.2-.4 1.3 3 3 1.3-.4 3.2L22 12l.5 3.8-3 1.3-1.3 3-3.2-.4L12 22l-2.4-2.1-3.2.4-1.3-3-3-1.3L2 12l-.5-3.8 3-1.3 1.3-3 3.2.4L12 2z'/%3E%3Cpath fill='%23fff' d='M10.2 12.8l-1.7-1.7-1.4 1.4 3.1 3.1 5.8-5.8-1.4-1.4z'/%3E%3C/svg%3E") center/contain no-repeat;
 }
-.ig-ellipsis{
-  font-size:22px; line-height:1; background:transparent; border:0; cursor:pointer; padding:4px 6px;
-}
+.ig-ellipsis{ font-size:22px; line-height:1; background:transparent; border:0; cursor:pointer; padding:4px 6px; }
 
-.ig-actions{ display:flex; align-items:center; gap:8px; }
-.ig-btn{
-  height:34px; padding:0 12px; border-radius:8px; border:1px solid #dbdbdb; background:#efefef;
-  font-weight:600; font-size:14px;
-}
-.ig-btn--primary{ background:#efefef; }
+.ig-actions{ display:flex; gap:8px; }
+.ig-btn{ height:34px; padding:0 12px; border-radius:8px; border:1px solid #dbdbdb; background:#efefef; font-weight:600; font-size:14px; }
 .ig-btn--icon{ width:34px; padding:0; display:grid; place-items:center; }
-.ig-icon{ width:18px; height:18px; fill:#111; }
+.ig-icon{ width:18px; height:18px; fill:currentColor; color:#111; }
 
-.ig-counters{
-  display:flex; gap:28px; list-style:none; margin:2px 0; padding:0;
-}
+.ig-counters{ display:flex; gap:28px; list-style:none; margin:2px 0; padding:0; }
 .ig-counters li{ display:flex; gap:6px; align-items:baseline; }
 .ig-counters strong{ font-size:16px; font-weight:700; }
-.ig-counters span{ font-size:16px; color:#111; }
+.ig-counters span{ font-size:16px; }
 
 .ig-bio{ display:grid; gap:6px; margin-top:4px; }
 .ig-bio__name{ font-weight:700; }
-.ig-bio__desc{ color:#111; }
 .ig-bio__links{ display:flex; align-items:center; gap:8px; }
 .ig-bio__links a{ color:#00376b; font-weight:600; }
 .ig-bio__links .dot{ color:#9ba3af; }
-.ig-bio__mutual{ display:flex; align-items:center; gap:6px; color:#6b7280; }
+.ig-bio__mutual{ display:flex; align-items:center; gap:6px; color:var(--muted); }
 .ig-bio__mutual .mutual{
-  width:22px; height:22px; border-radius:50%; object-fit:cover; border:1px solid #fff;
-  box-shadow:0 0 0 1px #e5e7eb;
+  width:22px; height:22px; border-radius:50%; object-fit:cover;
+  border:1px solid #fff; box-shadow:0 0 0 1px var(--card-bd);
 }
 
-/* ===== Highlights ===== */
-.ig-hi{
-  display:flex; gap:18px; align-items:center;
-  padding: 18px 0 10px;
-  overflow-x:auto;
-}
-.ig-hi__item{
-  background:transparent; border:0; text-align:center; cursor:pointer;
-}
-.ig-hi__ring{
-  width:86px; height:86px; border-radius:50%;
-  display:grid; place-items:center;
-  background: radial-gradient(circle at 50% 50%, #fff 60%, transparent 61%) padding-box,
-              conic-gradient(#d62976, #fa7e1e, #feda75, #962fbf, #d62976) border-box;
-  border: 3px solid transparent;
-}
-.ig-hi__ring > span{
-  width:76px; height:76px; border-radius:50%;
-  display:grid; place-items:center; background:#fff; font: 700 26px/1 "Inter", system-ui;
-  color:#111; border:1px solid #e5e7eb;
-}
-.ig-hi__item em{
-  display:block; margin-top:8px; font-style:normal; font-size:12px; color:#6b7280;
-}
-
-/* ===== Tabs ===== */
-.ig-tabs{
-  position:relative; display:flex; justify-content:center; gap:40px;
-  border-top:1px solid #e5e7eb; margin-top:8px;
-}
+/* ===== Tabs (상단 바) ===== */
+.ig-tabs{ position:relative; display:flex; justify-content:center; gap:40px; border-top:1px solid var(--card-bd); margin-top:8px; }
 .ig-tab{
   position:relative; display:flex; align-items:center; gap:6px;
   padding:12px 4px; background:transparent; border:0; cursor:pointer; color:#737373;
   font-weight:700; text-transform:uppercase; letter-spacing:.08em; font-size:12px;
 }
 .ig-tab svg{ width:12px; height:12px; fill: currentColor; }
-.ig-tab.is-active{ color:#111; }
-
+.ig-tab.is-active{ color:var(--ink); }
 .ig-tabs__underline{
-  position:absolute; bottom:0; height:1px; width:90px; background:#111; border-radius:2px;
-  transform: translateX(-150%); /* 초기 위치(첫 탭 아래) */
-  transition: transform .25s ease;
+  position:absolute; bottom:0; height:1px; width:90px; background:var(--ink); border-radius:2px;
+  transform:translateX(-150%); transition:transform .25s ease;
 }
-/* Grid */
+
+/* ===== Grid (3열 고정, 반응형 2/1열) ===== */
 .ig__grid{
+  max-width:var(--wrap);
+  margin:0 auto;
+  padding:0 1.6rem;
   display:grid;
-  grid-template-columns:repeat(3, minmax(0,1fr));
+  grid-template-columns:repeat(3,minmax(0,1fr));
   gap:.4rem;
 }
-@media (max-width:1024px){
-  .ig__grid{ grid-template-columns:repeat(2, minmax(0,1fr)); }
-}
-@media (max-width:560px){
-  .ig__grid{ grid-template-columns:1fr; gap:.6rem; }
-}
+@media (max-width:1024px){ .ig__grid{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:560px){ .ig__grid{ grid-template-columns:1fr; gap:.6rem; } }
 
-/* Card */
-.gallery-item{ cursor:zoom-in; position:relative; }
-.post-card{
-  position:relative; background:#fff; overflow:hidden; border-radius:.3rem;
-  border:1px solid #f1f5f9;
-}
-.post-thumb{ aspect-ratio:1/1; overflow:hidden; background:#f8fafc; }
+/* ===== Card ===== */
+.gallery-item{ position:relative; }
+.post-card{ position:relative; background:#fff; overflow:hidden; border-radius:.3rem; border:1px solid #f1f5f9; }
+.post-thumb{ position:relative; aspect-ratio:1/1; overflow:hidden; background:#f8fafc; cursor:pointer; }
 .post-thumb img{
-  width:100%; height:100%; object-fit:cover;
-  transform:scale(1); transition:transform .35s ease;
+  width:100%; height:100%; object-fit:cover; transition:transform .28s ease, filter .28s ease;
 }
-.gallery-item:hover .post-thumb img{ transform:scale(1.06); }
 
-/* Meta */
-.post-meta{
-  display:block; padding:.9rem 1rem 1rem;
-  font-size:1.25rem; line-height:1.5; color:#111;
+/* 호버: 이미지 어둡게 + 중앙 라벨 */
+.post-thumb::after{
+  content:"Tap for view";
+  position:absolute; inset:auto 0 10px 0; /* 기본은 하단 살짝 위 */
+  margin:auto; width:max-content; padding:.6rem 1rem;
+  left:50%; transform:translate(-50%, 8px);
+  font:700 12px/1.1 system-ui, -apple-system, Segoe UI, Roboto, 'Noto Sans KR', sans-serif;
+  color:#fff; background:rgba(0,0,0,.72); border-radius:999px;
+  opacity:0; pointer-events:none; transition:opacity .18s ease, transform .18s ease;
 }
-.post-meta .brand{
-  display:block; font-weight:800; font-size:1.3rem; margin-bottom:.4rem; letter-spacing:.02em;
-}
+.post-thumb:hover img{ transform:scale(1.02); filter:brightness(.72); }
+.post-thumb:hover::after{ opacity:1; transform:translate(-50%, 0); }
+
+/* 아래 메타 텍스트 */
+.post-meta{ padding:.9rem 1rem 1rem; font-size:1.25rem; line-height:1.5; }
+.post-meta .brand{ display:block; font-weight:800; font-size:1.3rem; margin-bottom:.4rem; letter-spacing:.02em; }
 .post-meta .hashtag{ display:block; color:#475569; white-space:pre-line; }
 
-/* Hover overlay (선택) */
-.gallery-item .hover-indicator{
-  position:absolute; inset:0; display:grid; place-items:center;
-  color:#fff; font-weight:700; font-size:1.2rem; letter-spacing:.02em;
-  background:rgba(0,0,0,.20); opacity:0; transition:opacity .2s ease;
+/* ===== 커서 옆 툴팁 (JS가 위치 업데이트/표시 토글) ===== */
+.ig-cursor-tip{
+  position:fixed; left:0; top:0; transform:translate(-50%,-50%);
+  padding:.6rem .8rem; background:rgba(0,0,0,.82); color:#fff;
+  font-size:12px; line-height:1; border-radius:8px; white-space:nowrap;
+  pointer-events:none; z-index:9999; opacity:0; transition:opacity .12s ease, transform .12s ease;
 }
-.gallery-item:hover .hover-indicator{ opacity:1; }
+.ig-cursor-tip.is-visible{ opacity:1; transform:translate(-50%,-60%); } /* 살짝 떠오르는 느낌 */
 
-/* Lightbox */
-.ig-lb{
-  position:fixed; inset:0; background:transparent;
-  display:none; align-items:center; justify-content:center; z-index:50;
-}
-.ig-lb.is-open{ display:flex; }
-.ig-lb__stage{
-  width:100vw; height:100vh;
-  display:grid; place-items:center; pointer-events:auto;
-  transform:scale(.94); opacity:0; transition:transform .22s ease, opacity .22s ease;
-}
-.ig-lb.is-open .ig-lb__stage{ transform:scale(1); opacity:1; }
-.ig-lb__swiper{
-  width:100%; height:100%;
-  border-radius:.6rem;
-  background:rgba(173,173,173,.95);
-}
-.ig-lb__swiper .swiper-slide{ display:grid; place-items:center; }
-.ig-lb__swiper img{
-  width:auto; height:auto; max-width:100%; max-height:100%;
-  object-fit:contain; display:block;
-}
-.swiper-button-prev, .swiper-button-next{
-  color:#fff; width:4.2rem; height:4.2rem; backdrop-filter:blur(.6rem); border-radius:999rem;
-}
-.swiper-button-prev:after, .swiper-button-next:after{ font-size:1.8rem; }
-.swiper-pagination-bullet{ background:#fff; opacity:.5; }
-.swiper-pagination-bullet-active{ opacity:1; }
-.ig-lb__close{
-  position:absolute; top:1.2rem; right:1.2rem;
-  width:3.6rem; height:3.6rem; border-radius:999rem;
-  border:.1rem solid #111; background:#fff;
-  font-size:2.2rem; line-height:3.4rem; cursor:pointer;
-  box-shadow:.2rem .2rem 0 #111; z-index:60;
-}
-.ig-lb__close:hover{ transform:translateY(-.1rem); }
+/* ===== Util ===== */
+.ig a{ text-decoration:none; color:inherit; }
 
 /* 썸네일 기본 인터랙션은 기존 코드 유지 */
 .post-thumb { position: relative; }
-
-/* 공통 툴팁 (IG 스타일 톤) */
-.tooltip-ig::after{
-  content: attr(data-tooltip);
-  position: absolute;
-  left: 50%; bottom: 8px;
-  transform: translate(-50%, 8px);
-  padding: 8px 10px;
-  background: rgba(0,0,0,.82);
-  color: #fff;
-  font-size: 12px; line-height: 1;
-  border-radius: 8px;
-  white-space: nowrap;
-  opacity: 0; pointer-events: none;
-  transition: opacity .18s ease, transform .18s ease;
-}
-.tooltip-ig::before{
-  content:"";
-  position:absolute; left:50%; bottom: 6px;
-  transform: translateX(-50%) rotate(45deg);
-  width: 8px; height: 8px;
-  background: rgba(0,0,0,.82);
-  opacity:0; transition: opacity .18s ease;
-}
-.tooltip-ig:hover::after{
-  opacity: 1; transform: translate(-50%, 0);
-}
-.tooltip-ig:hover::before{ opacity:1; }
-
-/* 접근성: 키보드 포커스에서도 표시 */
-.tooltip-ig:focus-visible::after,
-.tooltip-ig:focus-visible::before{ opacity:1; transform: translate(-50%, 0); }
 
 /* 클릭 느낌 */
 .post-thumb:active img{ transform: scale(1.02); transition: transform .08s ease; }
@@ -1232,6 +1112,63 @@ button:hover ~ #cursorSun,
 /* Reveal */
 [data-reveal]{ opacity:0; transform:translateY(1.2rem); }
 [data-reveal].is-visible{ opacity:1; transform:none; transition:.6s ease; }
+
+/* 동일 디자인으로 함께 쓰기: .tooltip-ig 와 .ig-tooltip */
+.tooltip-ig::after,
+.ig-tooltip::after{
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%; bottom: 8px;
+  transform: translate(-50%, 8px);
+  padding: 8px 10px;
+  background: rgba(0,0,0,.82);
+  color: #fff;
+  font-size: 12px; line-height: 1;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0; pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease;
+  z-index: 3;
+}
+.tooltip-ig::before,
+.ig-tooltip::before{
+  content:"";
+  position: absolute; left:50%; bottom: 6px;
+  transform: translateX(-50%) rotate(45deg);
+  width: 8px; height: 8px;
+  background: rgba(0,0,0,.82);
+  opacity: 0; transition: opacity .18s ease;
+  z-index: 2;
+}
+.tooltip-ig:hover::after,
+.tooltip-ig:hover::before,
+.ig-tooltip:hover::after,
+.ig-tooltip:hover::before{
+  opacity: 1; transform: translate(-50%, 0);
+}
+
+/* 키보드 포커스 접근성 */
+.tooltip-ig:focus-visible::after,
+.tooltip-ig:focus-visible::before,
+.ig-tooltip:focus-visible::after,
+.ig-tooltip:focus-visible::before{
+  opacity: 1; transform: translate(-50%, 0);
+}
+
+/* 커서 따라다니는 고정 툴팁도 같은 룩으로(선택) */
+.ig-cursor-tip{
+  position:fixed; left:0; top:0; transform:translate(-50%,-50%);
+  padding:8px 10px; background:rgba(0,0,0,.82); color:#fff;
+  font-size:12px; line-height:1; border-radius:8px; white-space:nowrap;
+  pointer-events:none; z-index:9999; opacity:0;
+  transition:opacity .12s ease, transform .12s ease;
+}
+.ig-cursor-tip.is-visible{ opacity:1; transform:translate(-50%,-60%); }
+.ig-cursor-tip::after{
+  content:""; position:absolute; left:8px; top:100%;
+  width:8px; height:8px; transform:translateY(0) rotate(45deg);
+  background:rgba(0,0,0,.82);
+}
 
 
 
@@ -1510,15 +1447,6 @@ button:hover ~ #cursorSun,
 .contact__cta{ display:flex; justify-content:center; gap:1rem; }
 [data-reveal]{ opacity:0; transform:translateY(1.2rem); }
 [data-reveal].is-visible{ opacity:1; transform:none; transition:.6s ease; }
-  /* Lightbox(stage를 화면 꽉 채우도록) */
-  .ig-lb__stage{
-    width:100vw; height:100vh;
-  }
-  .ig-lb__swiper{ border-radius:.6rem; }
-  .ig-lb__close{
-    top: 1.2rem; right: 1.2rem;
-    width:3.6rem; height:3.6rem; line-height:3.4rem;
-  }
 
   /* Tabs */
   .tabset__btn{ padding:1rem 1.2rem; font-size:1.4rem; }
