@@ -26,6 +26,8 @@
 }
 
 *{ box-sizing:border-box; }
+
+
 html{
   font-size:62.5%;
   scroll-behavior:smooth;
@@ -382,16 +384,19 @@ button:hover ~ #cursorSun,
   height:250vh; /* 원래 의도 유지 */
 }
 .projects-title{
-  font-size:12rem; margin-bottom:50rem; text-align:left;
+  font-size:12rem; margin-bottom:50rem; 
+  text-align:left;
+
   font-family:'Gasoek One', cursive; font-weight:500;
 }
 .nespresso, .tamburins, .glossier{
-  display:flex; font-family:doto, sans-serif; font-size:15rem;
+  display:flex; 
+  font-family:doto, sans-serif;     
+  font-size: clamp(6rem, 8vw, 10rem);
+  margin: 20rem 0 5rem;
+  line-height: 1;
 }
-.nespresso {
-  align-items:left;
 
-}
 /* iMac Shell (px → rem) */
 /* 1) iMac 래퍼: 실제 레이아웃 크기(폭×높이)만 키움 */
 .device--imac{
@@ -485,8 +490,8 @@ button:hover ~ #cursorSun,
 /* ------- Floating Window (크림톤 + 살짝 더 넓게) ------- */
 .floating-window{
   position: absolute;
-  top: 72%;       /* 기존보다 약간 아래로 */
-  left: 66%;      /* 기존보다 약간 오른쪽으로 */
+  top: 30%;       /* 기존보다 약간 아래로 */
+  left: 20%;      /* 기존보다 약간 오른쪽으로 */
   transform: translate(-50%, -50%);
   width: 420px;
   background-color: #f6f6f6;
@@ -512,7 +517,8 @@ button:hover ~ #cursorSun,
   gap:.8rem; padding:.8rem 1.2rem;
   background:#e9e9e9; border-bottom:1px solid #d8d8d8;
 }
-.window-title{ margin:0; font:700 1.6rem/1.2 ui-sans-serif, "Noto Sans KR", system-ui; color:#0f172a; }
+.window-title{ margin:0; font:700 1.6rem/1.2 ui-sans-serif, "Noto Sans KR", system-ui; 
+  color:#0f172a; }
 .window-controls{ display:flex; gap:.6rem; }
 .window-close, .window-minimize, .window-maximize{
   width:12px; height:12px; border-radius:50%;
@@ -578,6 +584,8 @@ button:hover ~ #cursorSun,
 
 
 /****************************** iPhone Frame (rem 통일) *********************************/
+
+
 .frame-base{
   display:block; width:31.96rem; height:66.44rem; background:#fff; border-radius:4.86rem;
   position:relative; margin:0 auto; box-shadow: inset .2rem 0 1.2rem #494949;
@@ -602,41 +610,154 @@ button:hover ~ #cursorSun,
 .lenz.left{ position:absolute; width:.4rem; height:.4rem; left:.2rem; top:.2rem; background:#245; border-radius:50%; }
 .lenz.right{ position:absolute; width:.5rem; height:.5rem; left:.2rem; top:.1rem; background:#245; border-radius:50%; }
 
-.phone-embed-wrap{ position:absolute; inset:0; overflow:hidden; background:#000; transform-origin:top left; }
-.phone-embed{ width:39rem; height:84.4rem; border:0; outline:0; display:block; transform-origin:top left; will-change:transform; }
-.phone-embed:focus{ outline:none; }
 
-/* Phones grid */
-.phones-grid{ display:grid; gap:4rem; margin:0; justify-content:center; }
-.phone-row{ display:grid; gap:2rem; align-items:center; justify-content:center; max-width:var(--design-w); width:100%; }
-@media (min-width:98rem){ .phone-row{ grid-template-columns: 36rem 1fr; } }
-.phone-pair{ display:grid; grid-template-columns: repeat(2, 32rem); gap:2.4rem; justify-content:center; align-items:start; }
 
-/* Phone meta */
-.phone-meta{
-  border:none; border-radius:2rem; background:linear-gradient(180deg,#fff 0%,#fafafa 100%);
+/* GLOSSIER PHONES SECTION Phones grid */
+
+
+.glossier{
+  font-size: clamp(6rem, 8vw, 10rem);
+  margin: 0 0 2.4rem;
+  line-height: 1;
+}
+
+/* 레이아웃: 왼쪽(아이폰2) + 오른쪽(meta) */
+#glossier-phones{
+  display: grid;
+  grid-template-columns: minmax(64rem, 72rem) minmax(32rem, 1fr);
+  gap: 3rem;
+  align-items: start;
+  width: min(100%, var(--design-w, 120rem));
+  margin-inline: auto;
+}
+
+/* 아이폰 2대 나란히 */
+#glossier-phones .phone-pair{
+  display: grid;
+  grid-template-columns: 32rem 32rem; /* 프레임 가로 고정 */
+  gap: 2.4rem;
+  justify-content: center;
+  align-items: start;
+}
+/* 하드웨어 디테일 */
+.phone-glossier .side-button{ position:absolute; width:.3rem; background:linear-gradient(to bottom,#494949 0%,#aaa 12%,#ddd 50%,#aaa 88%,#494949 100%); }
+.phone-glossier .mute{ height:2.5rem; top:7.5rem; left:-.1rem; border-radius:.15rem 0 0 .15rem; }
+.phone-glossier .volume-up{ height:5rem; top:12.5rem; left:-.1rem; border-radius:.15rem 0 0 .15rem; }
+.phone-glossier .volume-down{ height:5rem; top:19rem; left:-.1rem; border-radius:.15rem 0 0 .15rem; }
+.phone-glossier .hold{ height:7.5rem; top:14.5rem; left:99.5%; border-radius:0 .15rem .15rem 0; }
+.phone-glossier .port{ position:absolute; width:3rem; height:.2rem; bottom:0; left:50%; transform:translateX(-50%); background:#fff; border-radius:50% 50% 0 0; }
+.phone-glossier .mask{ background:#000; width:16rem; height:2.5rem; border-radius:0 0 2rem 2rem; position:absolute; left:50%; top:-.1rem; transform:translateX(-50%); z-index:10; }
+.phone-glossier .speaker{ position:absolute; height:.4rem; width:3.5rem; background:#222; border-radius:1rem; left:50%; top:.5rem; transform:translateX(-50%); }
+.phone-glossier .camera{ position:absolute; height:.8rem; width:.8rem; background:#222; border-radius:50%; left:70%; top:.3rem; transform:translateX(-50%); }
+.phone-glossier .lenz.left{ position:absolute; width:.4rem; height:.4rem; left:.2rem; top:.2rem; background:#245; border-radius:50%; }
+.phone-glossier .lenz.right{ position:absolute; width:.5rem; height:.5rem; left:.2rem; top:.1rem; background:#245; border-radius:50%; }
+
+/* ============== 왼쪽 iPhone: 온보딩 이미지 ============== */
+.phone-onboarding .onboarding-shot{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover; /* 필요 시 contain */
+}
+/* =============== iPhone Frame (공통) =============== */
+.phone-glossier.frame-base{
+  display:block; width:31.96rem; height:66.44rem; background:#fff; border-radius:4.86rem;
+  position:relative; margin:0 auto; box-shadow: inset .2rem 0 1.2rem #494949;
+}
+.phone-glossier .layer2{
+  width:30.66rem; height:65.14rem; background:#000; 
+  border-radius:4.46rem;
+  position:absolute; left:50%; top:.65rem; 
+  transform:translateX(-50%); box-shadow:-.2rem 0 1.5rem .15rem #494949;
+}
+
+.phone-glossier .screen{
+  background:#fff; width:28.66rem; height:63.14rem; 
+  border-radius:3.86rem;
+  position:absolute; left:50%; top:.9rem; 
+  transform:translateX(-50%); overflow:hidden;
+}
+
+/* 오른쪽 iPhone (라이브) 기본 설정 */
+.phone-live .phone-embed-wrap{
+  position: absolute;
+  inset: 0;                  /* .screen 내부를 정확히 덮음 */
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: black;
+  transform-origin: top left; 
+
+
+}
+
+.phone-live .phone-embed{
+  width: 390px;
+  height: 80px;
+  border: 0;
+  outline: 0;
+  display: block;
+  transform-origin: top left;
+  will-change: transform;
+}
+
+/* =============== Meta 카드 (Glossier 무드) =============== */
+.g-card-meta.phone-meta{
+  border:1px solid #f2a8bb; border-radius:2rem; background:linear-gradient(180deg,#fff 0%,#fafafa 100%);
   box-shadow:0 .6rem 1.8rem rgba(0,0,0,.06), inset 0 0 0 .1rem rgba(240,240,240,.9);
-  padding:2.4rem 2rem; text-align:center; width:100%; max-width:30rem; margin:0 auto;
-  transition:box-shadow .25s ease, transform .25s ease;
+  padding:2.4rem 2rem; text-align:center; width:100%; max-width:70rem; margin-top:20rem;
+  transition:box-shadow .25s ease, transform .25s ease; font-size: 1.5rem;
 }
-.phone-meta:hover{ transform:translateY(-.2rem); box-shadow:0 1rem 2.6rem rgba(0,0,0,.1); }
-.phone-meta h3{
-  font-family:'Poppins','Noto Sans KR',sans-serif; font-weight:500; font-size:1.9rem; color:#111; letter-spacing:.01em; margin:0 0 .6rem; text-align:center;
+.g-card-meta.phone-meta:hover{
+  transform:translateY(-.2rem); box-shadow:0 1rem 2.6rem rgba(0,0,0,.1);
 }
-.phone-meta p{ font-size:1.4rem; color:#9e9e9e; margin:0 0 1.8rem; line-height:1.6; text-align:center; }
-.phone-meta .link{
-  display:inline-block; font-weight:600; font-size:1.4rem; padding:.9rem 1.6rem; color:#fff;
-  background:linear-gradient(90deg,#f2bebe,#f7dede);
-  border-radius:999rem; text-decoration:none; border:none; transition:all .25s ease; box-shadow:0 .4rem 1.4rem rgba(242,200,200,.35);
+.g-card-meta h3{
+  font-family:'Poppins','Noto Sans KR',sans-serif; font-weight:600; font-size:2rem; color:#111; letter-spacing:.01em; margin:0 0 .8rem;
 }
-.phone-meta .link:hover{ background:linear-gradient(90deg,#f7dede,#f2bebe); transform:translateY(-.1rem); }
+.g-card-meta .meta-desc{
+  font-size:1.5rem; color:#000000; margin:0 0 1.6rem; line-height:1.65;
+}
+.g-card-meta .meta-bullets{
+  margin:0 0 2rem; padding:0; list-style:none; /* • 제거 */
+}
+.g-card-meta .meta-bullets li{
+  margin:.4rem 0; font-size:1.35rem; color:#374151; line-height:1.5;
+}
 
-/* Glossier 세로 스크롤 뷰어 */
-.phone-glossier .screen-inner{ position:absolute; inset:0; overflow:hidden; }
-.phone-glossier .stack{ position:absolute; left:0; top:0; width:100%; transition: transform 14s linear; }
-.phone-glossier .stack img{ width:100%; display:block; }
-.phone-glossier.in-view .stack{ transform: translateY(-66%); }
-.phone-glossier .stack.reset{ transform: translateY(0); transition: transform .8s ease; }
+/* 버튼: Portfolio x Glossier 핑크 톤 */
+.g-card-meta .meta-actions{
+  display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap;
+}
+.g-card-meta .meta-actions .meta-btn{
+  --glow: rgba(243, 170, 180, .45);
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width:12rem;
+  padding:1rem 1.6rem;
+  border-radius:999rem;
+  font-weight:700; font-size:1.35rem;
+  text-decoration:none; border:.12rem solid transparent;
+  background:
+    radial-gradient(80% 140% at 50% 0%, #ffdbe4, #f7b6c7 45%, #f4a9be 100%);
+  color:#111;
+  box-shadow: 0 .6rem 1.6rem var(--glow), inset 0 1px 0 #fff;
+  transition: transform .15s ease, box-shadow .2s ease, filter .2s ease;
+}
+.g-card-meta .meta-actions .meta-btn:hover{
+  transform: translateY(-.1rem); filter:saturate(1.05);
+}
+.g-card-meta .meta-actions .meta-btn:active{ transform: translateY(0); }
+
+.g-card-meta .meta-actions .meta-btn--ghost{
+  background: #fff; color:#111;
+  border-color: #f2a8bb;
+  box-shadow: 0 .6rem 1.4rem rgba(242,168,187,.18), inset 0 1px 0 rgba(255,255,255,.85);
+}
+.g-card-meta .meta-actions .meta-btn--ghost:hover{
+  background: linear-gradient(180deg,#fff,#fff7fb);
+  box-shadow: 0 .8rem 2rem rgba(242,168,187,.26);
+}
+
+
 
 /* ========== Zigzag(썸네일/스와이퍼) ========== */
 .proj--zigzag-v2{ margin:8rem 0; }

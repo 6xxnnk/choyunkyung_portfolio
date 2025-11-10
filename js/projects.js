@@ -1,53 +1,42 @@
-(function(){
-  const cards = document.querySelectorAll('.device[data-images]');
-  if(!cards.length) return;
+// 아이폰 프레임용 임베드 스케일러: 가로 맞춤 + 상단 정렬(레터박스 제거)
+document.addEventListener('DOMContentLoaded', () => {
+  const wraps = document.querySelectorAll('.phone-embed-wrap');
 
-  // 화면 진입/이탈로 슬라이드 시작·중지
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      const card = entry.target;
-      if(entry.isIntersecting){
-        startSlide(card);
-      } else {
-        stopSlide(card);
-      }
+  const FIT_WIDTH = true;       // 가로 기준(실기기처럼 표시)
+
+  const fit = () => {
+    wraps.forEach(wrap => {
+      const frame = wrap.querySelector('.phone-embed');
+      if (!frame) return;
+
+      // 기준 해상도(아이폰 14 기준)
+      const DW = 390;
+      const DH = 844;
+
+      const PW = wrap.clientWidth;
+      const PH = wrap.clientHeight;
+
+      // 가로 기준 스케일(위쪽 여백 제거)
+      const scale = PW / DW;
+
+      // 중앙 정렬했던 y를 0으로 고정 → 상단 밀착
+      const x = (PW - DW * scale) / 2;
+      const y = 0;
+
+      // 적용
+      frame.style.width = DW + 'px';
+      frame.style.height = DH + 'px';
+      frame.style.transformOrigin = 'top left';
+      frame.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
     });
-  }, { threshold: 0.25 });
+  };
 
-  cards.forEach(card => io.observe(card));
+  fit();
+  window.addEventListener('resize', fit);
 
-  function startSlide(card){
-    if(card._slideTimer) return;
-    const imgEl = card.querySelector('.device__screen img');
-    const list = (card.dataset.images || '').split(',').map(s=>s.trim()).filter(Boolean);
-    if(!imgEl || list.length <= 1) return;
-
-    let idx = 0;
-    card._slideTimer = setInterval(()=>{
-      idx = (idx + 1) % list.length;
-      imgEl.style.opacity = '0';
-      setTimeout(()=>{
-        imgEl.src = list[idx];
-        imgEl.onload = ()=> (imgEl.style.opacity = '1');
-      }, 180);
-    }, 2600);
+  // 폰트/이미지 로딩 후 레이아웃 변동에도 대응
+  if (window.ResizeObserver) {
+    const ro = new ResizeObserver(fit);
+    wraps.forEach(w => ro.observe(w));
   }
-
-  function stopSlide(card){
-    if(card._slideTimer){
-      clearInterval(card._slideTimer);
-      card._slideTimer = null;
-    }
-  }
-
-  // (옵션) iMac 약간의 tilt
-  document.querySelectorAll('.imac__bezel').forEach(bezel=>{
-    bezel.addEventListener('mousemove', (e)=>{
-      const r = bezel.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - 0.5;
-      const y = (e.clientY - r.top) / r.height - 0.5;
-      bezel.style.transform = `rotateX(${(-y*2)}deg) rotateY(${(x*2)}deg)`;
-    });
-    bezel.addEventListener('mouseleave', ()=>{ bezel.style.transform = 'none'; });
-  });
-})();
+});
