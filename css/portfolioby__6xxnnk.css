@@ -481,127 +481,100 @@ button:hover ~ #cursorSun,
 @supports (content-visibility:auto){
   .imac-shell .figma-embed, .imac-shell .site-embed{ content-visibility:auto; }
 }
-/* 공통 팝업 스타일 (요청하신 디자인) */
+
+/* ------- Floating Window (크림톤 + 살짝 더 넓게) ------- */
 .floating-window{
   position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%,-50%);
-  width: 500px; max-width: 86vw;
+  top: 72%;       /* 기존보다 약간 아래로 */
+  left: 66%;      /* 기존보다 약간 오른쪽으로 */
+  transform: translate(-50%, -50%);
+  width: 420px;
   background-color: #f6f6f6;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,.3);
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
   overflow: hidden;
   z-index: 9999;
+  transition: box-shadow .25s ease, transform .25s ease;
+
+  /* 드래그 성능 */
+  will-change: transform;
+  transform: translate3d(0,0,0);
+  touch-action: none;
+}
+.floating-window.dragging{
+  cursor: grabbing;
+  user-select: none;
 }
 
-/* 아이맥 오른쪽 하단 겹치게: 포지션 수정용 모디파이어 */
-.floating-window--imac-br{
-  position: absolute;
-  width: 50rem;              /* 500px */
-  right: -5.6rem;            /* 바깥으로 5.6rem */
-  bottom: -2.2rem;           /* 아래로 2.2rem */
-  top: auto; left: auto;
-
-}
-
-/* 헤더/버튼 (요청안 그대로) */
+/* macOS 헤더 */
 .window-header{
-  display:flex; justify-content:space-between; align-items:center;
-  padding:8px 12px; background-color:#e6e6e6; border-bottom:1px solid #d6d6d6;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:.8rem; padding:.8rem 1.2rem;
+  background:#e9e9e9; border-bottom:1px solid #d8d8d8;
 }
-.window-title{ margin:0; font-size:14px; font-weight:bold; }
-.window-controls{ display:flex; gap:8px; }
-.window-minimize,.window-maximize,.window-close{
+.window-title{ margin:0; font:700 1.6rem/1.2 ui-sans-serif, "Noto Sans KR", system-ui; color:#0f172a; }
+.window-controls{ display:flex; gap:.6rem; }
+.window-close, .window-minimize, .window-maximize{
   width:12px; height:12px; border-radius:50%;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
 }
-.window-minimize{ background-color:#f7d54a; }
-.window-maximize{ background-color:#62c462; }
-.window-close{ background-color:#ee5f5b; }
-.window-content{ padding:12px; }
+.window-close{ background:#ee5f5b; }
+.window-minimize{ background:#f7d54a; }
+.window-maximize{ background:#62c462; }
 
-/* iMac 프레임이 팝업을 덮지 않도록 보장 */
-.device--imac .imac-shell{ z-index: 1; }
-.device--imac .floating-window{ z-index: 2; }
+.window-content{ padding: 1.4rem 1.6rem 1.8rem; }
+.meta-bullets{ margin:0 0 1.2rem; padding-left:1.6rem; font-size:1.5rem; color:#374151; }
+.meta-bullets li + li{ margin-top:.4rem; }
 
+/* ------- 포트폴리오 무드 버튼 ------- */
+.meta-actions{ display:flex; flex-wrap:wrap; gap:.8rem; }
 
-/* =============================
-   Portfolio Mood — Meta Actions
-   ============================= */
-:root{
-  --pf-ink:#0f172a;            /* 잉크 */
-  --pf-cream:#fffdf4;          /* 종이 크림 */
-  --pf-cream-2:#fff7e6;
-  --pf-sun:#ffb95e;            /* 따뜻한 포인트 */
-  --pf-sun-2:#ff9f47;
-  --pf-sky:#3b82f6;
-  --pf-shadow: 0 .6rem 1.6rem rgba(15,23,42,.08);
+.meta-btn,
+.meta-btn--ghost{
+  --ink:#0f172a;
+  --cream:#fff9ed;
+  --line:#cfd5df;
+  --accent:#111; /* 텍스트/아이콘 */
+  display:inline-flex; align-items:center; gap:.6rem;
+  padding: .9rem 1.6rem;
+  border-radius: 999rem;
+  font: 700 1.45rem/1.1 ui-sans-serif, "Noto Sans KR", system-ui;
+  text-decoration:none; white-space:nowrap;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease, color .18s ease;
+  box-shadow: 0 8px 18px rgba(15,23,42,.08);
+  border: 1.5px solid var(--line);
 }
 
-.meta-actions{
-  display:flex; gap:1.2rem; flex-wrap:wrap; margin-top:1.4rem;
-}
-
-/* 공통 버튼: 스티커 느낌(잉크 테두리 + 종이 배경 + 투명 그림자) */
+/* 솔리드(메인) */
 .meta-btn{
-  --bd: var(--pf-ink);
-  display:inline-flex; align-items:center; justify-content:center;
-  padding:1rem 1.9rem; border-radius:999rem;
-  font-weight:700; font-size:1.5rem; letter-spacing:.01em;
-  text-decoration:none; position:relative;
-  border:.16rem solid var(--bd);
-  box-shadow: 2px 2px 0 var(--pf-ink), var(--pf-shadow);
-  transition: transform .18s ease, box-shadow .18s ease, background .2s ease, color .2s ease;
-  background: linear-gradient(180deg, var(--pf-cream) 0%, var(--pf-cream-2) 100%);
-  color:var(--pf-ink);
+  color: var(--ink);
+  background: linear-gradient(180deg, #fffdf6, var(--cream));
+  border-color:#e6e2d8;
 }
 .meta-btn:hover{
-  transform: translateY(-2px);
-  box-shadow: 3px 3px 0 var(--pf-ink), 0 1.2rem 2.2rem rgba(15,23,42,.12);
-}
-.meta-btn:active{ transform: translateY(0); box-shadow: 1px 1px 0 var(--pf-ink), var(--pf-shadow); }
-.meta-btn:focus-visible{ outline:2px dashed var(--pf-ink); outline-offset:3px; }
-
-/* 프라이머리(홈페이지 보기) – 태양 포인트 */
-.meta-btn--primary{
-  background: linear-gradient(135deg, var(--pf-sun) 0%, var(--pf-sun-2) 100%);
-  color:#111; border-color:#111;
-}
-.meta-btn--primary:hover{
-  filter:saturate(1.05) brightness(1.02);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(15,23,42,.12);
+  background: linear-gradient(180deg, #fffef9, #fff4e0);
 }
 
-/* 고스트(작업과정 보기) – 투명/잉크 점선 */
+/* 고스트(윤곽 버튼) */
 .meta-btn--ghost{
-  background:transparent;
-  border-style:dashed;
-  color:var(--pf-ink);
+  color: var(--ink);
+  background: #fff;
+  border-color:#cfd5df;
 }
 .meta-btn--ghost:hover{
-  background:linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+  transform: translateY(-1px);
+  border-color:#98a3b3;
+  background:#f9fbff;
 }
 
-/* ▶ 화살표 미세 인터랙션(텍스트에 화살표가 없을 때) */
-.meta-btn[data-arrow]::after{
-  content:""; width:.7rem; height:.7rem; margin-left:.6rem;
-  border-right:2px solid currentColor; border-bottom:2px solid currentColor;
-  transform: rotate(-45deg); transition: transform .2s ease;
+/* 버튼 안 화살표(텍스트 끝의 →를 살짝 강조하고 싶다면) */
+.meta-btn::after{
+  content:"→"; font-weight:800; opacity:.9; transform: translateX(0); transition: transform .18s ease;
 }
-.meta-btn[data-arrow]:hover::after{ transform: rotate(-45deg) translate(2px,-2px); }
+.meta-btn:hover::after{ transform: translateX(.08em); }
 
-/* Tamburins 같이 다크 무드 카드 안에서는 반전 테마 */
-.meta-window[data-theme="dark"] .meta-btn{
-  --bd:#0b0b0b;
-  background:linear-gradient(180deg,#121212,#0b0b0b);
-  color:#fff; border-color:#0b0b0b;
-  box-shadow: 2px 2px 0 #000, 0 .8rem 1.8rem rgba(0,0,0,.35);
-}
-.meta-window[data-theme="dark"] .meta-btn--primary{
-  background:linear-gradient(135deg,#222,#101010);
-  color:#fff;
-}
-.meta-window[data-theme="dark"] .meta-btn--ghost{
-  background:transparent; border-color:#2b2b2b; color:#e5e7eb;
-}
 
 
 /****************************** iPhone Frame (rem 통일) *********************************/
