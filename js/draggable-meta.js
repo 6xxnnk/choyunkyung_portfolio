@@ -1,8 +1,7 @@
-
 // =========================================================
-// draggable-meta.smooth.js  — 부드러운 드래그(rAF + translate3d)
-//  • 초기엔 우하단(right/bottom) 고정 → 드래그 시작 때 좌표를 translate로 변환
-//  • 경계는 가장 가까운 .device--imac 내부로 제한
+// draggable-meta.smooth.js — 초기 우하단 배치 + 부드러운 드래그
+//  • .floating-window--imac-br 요소는 최초에 아이맥(view bound) 우하단 16px로 배치
+//  • 이후엔 translate3d 기반으로 드래그 (경계는 가장 가까운 .device--imac 내부)
 //  • 버튼(.meta-actions) 위에서는 드래그/툴팁 비활성
 // =========================================================
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ----- tooltip (간단 버전) -----
   const tt = document.createElement('div');
   Object.assign(tt.style, {
-    position:'fixed', top:'0', left:'0', transform:'translate(-50%,-8px)',
+    position:'fixed', top:'0', left:'0', transform:'translate(-50%,-100%)',
     padding:'8px 10px', fontSize:'12px', fontWeight:'700', letterSpacing:'0.02em',
     color:'#111', background:'linear-gradient(180deg,#fffdf4,#fff7cc)',
     border:'1px solid rgba(0,0,0,.12)', borderRadius:'10px',
@@ -21,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.body.appendChild(tt);
   const showTT = (el,x=null,y=null)=>{
-    if(el.matches(':has(.meta-actions:hover)')) return; // 안전장치
+    if(el.matches(':has(.meta-actions:hover)')) return;
     tt.textContent = el.getAttribute('data-tooltip') || '드래그해서 위치를 바꿔보세요';
     tt.style.opacity = '1';
     if(x!=null&&y!=null){ tt.style.left=`${x}px`; tt.style.top=`${y-14}px`; tt.style.transform='translate(-50%,-100%)'; }
@@ -33,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
   wins.forEach(win=>{
     const bound = win.closest('.device--imac') || win.closest('section') || document.body;
     if(getComputedStyle(bound).position === 'static') bound.style.position = 'relative';
-
     const handle = win.querySelector('[data-drag-handle]') || win;
 
     let dragging=false, startX=0, startY=0, startTx=0, startTy=0;
@@ -51,6 +49,28 @@ document.addEventListener('DOMContentLoaded', () => {
       return {tx:0, ty:0};
     };
 
+    const updateBounds = ()=>{
+      const br = bound.getBoundingClientRect();
+      const ww = win.offsetWidth, wh = win.offsetHeight;
+      minL = 0; minT = 0;
+      maxL = Math.max(0, br.width  - ww);
+      maxT = Math.max(0, br.height - wh);
+    };
+
+    // 초기 우하단 배치(아이맥 내부)
+    const placeBottomRight = (margin=16)=>{
+      const br = bound.getBoundingClientRect();
+      const ww = win.offsetWidth, wh = win.offsetHeight;
+      const x = Math.max(0, br.width  - ww - margin);
+      const y = Math.max(0, br.height - wh - margin);
+      // translate3d 기준 좌표로 전환
+      win.style.left='0'; win.style.top='0';
+      win.style.right='auto'; win.style.bottom='auto';
+      win.style.transform=`translate3d(${x}px, ${y}px, 0)`;
+      startTx = x; startTy = y;
+      win.dataset.initialPlaced = '1';
+    };
+
     // right/bottom으로 배치되어 있으면 translate로 전환
     const ensureTranslatePosition = ()=>{
       const br = bound.getBoundingClientRect();
@@ -65,54 +85,52 @@ document.addEventListener('DOMContentLoaded', () => {
         win.style.transform = `translate3d(${left}px, ${top}px, 0)`;
       }
     };
-    ensureTranslatePosition();
 
-    const updateBounds = ()=>{
-      const br = bound.getBoundingClientRect();
-      const ww = win.offsetWidth, wh = win.offsetHeight;
-      minL = 0; minT = 0;
-      maxL = Math.max(0, br.width  - ww);
-      maxT = Math.max(0, br.height - wh);
-    };
+    // 최초 세팅
     updateBounds();
-    window.addEventListener('resize', updateBounds, {passive:true});
+
+    // ★ 여기서 클래스가 있으면 우하단으로 초기 배치
+    if (win.classList.contains('floating-window--imac-br') && win.dataset.initialPlaced !== '1'){
+      placeBottomRight(16);
+    } else {
+      ensureTranslatePosition();
+      // startTx/startTy 동기화
+      const p = parseTxTy(win); startTx = p.tx; startTy = p.ty;
+    }
+
+    window.addEventListener('resize', ()=>{
+      updateBounds();
+      // 리사이즈 시 현재 좌표를 경계로 클램프
+      const p = parseTxTy(win);
+      const clampedX = Math.min(Math.max(p.tx, minL), maxL);
+      const clampedY = Math.min(Math.max(p.ty, minT), maxT);
+      win.style.transform = `translate3d(${clampedX}px, ${clampedY}px, 0)`;
+      startTx = clampedX; startTy = clampedY;
+    }, {passive:true});
 
     const render = ()=>{ raf=0; if(!needs) return; needs=false; win.style.transform = `translate3d(${nextTx}px, ${nextTy}px, 0)`; };
 
     const onDown = (e)=>{
-      // 버튼 위에서는 드래그 X (클릭 UX 보존)
       if(e.target.closest('.meta-actions')) return;
-
-      ensureTranslatePosition();
       dragging=true; win.classList.add('dragging'); win.style.zIndex=String(++zSeed); hideTT();
-
-      const {tx,ty} = parseTxTy(win);
-      startTx=tx; startTy=ty;
-      startX=e.clientX; startY=e.clientY;
-
+      const p = parseTxTy(win); startTx=p.tx; startTy=p.ty; startX=e.clientX; startY=e.clientY;
       handle.setPointerCapture?.(e.pointerId);
     };
     const onMove = (e)=>{
       if(!dragging) return; e.preventDefault();
       let tx = startTx + (e.clientX - startX);
       let ty = startTy + (e.clientY - startY);
-
-      // 경계(섹션 내부)
       tx = Math.min(Math.max(tx, minL), maxL);
       ty = Math.min(Math.max(ty, minT), maxT);
-
       nextTx=tx; nextTy=ty; needs=true;
       if(!raf) raf = requestAnimationFrame(render);
-
-      // 툴팁은 드래그 중 숨김
       hideTT();
     };
     const onUp = ()=>{
       if(!dragging) return;
       dragging=false; win.classList.remove('dragging');
       cancelAnimationFrame(raf); raf=0;
-      const {tx,ty} = parseTxTy(win);
-      startTx=tx; startTy=ty;
+      const p = parseTxTy(win); startTx=p.tx; startTy=p.ty;
     };
 
     handle.addEventListener('pointerdown', onDown);

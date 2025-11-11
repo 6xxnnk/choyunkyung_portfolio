@@ -389,7 +389,7 @@ button:hover ~ #cursorSun,
 
   font-family:'Gasoek One', cursive; font-weight:500;
 }
-.nespresso, .tamburins, .glossier{
+.nespresso, .tamburins, .zigzag, .glossier{
   display:flex; 
   font-family:doto, sans-serif;     
   font-size: clamp(6rem, 8vw, 10rem);
@@ -449,7 +449,23 @@ button:hover ~ #cursorSun,
 
 /* Figma (px → rem) */
 .figma-embed{ width:192rem; height:108rem; border:0; outline:0; display:block; transform-origin:top left; will-change:transform; }
-
+/* 반응형 Figma 래퍼: 16:9 비율 유지 + 가득 채우기 */
+.figma-responsive{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* iMac display-panel이 이미 여백(inset)으로 비율을 제어하므로
+     별도의 aspect-ratio 없이 100%로 채우는 편이 안전 */
+}
+.figma-frame{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  outline:0;
+  display:block;
+}
 .display-panel .embed-fallback{
   position:absolute; inset:0; display:none; align-items:center; justify-content:center;
   flex-direction:column; gap:.8rem; color:#fff; background:rgba(0,0,0,.55);
@@ -488,11 +504,12 @@ button:hover ~ #cursorSun,
 }
 
 /* ------- Floating Window (크림톤 + 살짝 더 넓게) ------- */
+/* 우하단 시작 팝업: CSS 초기 배치값 무효화(자바스크립트가 좌표를 잡게) */
+
+
 .floating-window{
   position: absolute;
-  top: 30%;       /* 기존보다 약간 아래로 */
-  left: 20%;      /* 기존보다 약간 오른쪽으로 */
-  transform: translate(-50%, -50%);
+  /* top/left는 '기본형'에선 아예 두지 않는 게 안전 */
   width: 420px;
   background-color: #f6f6f6;
   border-radius: 10px;
@@ -501,10 +518,19 @@ button:hover ~ #cursorSun,
   z-index: 9999;
   transition: box-shadow .25s ease, transform .25s ease;
 
-  /* 드래그 성능 */
   will-change: transform;
-  transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);  /* ← 이것만 유지 (위의 translate(-50%,-50%)는 제거) */
   touch-action: none;
+}
+.floating-window--imac-br{
+  /* 폴백: 화면에 바로 우하단 배치 */
+  right: 16px;
+  bottom: 16px;
+  left: auto;
+  top: auto;
+
+  /* 드래그용 transform 기본값 */
+  transform: translate3d(0,0,0);
 }
 .floating-window.dragging{
   cursor: grabbing;
@@ -618,7 +644,8 @@ button:hover ~ #cursorSun,
 .glossier{
   font-size: clamp(6rem, 8vw, 10rem);
   margin: 0 0 2.4rem;
-  line-height: 1;
+  line-height: 1; 
+  display:flex; flex-direction:column; align-items:flex-end;
 }
 
 /* 레이아웃: 왼쪽(아이폰2) + 오른쪽(meta) */
@@ -692,8 +719,8 @@ button:hover ~ #cursorSun,
 }
 
 .phone-live .phone-embed{
-  width: 390px;
-  height: 80px;
+  width: 100%;
+  height: auto;
   border: 0;
   outline: 0;
   display: block;
@@ -761,38 +788,55 @@ button:hover ~ #cursorSun,
 
 
 /* ========== Zigzag(썸네일/스와이퍼) ========== */
-.proj--zigzag-v2{ margin:8rem 0; }
-.proj--zigzag-v2 .proj__title{
-  color:#000; margin:0; font-size:10em; font-weight:500; font-family:'Butterfly Kids', cursive; line-height:1;
-}
-.proj--zigzag-v2 .kicker{ color:#9e9e9e; margin:0 0 3rem; line-height:1.6; font-size:1.5rem; }
-.zzOpenBtn{
-  display:inline-block; margin-top:2rem; padding:.8rem 1.6rem; background:#ffb95e; color:#fffdf9; font-weight:700;
-  border:none; border-radius:.8rem;
-  box-shadow:0 .6rem 1.8rem rgba(255,168,68,.25), 0 0 1.8rem .6rem rgba(255,200,120,.16);
-  cursor:pointer; transition:all .25s ease;
+/* ============================
+   ZigZag — margin 통일 / rem 통일
+============================ */
+/* 섹션 상하 여백을 다른 섹션(.section { padding:10rem 0 })과 톤 맞춤 */
+.zigzag {display:flex; flex-direction:column; align-items:flex-end;}
+.proj--zigzag-v2{
+  margin: 10rem 0;               /* 기존 8rem → 10rem로 통일 */
 }
 
-/* layout */
-.zz-layout{
-  display:grid; grid-template-columns:min(46rem,45%) 1fr; gap:3rem; align-items:center; justify-content:center;
-  margin:5rem auto 0; width:min(100%, var(--design-w));
+/* 서브 카피 */
+.proj--zigzag-v2 .kicker{
+  color:#9e9e9e; margin:0 0 3rem; line-height:1.6; font-size:1.5rem;
 }
-.zz-left{ display:grid; grid-template-columns:repeat(2,1fr); gap:2rem; align-items:center; justify-content:center; }
+
+/* 레이아웃: 폭/중앙 대칭 유지 + 상단 간격만 3rem로 단정 */
+.zz-layout{
+  width: min(100%, var(--design-w));
+  margin: 3rem auto 0;           /* 기존 5rem → 3rem (상단만 살짝) */
+  display:grid;
+  grid-template-columns: min(46rem,45%) 1fr;
+  gap: 3rem;
+  align-items:center;
+  justify-content:center;
+}
+
+/* 썸네일 2x2 */
+.zz-left{
+  display:grid; grid-template-columns:repeat(2,1fr);
+  gap:2rem; align-items:center; justify-content:center;
+}
 .zz-thumb{
   position:relative; padding:0; background:none; cursor:pointer; overflow:hidden;
   aspect-ratio:9/19; border-radius:1.4rem;
-  transition:transform .25s ease, box-shadow .25s ease, outline-color .25s;
   outline:.2rem solid transparent; border:.1rem solid #a6a7ab;
+  transition: transform .25s ease, box-shadow .25s ease, outline-color .25s ease, border-color .25s ease;
 }
 .zz-thumb:hover{ transform:translateY(-.3rem); }
 .zz-thumb.is-active{ border:.5rem dotted #a6a7ab; }
 .zz-thumb img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .3s ease; }
 .zz-thumb:hover img{ transform:scale(1.02); }
 
-.zz-right{ position:relative; display:flex; justify-content:center; align-items:center; height:62rem; padding-left:30rem; }
+/* 우측 슬라이더 */
+.zz-right{
+  position:relative; display:flex; justify-content:center; align-items:center;
+  height:62rem; padding-left:30rem;   /* 기존 값 유지(구조 영향 최소화) */
+}
 .zz-swiper{
-  position:absolute; inset:0; opacity:0; visibility:hidden; pointer-events:none; transition:opacity .6s ease; border:none;
+  position:absolute; inset:0; opacity:0; visibility:hidden; pointer-events:none;
+  transition:opacity .6s ease; border:none;
   display:flex; justify-content:center; align-items:center;
 }
 .zz-swiper.is-active{ position:relative; opacity:1; visibility:visible; pointer-events:auto; }
@@ -811,9 +855,159 @@ button:hover ~ #cursorSun,
 .zz-swiper .swiper-button-prev{ left:-6rem; }
 .zz-swiper .swiper-button-next{ right:-6rem; }
 
+/* ===== ZigZag Meta Card (오렌지 톤) ===== */
+/* ================= Vars ================= */
+:root{
+  --zz-ink:#0f172a;          /* 텍스트 잉크 */
+  --zz-paper:#fffdf6;        /* 종이(크림) */
+  --zz-paper-2:#faf5ea;      /* 살짝 더 짙은 크림 */
+  --zz-bd:#e9e3d6;           /* 종이 테두리 */
+  --zz-dot:#d8d2c6;          /* 천공 점선 */
+  --zz-shadow:0 12px 34px rgba(15,23,42,.12);
+
+  --zz-coral:#ff7a6e;        /* Zigzag 코랄 */
+  --zz-orange:#ffb35f;       /* Zigzag 오렌지 */
+  --zz-amber:#ffcf7f;        /* 밝은 앰버 하이라이트 */
+}
+
+/* ================= Shell ================= */
+.zz-meta.phone-meta.g-card-meta2{
+  position:relative;
+  width:min(72rem, 92vw);
+  margin:4rem auto 0;
+  padding:2.4rem 2rem 2rem;
+  color:var(--zz-ink);
+  background:
+    linear-gradient(180deg, var(--zz-paper), var(--zz-paper-2));
+  border:1px solid var(--zz-bd);
+  border-radius:1.6rem;
+  box-shadow: var(--zz-shadow), inset 0 0 0 .1rem rgba(255,255,255,.9);
+  overflow:hidden;
+  isolation:isolate;
+  transition:transform .2s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.zz-meta.phone-meta.g-card-meta2:hover{
+  transform:translateY(-.2rem);
+  box-shadow:0 18px 44px rgba(15,23,42,.16);
+  border-color:color-mix(in oklab, var(--zz-bd) 70%, var(--zz-amber) 30%);
+}
+
+/* 상단 에디토리얼 리본 */
+.zz-meta .zz-label{
+  position:absolute; left:1.6rem; top:.8rem;
+  display:inline-block;
+  padding:.28rem .8rem .34rem;
+  border:1px solid color-mix(in oklab, var(--zz-ink) 18%, transparent);
+  border-radius:.6rem;
+  background:
+    linear-gradient(180deg, #fffefd, #fff6e6);
+  font:700 1.05rem/1 ui-sans-serif, "Noto Sans KR", system-ui;
+  letter-spacing:.12em;
+  color:#6b7280;
+  text-transform:uppercase;
+  box-shadow:inset 0 1px 0 #fff, 0 4px 12px rgba(0,0,0,.06);
+  z-index:2;
+}
+
+/* 상단 지그재그 데코 스트립 */
+.zz-meta .zz-deco{
+  position:absolute; left:0; right:0; top:0; height:1.1rem;
+  background:
+    repeating-linear-gradient(135deg,
+      var(--zz-coral) 0 14px,
+      var(--zz-orange) 14px 28px);
+  mask: radial-gradient(12px at 12px 0,#0000 98%,#000) repeat-x left top/24px 100%;
+  opacity:.95;
+  z-index:1;
+}
+
+/* 타이틀/텍스트 */
+.zz-meta .zz-title{
+  margin:1.2rem 0 .6rem;
+  font:700 1.9rem/1.2 "Poppins","Noto Sans KR",ui-sans-serif;
+  letter-spacing:.01em;
+}
+.zz-meta .meta-desc{
+  margin:0 0 1.2rem;
+  font-size:1.45rem; line-height:1.6;
+  color:#2b2b2b;
+}
+
+/* 천공(티켓) 스타일 구분선 */
+.zz-meta .meta-bullets{
+  position:relative;
+  margin:1.2rem 0 1.8rem;
+  padding:1.2rem 0 0;
+  list-style:none;
+}
+.zz-meta .meta-bullets::before{
+  content:"";
+  position:absolute; left:-2rem; right:-2rem; top:0; height:.1rem;
+  background:
+    radial-gradient(circle at 0 .05rem, var(--zz-dot) .05rem, #0000 .06rem) repeat-x left top/10px 2px;
+  opacity:.9;
+}
+.zz-meta .meta-bullets li{
+  margin:.45rem 0; font-size:1.35rem; color:#374151;
+}
+.zz-meta .meta-bullets li strong{ color:#111; }
+
+/* 버튼 */
+.zz-meta .meta-actions{
+  display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap;
+}
+.zz-meta .meta-btn{
+  --glow: color-mix(in oklab, var(--zz-orange) 55%, var(--zz-coral) 45%);
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width:12rem;
+  padding:1rem 1.6rem;
+  border-radius:999rem;
+  font-weight:800; font-size:1.35rem;
+  text-decoration:none; border:.12rem solid transparent;
+  color:#111;
+  background:
+    radial-gradient(80% 140% at 50% 0%, #fff3e3,
+      color-mix(in oklab, var(--zz-amber) 70%, #fff 30%) 48%,
+      var(--zz-orange) 100%);
+  box-shadow: 0 .6rem 1.6rem rgba(255,179,95,.35), inset 0 1px 0 #fff;
+  transition: transform .15s ease, filter .2s ease, box-shadow .2s ease;
+}
+.zz-meta .meta-btn:hover{
+  transform:translateY(-.1rem);
+  filter:saturate(1.06);
+  box-shadow:0 .8rem 2rem rgba(255,179,95,.42);
+}
+.zz-meta .meta-btn:active{ transform:translateY(0); }
+
+/* 모서리 천공 디테일 */
+.zz-meta.phone-meta.g-card-meta2::after,
+.zz-meta.phone-meta.g-card-meta2::before{
+  content:"";
+  position:absolute; top:50%;
+  width:10px; height:10px; border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, #e9e3d6 45%, #fff0 46%);
+  transform:translateY(-50%);
+  opacity:.9;
+}
+.zz-meta.phone-meta.g-card-meta2::before{ left:-5px; }
+.zz-meta.phone-meta.g-card-meta2::after{ right:-5px; }
+
+/* 반응형 */
+@media (max-width:560px){
+  .zz-meta.phone-meta.g-card-meta2{ padding:2rem 1.4rem; border-radius:1.2rem; }
+  .zz-meta .zz-title{ font-size:1.7rem; }
+  .zz-meta .meta-desc{ font-size:1.35rem; }
+  .zz-meta .meta-bullets li{ font-size:1.25rem; }
+}
+
+/* 색상 테마 확장 (선택) */
+.zz-meta--coral{ /* 기본: 위 변수 사용 */ }
+.zz-meta--ink {
+  --zz-coral:#111; --zz-orange:#2b2b2b; --zz-amber:#6b7280;
+}
+
 /* ========== 29CM — 데스크탑 디자인으로 정리(난잡 X) ========== */
 .proj--29cm-v2{ margin:8rem 0; }
-.proj--29cm-v2 .proj__title{ margin:0 0 .6rem; font-family:Gasoek One, sans-serif; color:#000; }
 .proj--29cm-v2 .kicker{ color:#9e9e9e; margin:0 0 3rem; line-height:1.6; font-size:1.5rem; }
 
 .cm-layout{
