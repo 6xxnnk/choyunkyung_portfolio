@@ -174,4 +174,22 @@ document.addEventListener('DOMContentLoaded', () => {
     scan,
     selector: TIP_SELECTOR,
   };
+
+  document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.proj--zigzag-v2 .zz-thumb').forEach(el => {
+    el.removeAttribute('title');       // 네이티브 툴팁 차단
+  });
+});
+
+function bind(el){
+  el.addEventListener('mouseenter', onEnter);
+  el.addEventListener('mousemove', onMove);
+  el.addEventListener('mouseleave', onLeave);
+
+  // 지그재그 섹션에서는 포커스 기반 툴팁 비활성화 → 클릭해도 상단 툴팁 안 뜸
+  if (!el.closest('.proj--zigzag-v2')) {
+    el.addEventListener('focusin', onFocus);
+    el.addEventListener('focusout', onBlur);
+  }
+}
 })();

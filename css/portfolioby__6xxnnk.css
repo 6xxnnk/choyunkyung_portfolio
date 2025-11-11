@@ -352,24 +352,33 @@ button:hover ~ #cursorSun,
 /* 말풍선 */
 
 .tooltip-email::after,
-.tooltip-insta::after, .tooltip-portfolio::after{
+.tooltip-insta::after, 
+.tooltip-portfolio::after
+{
   position:absolute; z-index:999; content:""; display:none; top:0; left:100%;
   transform:translate(1rem,-30%); padding:1rem 1.5rem; border-radius:1rem; font-size:1.6rem; background:#fff; color:#111;
   border:.15rem solid #ddd; box-shadow:0 .3rem 1rem rgba(0,0,0,.1); white-space:nowrap; pointer-events:none;
 }
-.tooltip-email::before, .tooltip-insta::before, .tooltip-portfolio::before{
+
+
+.tooltip-email::before, .tooltip-insta::before, .tooltip-portfolio::before {
   position:absolute; content:""; display:none; top:50%; left:calc(100% + .2rem);
   transform:translateY(-50%); border:.6rem solid transparent; border-right-color:#fff;
 }
+
 .tooltip-email::after{ content:"📧 이메일 보내기"; }
 .tooltip-insta::after{ content:"📷 인스타그램 방문하기"; }
 .tooltip-portfolio::after{ content:"📄 이력서 보기"; }
+
+
+
+
 .tooltip-email:hover::after,
 .tooltip-email:hover::before,
 .tooltip-insta:hover::after,
 .tooltip-insta:hover::before,
 .tooltip-portfolio:hover::after,
-.tooltip-portfolio:hover::before{ display:block; animation:pop .25s ease forwards; }
+.tooltip-portfolio:hover::before { display:block; animation:pop .25s ease forwards; }
 @keyframes pop{ 0%{opacity:0; transform:translate(1rem,-40%) scale(.9)} 100%{opacity:1; transform:translate(1rem,-30%) scale(1)} }
 .tooltip-email, .tooltip-insta, .tooltip-portfolio{ 
   position: relative;
@@ -397,7 +406,7 @@ button:hover ~ #cursorSun,
 
   font-family:'Gasoek One', cursive; font-weight:500;
 }
-.nespresso, .tamburins, .zigzag, .glossier{
+.nespresso, .tamburins, .zigzag, .glossier, .cm29{
   display:flex; 
   font-family:doto, sans-serif;     
   font-size: clamp(6rem, 8vw, 10rem);
@@ -800,78 +809,71 @@ button:hover ~ #cursorSun,
 
 /* 섹션 상하 여백을 다른 섹션(.section { padding:10rem 0 })과 톤 맞춤 */
 .zigzag {display:flex; flex-direction:column; align-items:flex-end;}
-.proj--zigzag-v2{
-  margin: 10rem 0;               /* 기존 8rem → 10rem로 통일 */
-}
 
 /* 서브 카피 */
 .proj--zigzag-v2 .kicker{
   color:#9e9e9e; margin:0 0 3rem; line-height:1.6; font-size:1.5rem;
 }
 
-/* 레이아웃: 폭/중앙 대칭 유지 + 상단 간격만 3rem로 단정 */
-.zz-layout{
-  width: min(100%, var(--design-w));
-  margin: 3rem auto 0;           /* 기존 5rem → 3rem (상단만 살짝) */
-  display:grid;
-  grid-template-columns: min(46rem,45%) 1fr;
-  gap: 3rem;
-  align-items:center;
-  justify-content:center;
-}
 
 /* 썸네일 2x2 */
 .zz-left{
-  display:grid; grid-template-columns:repeat(2,1fr);
-  gap:2rem; align-items:center; justify-content:center;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1.2rem;
+  align-items:center;
+  justify-content:center;
 }
 .zz-thumb{
-  position:relative; padding:0; background:none; cursor:pointer; overflow:hidden;
+  position:relative; overflow:hidden; cursor:pointer;
   aspect-ratio:9/19; border-radius:1.4rem;
-  outline:.2rem solid transparent; border:.1rem solid #a6a7ab;
-  transition: transform .25s ease, box-shadow .25s ease, outline-color .25s ease, border-color .25s ease;
+  border:.1rem solid #a6a7ab; outline:.2rem solid transparent;
+  transition:transform .25s ease, box-shadow .25s ease, outline-color .25s ease, border-color .25s ease;
 }
 .zz-thumb:hover{ transform:translateY(-.3rem); }
-.zz-thumb.is-active{ border:.5rem dotted #a6a7ab; }
+.zz-thumb.is-active{
+  border-color:#111;
+  outline-color:rgba(0,0,0,.08); /* 은은한 이중선 느낌 */
+}
+
 .zz-thumb img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .3s ease; }
 .zz-thumb:hover img{ transform:scale(1.02); }
 
-/* 우측 슬라이더 */
 .zz-right{
-  position:relative; display:flex; justify-content:center; align-items:center;
-  height:62rem; padding-left:30rem;   /* 기존 값 유지(구조 영향 최소화) */
+  position:relative;
+  display:flex; justify-content:center; align-items:center;
+  height:auto; padding-left:0; /* ← 이 줄이 핵심 */
 }
 .zz-swiper{
-  position:absolute; inset:0; opacity:0; visibility:hidden; pointer-events:none;
-  transition:opacity .6s ease; border:none;
+  position:relative; inset:auto;
+  opacity:1; visibility:visible; pointer-events:auto; /* 상태토글 안 쓰면 이렇게 고정 */
+  border:none;
   display:flex; justify-content:center; align-items:center;
+  transition:opacity .3s ease;
 }
 .zz-swiper.is-active{ position:relative; opacity:1; visibility:visible; pointer-events:auto; }
-.zz-swiper .swiper{ width:45rem; height:70rem; border:none; border-radius:1.6rem; overflow:hidden; }
+.zz-swiper .swiper{
+  width:min(46rem, 92%);
+  aspect-ratio:9/19; /* 높이 고정 대신 화면비 유지 */
+  border:none; border-radius:1.6rem; overflow:hidden;}
 .zz-swiper .swiper-wrapper{ height:100%; transition-timing-function:cubic-bezier(.22,.61,.36,1) !important; }
 .zz-swiper .swiper-slide{ display:flex; align-items:center; justify-content:center; }
 .zz-swiper img{ width:100%; height:100%; object-fit:cover; border:none; box-shadow:none; transition:transform .6s ease; padding:1rem; overflow:visible; }
+/* 네비 버튼: 프레임 ‘바깥쪽’으로 살짝 내보내 간섭 최소화 */
 .zz-swiper .swiper-button-prev,
 .zz-swiper .swiper-button-next{
   --swiper-navigation-size:3.2rem;
-  width:4.6rem; height:4.6rem; border-radius:50%; background:rgba(255,200,120,.25);
-  backdrop-filter:blur(.6rem); color:#ff9f47; border:.1rem solid rgba(255,180,90,.3);
-  box-shadow:0 .6rem 1.8rem rgba(255,168,68,.25), 0 0 1.8rem .6rem rgba(255,200,120,.16);
-  transition:all .25s ease;
+  width:4.6rem; height:4.6rem; border-radius:50%;
+  background:rgba(255,200,120,.22);
+  backdrop-filter:blur(.6rem); color:#ff9f47; border:.1rem solid rgba(255,180,90,.28);
+  box-shadow:0 .6rem 1.8rem rgba(255,168,68,.18), 0 0 1.8rem .6rem rgba(255,200,120,.12);
+  transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
 }
-.zz-swiper .swiper-button-prev{ left:-6rem; }
-.zz-swiper .swiper-button-next{ right:-6rem; }
+.zz-swiper .swiper-button-prev{ left:-3.2rem; }  /* -6rem → -3.2rem (과도한 벌어짐 축소) */
+.zz-swiper .swiper-button-next{ right:-3.2rem; }
 
 
 
-.proj--zigzag-v2{
-  margin: 10rem 0;               /* 기존 8rem → 10rem로 통일 */
-}
-
-/* 서브 카피 */
-.proj--zigzag-v2 .kicker{
-  color:#9e9e9e; margin:0 0 3rem; line-height:1.6; font-size:1.5rem;
-}
 
 /* 레이아웃: 폭/중앙 대칭 유지 + 상단 간격만 3rem로 단정 */
 .zz-layout{
@@ -890,15 +892,24 @@ button:hover ~ #cursorSun,
   gap:2rem; align-items:center; justify-content:center;
 }
 .zz-thumb{
-  position:relative; padding:0; background:none; cursor:pointer; overflow:hidden;
-  aspect-ratio:9/19; border-radius:1.4rem;
+  position:relative; padding:0; background:none; cursor:pointer;
+  aspect-ratio:9/19; border-radius:1.4rem; overflow:hidden;
   outline:.2rem solid transparent; border:.1rem solid #a6a7ab;
   transition: transform .25s ease, box-shadow .25s ease, outline-color .25s ease, border-color .25s ease;
 }
+.ig-tooltip { position: relative; }
+.zz-thumb img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  transition:transform .3s ease;
+  border-radius:1.4rem;   /* ← 추가 */
+}
+
 .zz-thumb:hover{ transform:translateY(-.3rem); }
 .zz-thumb.is-active{ border:.5rem dotted #a6a7ab; }
 .zz-thumb img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .3s ease; }
 .zz-thumb:hover img{ transform:scale(1.02); }
+
+
 
 /* 우측 슬라이더 */
 .zz-right{
@@ -927,72 +938,104 @@ button:hover ~ #cursorSun,
 .zz-swiper .swiper-button-next{ right:-6rem; }
 
 /* ===== ZigZag Meta Card (오렌지 톤) ===== */
-.zz-meta{
-  border: .1rem solid #ffc27a;
-  border-radius: 2rem;
-  background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
-  box-shadow: 0 .6rem 1.8rem rgba(0,0,0,.06),
-              inset 0 0 0 .1rem rgba(255,200,120,.9);
-  padding: 2.4rem 2rem;
-  text-align: center;
-  width: min(100%, 56rem);
-  margin: 4rem auto 0;                /* 지그재그 내부 요소와 간격 */
-  transition: box-shadow .25s ease, transform .25s ease;
-  font-size: 1.5rem;
+/* =============== Meta 카드 (ZigZag Yellow Ver.) =============== */
+.g-card-meta.phone-meta.zz-meta--zigzag{
+  border:1px solid #ffe08a;
+  border-radius:2rem;
+  text-align:center;
+  width:100%;
+  max-width:60rem;       /* 70rem → 60rem: 본문 줄길이 안정 */
+  margin:6rem auto;      /* 10rem → 6rem: 섹션과 간격 톤 맞춤 */
+  font-size:1.5rem;
+  transition:box-shadow .25s ease, transform .25s ease;
+  position: relative;
 }
-.zz-meta:hover{ transform: translateY(-.2rem); box-shadow: 0 1rem 2.6rem rgba(255,179,95,.22); }
-.zz-meta h3{
-  margin:0 0 .8rem; font-weight:600; font-size:2rem; color:#111; letter-spacing:.01em;
-}
-.zz-meta .meta-desc{
-  font-size:1.5rem; color:#4a3a28; margin:0 0 1.6rem; line-height:1.65;
-}
-.zz-meta .meta-bullets{ margin:0 0 2rem; padding:0; list-style:none; }
-.zz-meta .meta-bullets li{ margin:.4rem 0; font-size:1.35rem; color:#374151; line-height:1.5; }
-.zz-meta .meta-actions{ display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap; }
 
-/* 버튼(오렌지) — 기존 .meta-btn 계열이 있더라도 카드 안에서만 톤 변경 */
-.zz-meta .meta-btn{
-  --glow: rgba(255,179,95,.45);
-  display:inline-flex; align-items:center; justify-content:center;
-  min-width:12rem; padding:1rem 1.6rem; border-radius:999rem;
-  font-weight:700; font-size:1.35rem; text-decoration:none; border:.12rem solid transparent;
-  background: radial-gradient(80% 140% at 50% 0%, #fff2e0, #ffd9a0 45%, #ffb35f 100%);
+.g-card-meta.phone-meta.zz-meta--zigzag:hover{
+  transform:translateY(-.2rem);
+  box-shadow:0 1rem 2.6rem rgba(255,210,90,.15);
+}
+.g-card-meta.zz-meta--zigzag h3{
+  font-family:'Poppins','Noto Sans KR',sans-serif;
+  font-weight:600;
+  font-size:2rem;
   color:#111;
-  box-shadow: 0 .6rem 1.6rem var(--glow), inset 0 1px 0 #fff;
-  transition: transform .15s ease, box-shadow .2s ease, filter .2s ease;
+  letter-spacing:.01em;
+  margin:0 0 .8rem;
 }
-.zz-meta .meta-btn:hover{ transform: translateY(-.1rem); filter: saturate(1.08); }
-.zz-meta .meta-btn:active{ transform: translateY(0); }
-.zz-meta .meta-btn--ghost{
-  background:#fff; color:#111; border-color:#ffc27a;
-  box-shadow:0 .6rem 1.4rem rgba(255,191,120,.18), inset 0 1px 0 rgba(255,255,255,.85);
+.g-card-meta.zz-meta--zigzag .meta-desc{
+  font-size:1.5rem;
+  color:#3b2f0b;
+  margin:0 0 1.6rem;
+  line-height:1.65;
 }
-.zz-meta .meta-btn--ghost:hover{
-  background: linear-gradient(180deg,#fff,#fff7ef);
-  box-shadow:0 .8rem 2rem rgba(255,191,120,.26);
+.g-card-meta.zz-meta--zigzag .meta-bullets{
+  margin:0 0 2rem;
+  padding:0;
+  list-style:none;
 }
-
-.zz-meta--ink {
-  --zz-coral:#111; --zz-orange:#2b2b2b; --zz-amber:#6b7280;
-}
-.zz-meta--coral{
-  --meta-border:#ffb3a1;
-  --meta-verylight:#fff0ec;
-  --meta-light:#ffd1c6;
-  --meta-base:#ff8e73;
-  --meta-shadow: 255,142,115;
-  --meta-inset: 255,189,169;
+.g-card-meta.zz-meta--zigzag .meta-bullets li{
+  margin:.4rem 0;
+  font-size:1.35rem;
+  color:#46391a;
+  line-height:1.5;
 }
 
+/* 버튼: Butter Yellow 톤 */
+.g-card-meta.zz-meta--zigzag .meta-actions{
+  display:flex;
+  gap:.8rem;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.g-card-meta.zz-meta--zigzag .meta-actions .meta-btn{
+  --glow: rgba(255, 230, 120, .45);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:12rem;
+  padding:1rem 1.6rem;
+  border-radius:999rem;
+  font-weight:700;
+  font-size:1.35rem;
+  text-decoration:none;
+  border:.12rem solid transparent;
+  background:
+    radial-gradient(80% 140% at 50% 0%,
+      #fffbe0,
+      #ffeaa0 45%,
+      #ffd74f 100%);
+  color:#111;
+  box-shadow:0 .6rem 1.6rem var(--glow), inset 0 1px 0 #fff;
+  transition:transform .15s ease, box-shadow .2s ease, filter .2s ease;
+}
+.g-card-meta.zz-meta--zigzag .meta-actions .meta-btn:hover{
+  transform:translateY(-.1rem);
+  filter:saturate(1.06);
+}
+.g-card-meta.zz-meta--zigzag .meta-actions .meta-btn:active{
+  transform:translateY(0);
+}
 
-/* 색상 테마 확장 (선택) */
+/* 윤곽형 버튼 */
+.g-card-meta.zz-meta--zigzag .meta-actions .meta-btn--ghost{
+  background:#fff;
+  color:#111;
+  border-color:#ffe08a;
+  box-shadow:0 .6rem 1.4rem rgba(255,220,90,.18),
+              inset 0 1px 0 rgba(255,255,255,.85);
+}
+.g-card-meta.zz-meta--zigzag .meta-actions .meta-btn--ghost:hover{
+  background:linear-gradient(180deg,#fff,#fffbe8);
+  box-shadow:0 .8rem 2rem rgba(255,220,90,.25);
+}
+
 
 
 /* ========== 29CM — 데스크탑 디자인으로 정리(난잡 X) ========== */
 .proj--29cm-v2{ margin:8rem 0; }
 .proj--29cm-v2 .kicker{ color:#9e9e9e; margin:0 0 3rem; line-height:1.6; font-size:1.5rem; }
-
+.cm29{ display:flex; flex-direction:column; align-items:center; }
 .cm-layout{
   /* 데스크탑 좌표를 유지하는 폭 + 중앙 대칭 */
   width:min(100%, var(--design-w));
@@ -1104,19 +1147,16 @@ button:hover ~ #cursorSun,
 .cm-section-29 .cm-cap{ margin-top:.8rem; text-align:center; color:#475569; font-size:.95rem; }
 
 /* ====== 29CM meta 카드 (오렌지 톤 리디자인) ====== */
-.phone-meta--29cm {
-  border: 1px solid #ffc27a;
-  border-radius: 2rem;
-  background: #fafafa;
-  box-shadow: 0 .6rem 1.8rem rgba(0,0,0,.06),
-              inset 0 0 0 .1rem rgba(255, 200, 120, .9);
-  padding: 2.4rem 2rem;
-  text-align: center;
-  width: 30%;
-  max-width: 70rem;
-  transition: box-shadow .25s ease, transform .25s ease;
-  font-size: 1.5rem;
-  margin: 5rem auto;
+.phone-meta--29cm { 
+  border-radius:2rem;
+  background:#fafafa;
+  box-shadow:0 .6rem 1.8rem rgba(0,0,0,.06), inset 0 0 0 .1rem rgba(255,200,120,.9);
+  padding:2.4rem 2rem;
+  text-align:center;
+  width:30%;           
+  max-width:60rem;       /* 균형 좋은 최대폭 */
+  margin:5rem auto;
+  transition:box-shadow .25s ease, transform .25s ease;
 }
 
 .phone-meta--29cm:hover {
@@ -1405,6 +1445,7 @@ button:hover ~ #cursorSun,
 .ig-tooltip:focus-visible::before{
   opacity: 1; transform: translate(-50%, 0);
 }
+
 
 /* 커서 따라다니는 고정 툴팁도 같은 룩으로(선택) */
 .ig-cursor-tip{
@@ -1712,24 +1753,7 @@ button:hover ~ #cursorSun,
   /* Zigzag */
   .proj--zigzag-v2{ margin:6rem 0; }
   .proj--zigzag-v2 .proj__title{ font-size:7.2rem; }
-  .zz-layout{
-    grid-template-columns: 1fr;
-    gap:2rem;
-    margin-top:3.2rem;
-  }
-  .zz-left{ grid-template-columns: 1fr 1fr; gap:1.2rem; }
-  .zz-right{
-    height:auto; 
-    padding-left:0; 
-    min-height:58rem;
-  }
-  .zz-swiper .swiper{
-    width: 100%;
-    height: 58rem;
-    border-radius:1.2rem;
-  }
-  .zz-swiper .swiper-button-prev{ left:.6rem; }
-  .zz-swiper .swiper-button-next{ right:.6rem; }
+
 
   /* 29CM */
   .cm-layout{
@@ -1894,11 +1918,7 @@ button:hover ~ #cursorSun,
     gap:2rem;
   }
 
-  /* Zigzag */
-  .zz-layout{
-    grid-template-columns: min(40rem,48%) 1fr;
-    gap:2.4rem;
-  }
+ 
   .zz-right{ padding-left: 12rem; }
   .zz-swiper .swiper{ width: 40rem; height: 64rem; }
 

@@ -367,8 +367,10 @@
       </p>
 
       <div class="meta-actions">
-        <a class="meta-btn" href="https://6xxnnk.github.io/glossier.renewal/" target="_blank" rel="noopener">사이트 열기</a>
-        <a class="meta-btn meta-btn--ghost" href="https://your-notion-or-docs-link.example" target="_blank" rel="noopener">작업과정 보기</a>
+        <a class="meta-btn" href="https://6xxnnk.github.io/glossier.renewal/" target="_blank" 
+        rel="noopener">사이트 열기</a>
+        <a class="meta-btn meta-btn--ghost" href="https://your-notion-or-docs-link.example"
+         target="_blank" rel="noopener">작업과정 보기</a>
       </div>
     </div>
   </div>
@@ -378,22 +380,23 @@
 <section class="proj proj--zigzag-v2" id="zigzag">
   <div class="zigzag">....</div>
 
-  <div class="zz-layout">
+<div class="zz-layout">
+    
     <!-- 왼쪽: 2x2 썸네일 -->
-    <div class="zz-left" id="zzThumbs">
-      <button class="zz-thumb is-active" data-target="1" aria-label="썸네일 1">
-        <img src="img/zigzag-HOME.jpg" alt="">
+    <div class="zz-left" id="zzThumbs" >
+      <button class="zz-thumb is-active" data-target="1" data-tooltip="click me!" aria-label="썸네일 1">
+        <img src="img/zigzag-HOME.jpg" alt="" >
         <span class="dot">1</span>
       </button>
-      <button class="zz-thumb" data-target="2" aria-label="썸네일 2">
+      <button class="zz-thumb" data-target="2" data-tooltip="click me!" aria-label="썸네일 2">
         <img src="img/zigzag-PRODUCT.jpg" alt="">
         <span class="dot">2</span>
       </button>
-      <button class="zz-thumb" data-target="3" aria-label="썸네일 3">
+      <button class="zz-thumb" data-target="3" data-tooltip="click me!" aria-label="썸네일 3">
         <img src="img/zigzag-mypage.jpg" alt="">
         <span class="dot">3</span>
       </button>
-      <button class="zz-thumb" data-target="4" aria-label="썸네일 4">
+      <button class="zz-thumb" data-target="4" data-tooltip="click me!" aria-label="썸네일 4">
         <img src="img/zigzag-ORDER.jpg" alt="">
         <span class="dot">4</span>
       </button>
@@ -441,7 +444,7 @@
       <div class="zz-swiper" data-id="4">
         <div class="swiper" id="zz-s4">
           <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="img/zigzag-MYPAGE-mockip.png" alt=""></div>
+            <div class="swiper-slide"><img src="img/zigzag-MYPAGE-mockip.png" alt="" ></div>
             <div class="swiper-slide"><img src="img/zigzag-HOME-mockip.png" alt=""></div>
           </div>
           <div class="swiper-button-prev"></div>
@@ -450,36 +453,29 @@
       </div>
     </div>
   </div>
-  <!-- ZigZag Meta Card -->
-<div class="zz-meta phone-meta g-card-meta2 zz-meta--coral">
 
-  <!-- 지그재그 데코 스트립 -->
-  <span class="zz-deco" aria-hidden="true"></span>
-
-  <h3 class="zz-title">ZigZag App Redesign</h3>
+ <div class="g-card-meta phone-meta zz-meta--zigzag">
+  <h3>ZigZag App Redesign</h3>
   <p class="meta-desc">
-    탐색 → 상품 → 결제로 이어지는 <strong>핵심 플로우를 간결화</strong>한 모바일 리디자인.
+    탐색 → 상품 → 결제까지 핵심 플로우를 단축시킨 <strong>콘텐츠 중심 설계</strong>
   </p>
-
   <ul class="meta-bullets">
-    <li>카테고리/필터 구조 재배치로 <strong>탐색 경로 단축</strong></li>
-    <li>과도한 팝업 대신 <strong>개인맞춤화</strong> 컨텐츠 중심</li>
-    <li>최대할인가 표기로 <strong>합리적 구매 유도</strong></li>
+    <li>필터 구조 개선으로 <strong>탐색 효율 향상</strong></li>
+    <li>팝업 최소화 및 <strong>개인화 피드 강화</strong></li>
+    <li>가격 신뢰도 확보를 위한 <strong>할인가 시각화</strong></li>
   </ul>
-
   <div class="meta-actions">
-    <a class="meta-btn" href="https://your-prototype.example" target="_blank" rel="noopener">
-      작업과정 보기
-    </a>
+    <a class="meta-btn" href="#">작업과정 보기</a>
   </div>
 </div>
+
 
 </section>
 
 
 <!--4. 29cm -->
 <section class="cm-section-29" id="cm29">
-  <div id="29CM" class="glossier">.....</div>
+  <div id="29CM" class="cm29">.....</div>
   <div class="cm-row">
     <!-- 1 -->
     <figure class="cm-phone">
@@ -793,3 +789,5 @@ Telling brand stories through visual moods.</div>
 
 </body>
 </html>
+
+
