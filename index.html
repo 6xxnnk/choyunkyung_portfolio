@@ -311,6 +311,76 @@
 
 
 <!-- 2: Glossier — iPhone (1대) -->
+<section class="phones" id="phones">
+  <div id="glossier" class="glossier">...</div>
+
+  <div class="phone-row" id="glossier-phones">
+    <!-- 1) 왼쪽: 온보딩 이미지 iPhone -->
+    <div class="phone-pair">
+      <div class="frame-base phone-glossier phone-onboarding">
+        <div class="layer2">
+          <div class="screen">
+            <!-- 단일 온보딩 이미지 -->
+            <img class="onboarding-shot" src="img/글로시에온보딩.jpg" data-design="390x844" alt="Glossier Onboarding" />
+          </div>
+          <div class="mask">
+            <span class="speaker"></span>
+            <span class="camera"><span class="lenz left"></span><span class="lenz right"></span></span>
+          </div>
+        </div>
+        <span class="side-button mute"></span>
+        <span class="side-button volume-up"></span>
+        <span class="side-button volume-down"></span>
+        <span class="side-button hold"></span>
+        <span class="port"></span>
+      </div>
+
+      <!-- 2) 오른쪽: 실제 사이트 iPhone -->
+      <div class="frame-base phone-glossier phone-live">
+        <div class="layer2">
+          <div class="screen">
+            <div class="phone-embed-wrap" data-design="390x844" data-zoom="1">
+              <iframe
+                class="phone-embed"
+                src="https://6xxnnk.github.io/glossier.renewal/"
+                title="Glossier Mobile (Live)"
+                loading="lazy"
+              ></iframe>
+            </div>
+          </div>
+          <div class="mask">
+            <span class="speaker"></span>
+            <span class="camera"><span class="lenz left"></span><span class="lenz right"></span></span>
+          </div>
+        </div>
+        <span class="side-button mute"></span>
+        <span class="side-button volume-up"></span>
+        <span class="side-button volume-down"></span>
+        <span class="side-button hold"></span>
+        <span class="port"></span>
+      </div>
+    </div><!--  -->
+
+    <!-- 3) META 카드 -->
+    <div class="phone-meta phone-meta--glossier g-card-meta">
+      <h3>Glossier Mobile App</h3>
+      <p class="meta-desc">
+        아이폰13,14 레이아웃<br>
+        홈 → 상품 탐색 → 결제까지 <strong>핵심 플로우를 간결하게 연결</strong> <br>
+        <strong>디자인 시스템</strong>(타이포·그리드·토큰)과 <strong>모션</strong>으로 실제 앱 감도 강화
+      </p>
+
+      <div class="meta-actions">
+        <a class="meta-btn" href="https://6xxnnk.github.io/glossier.renewal/" target="_blank" 
+        rel="noopener">사이트 열기</a>
+        <a class="meta-btn meta-btn--ghost" href="img/조윤경_글로시에_결합.pdf"
+         target="_blank" rel="noopener">작업과정 보기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <section class="proj proj--zigzag-v2" id="zigzag">
   <div class="zigzag">....</div>
 
@@ -346,7 +416,7 @@
     <div class="zz-right" id="zzRight">
       <figure class="zz-stage" aria-live="polite">
         <!-- 초기 노출 이미지는 is-active 썸네일의 data-mock과 일치 -->
-        <img id="zzStageImg" src="img/zigzag-homemockup.png" alt="" data-src="img/zigzag-homemockip.png">
+        <img id="zzStageImg" src="img/zigzag-homemockup.png" alt="" data-src="img/zigzag-homemockup.png">
       </figure>
       <noscript>
         <img src="img/zigzag-homemockup.png" alt="">
@@ -369,6 +439,7 @@
     </div>
   </div>
 </section>
+
 
 <!--4. 29cm -->
 <section class="cm-section-29" id="cm29">
@@ -743,7 +814,9 @@ Telling brand stories through visual moods.</div>
   <script src="js/projects-devices.js" defer></script>
   <script src="js/tamburins.js" defer></script>
 
-  <script src="./js/zigzag.js" defer></script>
+  <script src="js/glossier.js"></script>
+
+  <script src="js/zigzag.js" defer></script>
 
   <script src="js/cm29-mockups.js" defer></script>
 
