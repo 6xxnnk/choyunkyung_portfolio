@@ -1497,7 +1497,7 @@ button:hover ~ #cursorSun,
 .creator__headline{
   font-family: "Manrope","Noto Sans KR",sans-serif;
   font-weight: 700;
-  font-size: clamp(1.8rem, 2.8vw, 3rem);
+  font-size: 4rem;
   color: var(--ink);
   letter-spacing: -0.02em;
   margin-bottom: 1.2rem;
@@ -1507,7 +1507,7 @@ button:hover ~ #cursorSun,
 .creator__desc{
   font-family: "Noto Sans KR",sans-serif;
   font-weight: 400;
-  font-size: 1.7rem;
+  font-size: 1.8rem;
   line-height: 1.7;
   color: #555;
   margin-bottom: 3.2rem;
@@ -1522,8 +1522,9 @@ button:hover ~ #cursorSun,
 }
 
 .pill{
-  font-family: "Manrope",sans-serif;
-  font-size: 1.3rem;
+  font-family: "bisBitcount","Noto Sans KR",system-ui,sans-serif;
+  
+  font-size: 1.6rem;
   padding: .6rem 1.4rem;
   border-radius: 999rem;
   border: 1px solid rgba(0,0,0,.1);
@@ -1554,15 +1555,32 @@ button:hover ~ #cursorSun,
 /* 텍스트 */
 .footer-inner{ position:relative; z-index:2; padding:6rem var(--gutter); }
 .contact__title{
-  font-family:"bungee tint","Noto Sans KR",system-ui,sans-serif;
+  font-family:"Bitcount Prop Double","Noto Sans KR",system-ui,sans-serif;
   font-weight:400;
-  font-size:5rem; line-height:1.1; margin:0 0 2rem; letter-spacing:-.02em;
+  font-size:5.5rem; line-height:1.1; margin:0 0 2rem; letter-spacing:-.02em;
 }
+/* Per-letter color mapping for contact title */
+.contact__title--final { color: inherit; }
+.contact__title--final .ch { display:inline-block; font: inherit; line-height: 1.1; }
+.contact__title--final .sp { white-space: pre; }
+
+/* Palette (JS와 동일 순서) */
+.contact__title--final .c1 { color:#e11d48; }
+.contact__title--final .c2 { color:#0ea5e9; }
+.contact__title--final .c3 { color:#f59e0b; }
+.contact__title--final .c4 { color:#10b981; }
+.contact__title--final .c5 { color:#ef4444; }
+.contact__title--final .c6 { color:#22c55e; }
+.contact__title--final .c7 { color:#3b82f6; }
+.contact__title--final .c8 { color:#8b5cf6; }
+.contact__title--final .c9 { color:#f97316; }
+
 .contact__subtitle{
   font-family:"Noto Sans KR",system-ui,sans-serif; color:#374151;
   font-size:clamp(1.6rem,2.4vw,2.2rem); line-height:1.6; letter-spacing:.02em;
   max-width:64rem; margin:0 auto;
 }
+
 .contact__subtitle span{ color:#000; font-weight:700; }
 .contact__subtitle em{ font-style:italic;  }
 
@@ -1717,7 +1735,7 @@ button:hover ~ #cursorSun,
 
   font: 700 1.45rem/1 ui-sans-serif, "Noto Sans KR", system-ui;
   color: var(--text);
-  border: 1px solid var(--card-bd);
+  border: 3px solid var(--card-bd);
   background: #fff;
 
   box-shadow: 0 8px 18px rgba(15,23,42,.06);
@@ -1780,8 +1798,3 @@ button:hover ~ #cursorSun,
   animation: breathe 6.4s ease-in-out infinite;
 }
 
-/* 작은 화면 최적화 */
-@media (max-width: 560px){
-  .chip{ font-size: 1.35rem; }
-  .chip__meta{ display: none; } /* 모바일은 보조 텍스트 숨김 → 간결하게 */
-}
