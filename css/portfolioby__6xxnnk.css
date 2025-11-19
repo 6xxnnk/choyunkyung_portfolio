@@ -189,6 +189,49 @@ button:hover ~ #cursorSun,
 @keyframes fadeIn{ from{opacity:0; transform:translateY(.6rem);} to{opacity:1; transform:none;} }
 @media (prefers-reduced-motion: reduce){ .logo, .search-wrap, .hero__subcopy{ animation:none !important; } }
 
+@media (max-width: 768px){
+  .search-wrap{
+    width: min(100%, 94vw);
+    padding: .4rem;
+  }
+  .search-bar{
+    padding: .6rem;
+    gap: .6rem;
+  }
+  .input-area input{ font-size: 1.6rem; }
+  .typing-ghost{ font-size: 1.6rem; }
+
+  .select select{
+    font-size: 1.4rem;
+    max-width: 14rem;     /* All Categories 글자 잘림 방지 */
+  }
+  .btn{
+    padding: .6rem 1.4rem !important;
+    font-size: 1.4rem !important;
+    white-space: nowrap;
+  }
+}
+
+/* 480px 이하: 더 콤팩트 */
+@media (max-width: 480px){
+  .search-wrap{
+    width: 94vw;
+    border-radius: 4.6rem;
+  }
+  .search-bar{
+    border-width: .35rem;
+  }
+  .btn{
+    padding: .5rem 1.2rem !important;
+    font-size: 1.35rem !important;
+  }
+
+  .select select{
+    font-size: 1.3rem;
+    max-width: 12rem;
+  }
+}
+
 /* =========================================================
    SECTION 2: ABOUT ME — 데스크탑 좌표계 고정 + 뷰포트 스케일
    (버블은 데스크탑 좌표를 절대값으로 유지, 섹션만 scale)
@@ -203,7 +246,7 @@ button:hover ~ #cursorSun,
   width: var(--cv-w);                 /* 좌표계 유지 */
   max-width: 100%;                    /* 레이아웃 과대 방지 */
   height: calc(var(--cv-h) * var(--cv-scale));
-  margin: 0 auto;
+    margin: 14rem auto 0; /* Hero와 겹치지 않도록 */
   position: relative;
   display:flex; justify-content:center; align-items:center; text-align:center;
   overflow: visible;
@@ -227,7 +270,7 @@ button:hover ~ #cursorSun,
   opacity:1; transition: transform .6s ease, opacity .6s ease;
 }
 .ink-title-svg{
-  display:block; width:auto; height:26rem;
+  display:block; width:auto; height:28rem;
   margin: 0 auto; overflow:visible; 
   pointer-events:none; /* 드래그 방지(선택) */
 }
@@ -235,7 +278,7 @@ button:hover ~ #cursorSun,
 /* 손글씨 텍스트(rem 통일) */
 .ink-title-stroke{
   font-family:"Butterfly Kids", cursive; font-weight:400;
-  font-size:16rem; letter-spacing:.02em; fill:transparent;
+  font-size: clamp(16rem, 15vw, 22rem); letter-spacing:.02em; fill:transparent;
   stroke:#0f172a; stroke-width:.15rem; stroke-linecap:round; stroke-linejoin:round;
   transition:fill .1s ease .9s; margin:0 auto
 }
@@ -387,92 +430,297 @@ button:hover ~ #cursorSun,
   font-weight: 500;
   cursor: pointer; }
 
+/* ============================
+   ABOUT ME 타이틀 위치 수정
+   (모바일/태블릿용)
+============================ */
+@media (max-width: 1024px){
+
+  /* 섹션은 그냥 일반 블록 */
+  .about-cvmap{
+    transform: none !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 8rem auto 0 !important;
+    position: relative !important;
+    display: block !important;
+  }
+
+  /* ---- 타이틀 완전 중앙 정렬 ---- */
+  .about-cvmap .cv-center{
+    position: relative !important;
+    inset: auto !important;           /* top/left 초기화 */
+    left: auto !important;
+    top: auto !important;
+
+    transform: none !important;       /* -50%, -50% 제거 */
+    margin: 0 auto 3.2rem !important; /* 아래 버블과 간격 */
+    width: 100% !important;
+    text-align: center !important;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* data-reveal 애니메이션에서 또 transform 거는 것 막기 */
+  .about-cvmap .cv-center[data-reveal],
+  .about-cvmap .cv-center[data-reveal].is-visible{
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  /* 타이틀 크기 & 비율 */
+  .about-cvmap .ink-title-svg{
+    height: clamp(22rem, 28vw, 28rem) !important;
+    margin: 0 auto !important;
+    display: block;
+  }
+  .about-cvmap .ink-title-stroke{
+    font-size: clamp(10rem, 22vw, 16rem) !important;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+  
+@media (max-width: 1024px){
+
+  /* 데스크탑 좌표/스케일 완전 해제 */
+  .about-cvmap{
+    transform: none !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 10rem auto 0 !important;
+    position: relative !important;
+    display: block !important;
+  }
+
+  /* 타이틀 중앙 */
+  .cv-center{
+    position: relative !important;
+    top: 0 !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    margin-bottom: 4rem !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  .cv-center[data-reveal],
+  .cv-center[data-reveal].is-visible{
+    transform: translateX(-50%) !important;
+    opacity: 1 !important;
+  }
+
+  .ink-title-svg{
+    height: clamp(20rem, 30vw, 26rem) !important;
+  }
+  .ink-title-stroke{
+    font-size: clamp(8rem, 20vw, 14rem) !important;
+  }
+
+  /* 버블: 절대좌표 → 일반 카드 구조 */
+  .bubble{
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    margin: 2.4rem auto !important;
+    width: min(90%, 48rem) !important;
+    height: auto !important;
+    padding: 2.4rem 2rem !important;
+    border-radius: 2.4rem !important;
+  }
+
+  .bubble__label{
+    font-size: 2.4rem !important;
+    margin-bottom: 1.2rem;
+  }
+
+  .list-plain li{
+    font-size: 1.6rem !important;
+    line-height: 1.5;
+  }
+}
+
+/* 초소형 */
+@media (max-width: 480px){
+  .bubble{ width: 92% !important; padding: 2.2rem 1.8rem !important; }
+  .bubble__label{ font-size: 2.2rem !important; }
+
+
+
+
+
+
+
+
+
+}
 /* =========================================================
    SECTION 3: PROJECTS (iMac / iPhone) — rem 통일
 ========================================================= */
 .projects{
   margin:50rem 0;
-  display:flex; flex-direction:column; align-items:center;
-  height:250vh; /* 원래 의도 유지 */
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  height:250vh;                    /* 데스크탑에서 크게 보여주기 */
 }
-.projects-p  {  
-  font-size:1.6rem;
+.projects .container{
+  width:min(100%, var(--design-w));
+    margin-inline:auto;
+  display:flex;
+  flex-direction:column;
+  align-items:center;  /* 컨테이너 기준 중앙 정렬 */
+}
+
+.projects-p{
+    font-size:1.6rem;
   color:#6b7280;
   display:block;
-  text-align:right;}
-.projects-title{
-  font-size:12rem; margin-bottom:50rem; 
-  text-align:left;
-
-  font-family:'Gasoek One', cursive; font-weight:500;
+  text-align:right;
+  width:100%;
+  margin-bottom:6rem;
 }
+.projects-title{
+  display:inline-block;
+  font-size:12rem;
+  margin-bottom:5rem;
+  font-family:'Gasoek One', cursive;
+  font-weight:500;
+  text-align:left;
+  white-space:nowrap;              /* "Table of contents" 한 줄 유지 */
+  width: 100%;
+}
+
+/* iMac 카드들을 감싸는 그리드(있으면) 중앙 정렬 */
+.projects-grid{
+  width:100%;
+  display:flex;              /* 그리드 대신 세로 플렉스 */
+  flex-direction:column;
+  align-items:center;        /* iMac, 팝업 전부 가운데 */
+  gap:10rem;
+}
+/* 섹션 라벨 (Nespresso / Tamburins 등) */
 .nespresso, .tamburins, .zigzag, .glossier, .cm29{
-  display:flex; 
-  font-family:doto, sans-serif;     
+  display:flex;
+  font-family:doto, sans-serif;
   font-size: clamp(6rem, 8vw, 10rem);
-  margin: 20rem 0 5rem;
+  margin: 20rem 0 10rem;
   line-height: 1;
 }
-
 /* iMac Shell (px → rem) */
 /* 1) iMac 래퍼: 실제 레이아웃 크기(폭×높이)만 키움 */
 .device--imac{
-  --imac-w-base: 120rem;   /* 기존 기준 폭 */
-  --imac-h-base: 90.4rem;  /* 기존 기준 높이 (비율 0.753333) */
-  --imac-scale: 1.25;      /* ← 여기 숫자만 키우면 전체 커짐 (예: 1.4, 1.6) */
+  --imac-w-base: 120rem;
+  --imac-h-base: 90.4rem;
+  --imac-scale: 1.25;
 
-  width:  calc(var(--imac-w-base) * var(--imac-scale));
+  width: calc(var(--imac-w-base) * var(--imac-scale));
   height: calc(var(--imac-h-base) * var(--imac-scale));
-  margin: 0 auto;
-  position: relative;
+  margin:0 auto;
+  position:relative;
 }
 
-/* 2) 실제 iMac 쉘: 기준 크기를 유지하고, 래퍼 안에서 균일 스케일 */
+/* 쉘을 래퍼 안에서 정확히 중앙에 두고 스케일 */
 .device--imac .imac-shell{
-  position: absolute;
-  left: 0; top: 0;
-  width: var(--imac-w-base);
-  height: var(--imac-h-base);
-  transform-origin: top left;     /* 좌상단 기준 확장 */
-  transform: scale(var(--imac-scale));
+  position:absolute;
+  left:50%;
+  top:0;
+  width:var(--imac-w-base);
+  height:var(--imac-h-base);
+  transform-origin:top center;
+  transform:translateX(-50%) scale(var(--imac-scale));
 }
 
+
+
+/* 상단 패널 */
 .imac-shell .top-panel{
-  position:relative; width:100%; height:65rem; border-radius:2.7rem 2.7rem 0 0; background:#070707;
-  box-shadow: inset 0 .1rem 0 rgba(255,255,255,.06), inset 0 0 0 .1rem rgba(255,255,255,.04), 0 .2rem 0 rgba(0,0,0,.4);
+  position:relative;
+  width:100%;
+  height:65rem;
+  border-radius:2.7rem 2.7rem 0 0;
+  background:#070707;
+  box-shadow:
+    inset 0 .1rem 0 rgba(255,255,255,.06),
+    inset 0 0 0 .1rem rgba(255,255,255,.04),
+    0 .2rem 0 rgba(0,0,0,.4);
 }
+
 .imac-shell .top-panel::after{
-  content:""; position:absolute; inset:0; border-radius:2.7rem 2.7rem 0 0;
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:2.7rem 2.7rem 0 0;
   background:
     radial-gradient(120% 70% at 50% -10%, rgba(255,255,255,.06), transparent 50%),
     radial-gradient(40% 60% at 0% 0%, rgba(255,255,255,.05), transparent 60%),
     radial-gradient(40% 60% at 100% 0%, rgba(255,255,255,.05), transparent 60%);
   pointer-events:none;
 }
+
+
 .imac-shell .facetime{
-  position:absolute; top:1rem; left:50%; width:1rem; height:1rem; margin-left:-.5rem;
-  border-radius:50%; background: radial-gradient(#1b1a1f, #0e0d12);
+  position:absolute;
+  top:1rem;
+  left:50%;
+  width:1rem;
+  height:1rem;
+  margin-left:-.5rem;
+  border-radius:50%;
+  background: radial-gradient(#1b1a1f, #0e0d12);
   box-shadow: 0 0 0 .2rem rgba(255,255,255,.04);
 }
-.imac-shell .facetime::before{
-  content:""; position:absolute; top:50%; left:50%; width:.4rem; height:.4rem; margin:-.2rem 0 0 -.2rem;
-  border-radius:50%; background: radial-gradient(#2c2b33,#111);
-}
-.imac-shell .display-panel{
-  position:absolute; inset:4.4rem 3.8rem; overflow:hidden; background:#000; border-radius:1.4rem;
-}
-.embed-scale-wrap{ position:absolute; inset:0; transform-origin:top left; overflow:hidden; }
-.site-embed{ position:absolute; inset:0; width:100%; height:100%; border:0; outline:0; }
 
-/* Figma (px → rem) */
-.figma-embed{ width:192rem; height:108rem; border:0; outline:0; display:block; transform-origin:top left; will-change:transform; }
-/* 반응형 Figma 래퍼: 16:9 비율 유지 + 가득 채우기 */
+.imac-shell .facetime::before{
+  content:"";
+  position:absolute;
+  top:50%; left:50%;
+  width:.4rem; height:.4rem;
+  margin:-.2rem 0 0 -.2rem;
+  border-radius:50%;
+  background: radial-gradient(#2c2b33,#111);
+}
+
+.imac-shell .display-panel{
+  position:absolute;
+  inset:4.4rem 3.8rem;
+  overflow:hidden;
+  background:#000;
+  border-radius:1.4rem;
+}
+
+/* Nespresso용 embed 래퍼 */
+.embed-scale-wrap{
+  position:absolute;
+  inset:0;
+  transform-origin:top left;
+  overflow:hidden;
+}
+.site-embed{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  outline:0;
+}
+
+/* Figma responsive */
 .figma-responsive{
   position: relative;
   width: 100%;
   height: 100%;
-  /* iMac display-panel이 이미 여백(inset)으로 비율을 제어하므로
-     별도의 aspect-ratio 없이 100%로 채우는 편이 안전 */
 }
 .figma-frame{
   position:absolute;
@@ -483,114 +731,208 @@ button:hover ~ #cursorSun,
   outline:0;
   display:block;
 }
+
 .display-panel .embed-fallback{
-  position:absolute; inset:0; display:none; align-items:center; justify-content:center;
-  flex-direction:column; gap:.8rem; color:#fff; background:rgba(0,0,0,.55);
-  font-size:1.4rem; text-align:center;
+  position:absolute;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:.8rem;
+  color:#fff;
+  background:rgba(0,0,0,.55);
+  font-size:1.4rem;
+  text-align:center;
 }
 .display-panel .embed-fallback a{
-  display:inline-block; padding:.6rem 1rem; border:.1rem solid #fff; border-radius:.6rem; color:#fff; text-decoration:none;
+  display:inline-block;
+  padding:.6rem 1rem;
+  border:.1rem solid #fff;
+  border-radius:.6rem;
+  color:#fff;
+  text-decoration:none;
 }
+
 .imac-shell .bottom-panel{
-  position:relative; width:100%; height:7.6rem; border-radius:0 0 2.7rem 2.7rem; background:linear-gradient(#dbdcde,#d1d2d6);
-  box-shadow: inset 0 .1rem 0 rgba(255,255,255,.8), inset 0 -.1rem 0 rgba(0,0,0,.08);
+  position:relative;
+  width:100%;
+  height:7.6rem;
+  border-radius:0 0 2.7rem 2.7rem;
+  background:linear-gradient(#dbdcde,#d1d2d6);
+  box-shadow:
+    inset 0 .1rem 0 rgba(255,255,255,.8),
+    inset 0 -.1rem 0 rgba(0,0,0,.08);
 }
 .imac-shell .bottom-panel::before{
-  content:""; position:absolute; inset:0; border-radius:0 0 2.7rem 2.7rem;
-  background: repeating-linear-gradient(90deg, rgba(255,255,255,.06) 0 .1rem, rgba(255,255,255,0) .1rem .3rem);
-  mix-blend-mode:overlay; opacity:.25; pointer-events:none;
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:0 0 2.7rem 2.7rem;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255,255,255,.06) 0 .1rem,
+    rgba(255,255,255,0) .1rem .3rem
+  );
+  mix-blend-mode:overlay;
+  opacity:.25;
+  pointer-events:none;
 }
+
 .imac-shell .apple-logo{
-  position:absolute; top:50%; left:50%; width:3.4rem; height:3.8rem; margin:-1.9rem 0 0 -1.7rem;
-  background:url(../img/apple.png) no-repeat center/contain; opacity:.9;
+  position:absolute;
+  top:50%; left:50%;
+  width:3.4rem;
+  height:3.8rem;
+  margin:-1.9rem 0 0 -1.7rem;
+  background:url(../img/apple.png) no-repeat center/contain;
+  opacity:.9;
 }
-.imac-shell .stand{ position:relative; left:50%; width:17rem; height:11rem; margin-left:-8.5rem; }
-.imac-shell .stand-right, .imac-shell .stand-left{
-  position:absolute; inset:0; background:linear-gradient(to bottom,#8b8c90 0%,#d0d1d5 52%,#e6e6e8 82%,#a6a7ab 100%); border-radius:.6rem;
+
+.imac-shell .stand{
+  position:relative;
+  left:50%;
+  width:17rem;
+  height:11rem;
+  margin-left:-8.5rem;
+}
+.imac-shell .stand-right,
+.imac-shell .stand-left{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to bottom,
+    #8b8c90 0%,
+    #d0d1d5 52%,
+    #e6e6e8 82%,
+    #a6a7ab 100%
+  );
+  border-radius:.6rem;
 }
 .imac-shell .stand-right{ transform:skew(10deg); }
 .imac-shell .stand-left{ transform:skew(-10deg); }
-.device--imac .imac-shell{ transform-origin:top center; }
+
 .imac-shell .stand::before{
-  content:""; position:absolute; inset:.6rem 1.2rem auto 1.2rem; height:.1rem;
-  background:linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
-  border-radius:999rem; pointer-events:none;
+  content:"";
+  position:absolute;
+  inset:.6rem 1.2rem auto 1.2rem;
+  height:.1rem;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.55),
+    transparent
+  );
+  border-radius:999rem;
+  pointer-events:none;
 }
+
 @supports (content-visibility:auto){
-  .imac-shell .figma-embed, .imac-shell .site-embed{ content-visibility:auto; }
+  .imac-shell .figma-frame,
+  .imac-shell .site-embed{
+    content-visibility:auto;
+  }
 }
 
-/* ------- Floating Window (크림톤 + 살짝 더 넓게) ------- */
-/* 베이스: 위치 기준은 오직 transform(=JS) */
+/* ============ Floating Window (PC 기본) ============ */
+
 .floating-window{
-  position: absolute;
-  /* edge 리셋 */
-  inset: auto;              /* top/right/bottom/left 전부 auto */
-  width: 420px;
-  background: #f6f6f6;
-  border-radius: 10px;
-  box-shadow: 0 12px 30px rgba(0,0,0,.25);
-  overflow: hidden;
-  z-index: 9999;
-  transition: box-shadow .25s ease, transform .25s ease;
-  will-change: transform;
-  touch-action: none;
+  position:absolute;
+  inset:auto;
+  width:420px;
+  background:#f6f6f6;
+  border-radius:10px;
+  box-shadow:0 12px 30px rgba(0,0,0,.25);
+  overflow:hidden;
+  z-index:9999;
+  transition:box-shadow .25s ease, transform .25s ease;
+  will-change:transform;
+  touch-action:none;
 }
 
-.floating-window--imac-br {
+.floating-window--imac-br{
   right:5%;
   bottom:30%;
   left:auto;
   top:auto;
 }
 
-/* 드래그 상태 */
+
 .floating-window.dragging{
   cursor: grabbing;
   user-select: none;
 }
 
-/* macOS 헤더 */
 .window-header{
-  display:flex; align-items:center; justify-content:space-between;
-  gap:.8rem; padding:.8rem 1.2rem;
-  background:#e9e9e9; border-bottom:1px solid #d8d8d8;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.8rem;
+  padding:.8rem 1.2rem;
+  background:#e9e9e9;
+  border-bottom:1px solid #d8d8d8;
 }
-.window-title{ margin:0; font:700 1.6rem/1.2 ui-sans-serif, "Noto Sans KR", system-ui; 
-  color:#0f172a; }
+.window-title{
+  margin:0;
+  font:700 1.6rem/1.2 ui-sans-serif, "Noto Sans KR", system-ui;
+  color:#0f172a;
+}
 .window-controls{ display:flex; gap:.6rem; }
-.window-close, .window-minimize, .window-maximize{
-  width:12px; height:12px; border-radius:50%;
+.window-close,
+.window-minimize,
+.window-maximize{
+  width:12px;
+  height:12px;
+  border-radius:50%;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
 }
 .window-close{ background:#ee5f5b; }
 .window-minimize{ background:#f7d54a; }
 .window-maximize{ background:#62c462; }
 
-.window-content{ padding: 1.4rem 1.6rem 1.8rem; }
-.meta-bullets{ margin:0 0 1.2rem; padding-left:1.6rem; font-size:1.5rem; color:#374151; }
+.window-content{
+  padding: 1.4rem 1.6rem 1.8rem;
+}
+.meta-bullets{
+  margin:0 0 1.2rem;
+  padding-left:1.6rem;
+  font-size:1.5rem;
+  color:#374151;
+}
 .meta-bullets li + li{ margin-top:.4rem; }
 
-/* ------- 포트폴리오 무드 버튼 ------- */
-.meta-actions{ display:flex; flex-wrap:wrap; gap:.8rem; }
+.meta-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.8rem;
+}
 
 .meta-btn,
 .meta-btn--ghost{
   --ink:#0f172a;
   --cream:#fff9ed;
   --line:#cfd5df;
-  --accent:#111; /* 텍스트/아이콘 */
-  display:inline-flex; align-items:center; gap:.6rem;
+  --accent:#111;
+
+  display:inline-flex;
+  align-items:center;
+  gap:.6rem;
   padding: .9rem 1.6rem;
   border-radius: 999rem;
   font: 700 1.45rem/1.1 ui-sans-serif, "Noto Sans KR", system-ui;
-  text-decoration:none; white-space:nowrap;
-  transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease, color .18s ease;
+  text-decoration:none;
+  white-space:nowrap;
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    background .18s ease,
+    border-color .18s ease,
+    color .18s ease;
   box-shadow: 0 8px 18px rgba(15,23,42,.08);
   border: 1.5px solid var(--line);
 }
 
-/* 솔리드(메인) */
+/* 솔리드 버튼 */
 .meta-btn{
   color: var(--ink);
   background: linear-gradient(180deg, #fffdf6, var(--cream));
@@ -602,7 +944,7 @@ button:hover ~ #cursorSun,
   background: linear-gradient(180deg, #fffef9, #fff4e0);
 }
 
-/* 고스트(윤곽 버튼) */
+/* 고스트 버튼 */
 .meta-btn--ghost{
   color: var(--ink);
   background: #fff;
@@ -614,14 +956,233 @@ button:hover ~ #cursorSun,
   background:#f9fbff;
 }
 
-/* 버튼 안 화살표(텍스트 끝의 →를 살짝 강조하고 싶다면) */
+/* 화살표 */
 .meta-btn::after{
-  content:"→"; font-weight:800; opacity:.9; transform: translateX(0); transition: transform .18s ease;
+  content:"→";
+  font-weight:800;
+  opacity:.9;
+  transform: translateX(0);
+  transition: transform .18s ease;
 }
-.meta-btn:hover::after{ transform: translateX(.08em); }
+.meta-btn:hover::after{
+  transform: translateX(.08em);
+}
 
 
+/* =========================================================
+   RESPONSIVE — Tablet & Mobile
+========================================================= */
 
+/* -------- 1024px 이하: 태블릿 레이아웃 -------- */
+@media (max-width: 1024px){
+
+  .projects{
+    margin:20rem 0;
+    height:auto;                      /* 높이 고정 풀기 */
+  }
+
+    .projects-title{
+    font-size:clamp(4.2rem, 6vw, 6.4rem);
+    margin-bottom:2rem;
+    text-align:left;
+  }
+
+  .projects-p{
+    font-size:1.4rem;
+    text-align:left;
+    margin-bottom:4rem;
+  }
+
+  .projects-grid{
+    gap: 14rem;
+  }
+
+    .device--imac{
+    --imac-scale: .8;    /* 살짝 줄이기 */
+    width: calc(var(--imac-w-base) * var(--imac-scale));
+    height: calc(var(--imac-h-base) * var(--imac-scale));
+  }
+
+  .device--imac .imac-shell{
+    left:50%;
+    transform-origin: top center;
+    transform: translateX(-50%) scale(var(--imac-scale));
+  }
+
+  /* 팝업은 약간 더 위로 */
+  .floating-window--imac-br{
+    right:4%;
+    bottom:34%;
+  }
+}
+
+/* -------- 834px 이하: 작은 태블릿 / 큰 폰 -------- */
+@media (max-width: 834px){
+
+  .projects{
+    margin: 20rem 0 14rem;
+  }
+
+  .projects .container{
+    text-align:center;
+  }
+
+  .projects-title,
+  .projects-p{
+    text-align:center;
+  }
+
+  .projects-p{
+    font-size:1.5rem;
+  }
+
+  .device--imac{
+    --imac-scale: 0.7;
+    width:  calc(var(--imac-w-base) * var(--imac-scale));
+    height: calc(var(--imac-h-base) * var(--imac-scale));
+  }
+
+  .projects-grid{
+    gap: 10rem;
+  }
+
+  /* iMac 아래로 팝업 내려주기 (겹침 줄이기) */
+  .floating-window--imac-br{
+    right:6%;
+    bottom:18%;
+  }
+}
+
+/* -------- 560px 이하: 스마트폰 -------- */
+@media (max-width: 560px){
+    body{
+    padding-inline:1.6rem;
+  }
+
+    .projects{
+    margin:12rem 0 8rem;
+     height:auto;
+  }
+
+  .projects-title{
+    width:100%;
+    font-size:clamp(3.2rem, 8vw, 4.4rem);
+    text-align:center;
+    margin-bottom:1.2rem;
+  }
+
+    .projects-p{
+    width:100%;
+    text-align:center;
+    font-size:1.3rem;
+    margin-bottom:3.2rem;
+  }
+
+  .projects-grid{
+    gap: 8rem;
+  }  /* 설명 텍스트(프로젝트명)도 조금 줄이기 */
+  .nespresso, .tamburins, .zigzag, .glossier, .cm29{
+    font-size: clamp(3.2rem, 8vw, 4rem);
+    margin: 10rem 0 3rem;
+  } .device--imac{
+    --imac-scale: calc((100vw - 2 * var(--gutter)) / var(--imac-w-base));
+
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    padding-top: calc(var(--imac-h-base) * var(--imac-scale)); /* iMac 높이만큼 위 공간 */
+
+    position: relative;
+    margin: 0 auto;
+  }
+
+  /* iMac 자체는 그대로 위에 떠 있게 (화면폭 기준으로 축소) */
+  .device--imac .imac-shell{
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: var(--imac-w-base);
+    height: var(--imac-h-base);
+    transform-origin: top center;
+    transform: translateX(-50%) scale(var(--imac-scale));
+  }
+
+  /* 팝업: 아이맥 아래에 카드처럼 세로 배치 */
+  .floating-window{
+    position: static !important;      /* 레이아웃 안으로 */
+    inset: auto !important;
+    transform: none !important;       /* 드래그용 transform 제거 */
+
+    width: min(92%, 34rem) !important;
+    margin: 1.6rem auto 0;            /* iMac 바로 아래 여백만 살짝 */
+    padding: 0 !important;            /* 바깥 여백 제거(데스크탑과 동일) */
+
+    z-index: 1;
+  }
+
+  /* 데스크탑용 bottom-right 위치값 무효화 */
+  .floating-window--imac-br{
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+  }
+  .floating-window .window-header{
+    padding:.6rem 1rem !important;
+  }
+  .floating-window .window-title{
+    font-size:1.35rem !important;
+  }
+  .floating-window .window-controls span{
+    width:8px !important;
+    height:8px !important;
+  }
+
+  .floating-window .window-content{
+    padding:1.2rem 0 .4rem;
+  }
+  .floating-window .meta-bullets{
+    font-size:1.3rem;
+  }
+
+}
+
+/* -------- 360px 이하: 초소형 폰 -------- */
+@media (max-width: 360px){
+
+  .projects{
+    margin: 14rem 0 8rem;
+  }
+
+  .projects-title{
+    font-size:3rem;
+  }
+  .projects-p{
+    font-size:1.2rem;
+  }
+
+
+  /* ✅ 작은 폰도 더 크게 (기존 .32 → .36) */
+  .device--imac{
+    --imac-scale:.36;
+    width: calc(var(--imac-w-base) * var(--imac-scale));
+    height: calc(var(--imac-h-base) * var(--imac-scale));
+  }
+
+  .device--imac .imac-shell{
+    transform:translateX(-50%) scale(var(--imac-scale));
+  }
+
+   .floating-window .meta-actions{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 0.8rem;
+    width: 100%;
+    text-align: center;
+    
+  }
+}
 /****************************** iPhone Frame (rem 통일) *********************************/
 
 
@@ -805,9 +1366,179 @@ button:hover ~ #cursorSun,
 
 
 
-/* ========== Zigzag(썸네일/스와이퍼) ========== */
+/* 태블릿 이하 (<= 1024px) */
+@media (max-width:1024px){
 
-/* ===== ZigZag layout (조정 버전) ===== */
+  .phones{
+    padding:8rem 0;
+  }
+
+  #glossier-phones{
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap:2.4rem;
+    width:min(100%, 94vw);
+  }
+
+  .g-card-meta.phone-meta{
+    margin-top:8rem;
+  }
+}
+
+/* 태블릿 · 작은 노트북 (<= 834px) */
+@media (max-width:834px){
+
+  .glossier{
+    font-size: clamp(3.6rem, 6vw, 6.4rem);
+    align-items:flex-start;
+    margin-bottom:1.6rem;
+  }
+
+  #glossier-phones{
+    grid-template-columns: 1fr;
+    gap:3.2rem;
+    justify-items:center;
+    width:min(100%, 94vw);
+  }
+
+  /* 아이폰 2대: 여전히 나란히, 조금 더 작게 */
+  #glossier-phones .phone-pair{
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap:1.8rem;
+  }
+
+  /* 프레임을 뷰포트 기반으로 스케일링 */
+  .phone-glossier.frame-base{
+    width:clamp(22rem, 44vw, 30rem);
+    height:auto;
+    aspect-ratio:9 / 19;
+    border-radius:3.6rem;
+  }
+  .phone-glossier .layer2{
+    width:calc(100% - 1.3rem);
+    height:calc(100% - 1.3rem);
+    border-radius:3.2rem;
+    top:.65rem;
+    left:50%;
+    transform:translateX(-50%);
+  }
+  .phone-glossier .screen{
+    width:calc(100% - 3.3rem);
+    height:calc(100% - 4.1rem);
+    top:1.5rem;
+    border-radius:3rem;
+  }
+
+  /* 라이브 임베드도 프레임에 꽉 차게 */
+  .phone-live .phone-embed-wrap{
+    inset:0;
+    transform:none;
+  }
+  .phone-live .phone-embed{
+    width:100%;
+    height:100%;
+  }
+
+  .g-card-meta.phone-meta{
+    max-width:52rem;
+    margin-top:4rem;
+  }
+}
+
+/* 폰 사이즈 (<= 480px) */
+@media (max-width:480px){
+
+  /* 아이폰 2대 → 세로 스택 */
+  #glossier-phones .phone-pair{
+    grid-template-columns:1fr;
+    gap:1.6rem;
+  }
+
+  .phone-glossier.frame-base{
+    width:min(88vw, 30rem);
+    aspect-ratio:9 / 19;
+    border-radius:3.2rem;
+  }
+  .phone-glossier .layer2{ border-radius:2.8rem; }
+  .phone-glossier .screen{ border-radius:2.4rem; }
+
+    .phone-glossier .screen {
+    top: 2.2rem !important;  /* 베젤 정상 노출 */
+    height: calc(100% - 5rem) !important;  /* 밑면도 자연스럽게 */
+  }
+
+  .phone-glossier .layer2 {
+    top: 0.9rem !important; /* actual frame 상단 */
+  }
+  
+  .g-card-meta.phone-meta{
+    max-width:100%;
+    margin-top:2.8rem;
+    padding:1.6rem 1.4rem;
+    font-size:1.4rem;
+  }
+  .g-card-meta h3{ font-size:1.8rem; }
+  .g-card-meta .meta-desc{ font-size:1.4rem; }
+
+
+}
+
+/* 아주 작은 폰 (<= 360px) */
+@media (max-width:360px){
+
+  .glossier{
+    font-size:3.2rem;
+    margin-top: 10rem;
+  }
+
+  .g-card-meta.phone-meta{
+    font-size:1.3rem;
+  }
+  .g-card-meta h3{
+    font-size:1.6rem;
+  }
+
+   .phone-glossier .screen {
+    top: 2.6rem !important;
+    height: calc(100% - 5.4rem) !important;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ===== ZigZag layout (mock 이미지 확장/하단 이동 버전) ===== */
 .zz-layout {
   display: grid;
@@ -1005,7 +1736,101 @@ button:hover ~ #cursorSun,
   box-shadow:0 .8rem 2rem rgba(255,220,90,.25);
 }
 
+/* ================= 반응형 ================= */
 
+/* 1) 태블릿 ~ 작은 데스크탑 */
+@media (max-width:1024px){
+  .zz-layout{
+    grid-template-columns:1fr;   /* 위: 썸네일 / 아래: mock */
+    gap:3rem;
+  }
+  .zz-right{
+    margin-top:4rem;
+    justify-content:center;
+  }
+  .zz-stage{
+    max-width:90%;
+    aspect-ratio:16/10;
+    transform:translateY(3rem);  /* 조금만 아래로 */
+  }
+  #zzStageImg{
+    width:108%;
+    transform:translateY(1.2rem);
+  }
+}
+
+/* 2) 태블릿 세로 & 큰 모바일 */
+@media (max-width:768px){
+  .zz-layout{
+    gap:2.4rem;
+  }
+  .zz-left{
+    max-width:40rem;
+    margin:0 auto;
+  }
+  .zz-thumb{
+    transform:scale(.95);
+  }
+  .zz-thumb:hover{
+    transform:scale(.98) translateY(-1px);
+  }
+
+  .zz-right{
+    margin-top:3rem;
+  }
+  .zz-stage{
+    max-width:100%;
+    aspect-ratio:3/4;      /* 세로감 살짝 더 */
+    transform:none;        /* 위·아래 이동 제거 */
+  }
+  #zzStageImg{
+    width:100%;
+    transform:none;
+  }
+
+  .g-card-meta.phone-meta.zz-meta--zigzag{
+    margin:4.5rem auto 0;
+    max-width:100%;
+  }
+}
+
+/* 3) 작은 모바일 (폰 폭 아주 좁을 때) */
+@media (max-width:480px){
+  .zz-left{
+    gap:.9rem;
+  }
+  .zz-thumb{
+    transform:scale(1);
+  }
+  .zz-thumb:hover{
+    transform:scale(1.02) translateY(-.2px);
+  }
+
+  .zz-stage{
+    aspect-ratio:9/16;   /* 더 세로 비율 */
+  }
+  #zzStageImg{
+    width:110%;
+  }
+
+  .g-card-meta.phone-meta.zz-meta--zigzag{
+    padding:2rem 1.4rem;
+    font-size:1.4rem;
+  }
+  .g-card-meta.zz-meta--zigzag h3{
+    font-size:1.8rem;
+  }
+  .g-card-meta.zz-meta--zigzag .meta-desc{
+    font-size:1.4rem;
+  }
+  .g-card-meta.zz-meta--zigzag .meta-bullets li{
+    font-size:1.3rem;
+  }
+  .g-card-meta.zz-meta--zigzag .meta-actions .meta-btn{
+    min-width:11rem;
+    font-size:1.3rem;
+  }
+}
 
 /* ========== 29CM — 데스크탑 디자인으로 정리(난잡 X) ========== */
 .proj--29cm-v2{ margin:8rem 0; }
@@ -1205,6 +2030,97 @@ button:hover ~ #cursorSun,
   75%  { transform: rotateY(-10deg) rotateX(1.2deg) translateY(-.4rem) }
   100% { transform: rotateY(0deg) rotateX(0deg) translateY(0) }
 }
+
+@media (max-width: 1024px){
+  .cm-section-29{
+    width:100%;
+    padding:5rem 2rem;
+  }
+
+  .cm-section-29 .cm-row{
+    --gap:6rem;
+    grid-template-columns: repeat(4, minmax(16rem, 1fr));
+  }
+
+  .cm-section-29 .cm-phone{
+    width:22rem;
+  }
+
+  .phone-meta--29cm{
+    width:60%;
+    margin:4rem auto 5rem;
+  }
+}
+
+/* 2) 작은 태블릿 / 큰 모바일 (max-width: 768px) */
+@media (max-width: 768px){
+  .cm-section-29{
+    padding:4rem 1.6rem;
+  }
+
+  .cm-section-29 .cm-row{
+    --gap:4rem;
+    grid-template-columns: repeat(2, minmax(15rem, 1fr));
+    justify-items:center;
+  }
+
+  .cm-section-29 .cm-phone{
+    width:min(40vw, 20rem);
+  }
+
+  .phone-meta--29cm{
+    width:80%;
+    max-width:40rem;
+    margin:3.5rem auto 4.5rem;
+  }
+
+  .phone-meta--29cm h3{
+    font-size:1.8rem;
+  }
+  .phone-meta--29cm .meta-desc{
+    font-size:1.4rem;
+  }
+}
+
+/* 3) 모바일 (max-width: 560px) */
+@media (max-width: 560px){
+  /* 모바일에서도 폰 2개씩 나열 */
+  .cm-section-29 .cm-row{
+    --gap:2.4rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-items:center;
+    align-items:start;
+  }
+
+  /* 폰 크기 조정 — 모바일에서도 보기 좋게 */
+  .cm-section-29 .cm-phone{
+    width: min(38vw, 16rem);   /* 한 줄에 2개 들어가도록 조절 */
+    margin: 0 auto;
+    animation-duration: 24s;   /* 부드럽고 천천히 */
+  }
+
+  /* 메타카드는 2열 그리드 아래 전체폭으로 */
+  .phone-meta--29cm{
+    width: 100%;
+    max-width: 100%;
+    margin: 4rem auto 0;
+    padding: 2rem 1.4rem;
+  }
+
+  .phone-meta--29cm h3{
+    font-size:1.7rem;
+  }
+  .phone-meta--29cm .meta-desc{
+    font-size:1.35rem;
+  }
+  .phone-meta--29cm .meta-actions .meta-btn{
+    min-width:11rem;
+    font-size:1.3rem;
+  }
+}
+
+
+
 
 /* =========================================================
    Instagram-like Grid
@@ -1430,6 +2346,214 @@ button:hover ~ #cursorSun,
   content:""; position:absolute; left:8px; top:100%;
   width:8px; height:8px; transform:translateY(0) rotate(45deg);
   background:rgba(0,0,0,.82);
+}
+
+
+/* =========================================
+   IG 섹션 반응형
+   (기존 코드 아래에 그대로 추가)
+========================================= */
+
+/* 1) 큰 태블릿 ~ 작은 데스크탑 정리 */
+@media (max-width: 1024px) {
+
+  /* 타이틀 크기 살짝 줄이기 */
+  .ig__title strong{
+    font-size: clamp(4.8rem, 6vw, 7.2rem);
+  }
+  .ig__title p{
+    font-size: clamp(4.4rem, 5.5vw, 6.8rem);
+  }
+
+  /* 헤더 좌우 여백 살짝 줄이기 */
+  .ig__container{
+    padding-inline: 1.2rem;
+  }
+
+  /* 프로필 영역 비율 조정 */
+  .ig-hd{
+    grid-template-columns: 140px 1fr;
+    gap: 20px;
+  }
+  .ig-hd__avatar{
+    width: 140px;
+    height: 140px;
+  }
+
+  .ig-hd__username{
+    font-size: 2.2rem;
+  }
+  .ig-counters strong,
+  .ig-counters span{
+    font-size: 1.4rem;
+  }
+  .ig-bio__name{
+    font-size: 1.4rem;
+  }
+  .ig-bio__desc{
+    font-size: 1.5rem;
+  }
+
+  .ig-btn{
+    height: 32px;
+    font-size: 1.4rem;
+    padding: 0 10px;
+  }
+}
+
+/* 2) 태블릿 세로 ~ 큰 모바일: 레이아웃 한 줄로 정렬 */
+@media (max-width: 768px) {
+
+  /* 타이틀 더 줄이기 */
+  .ig__title strong{
+    font-size: clamp(3.6rem, 7vw, 5.2rem);
+  }
+  .ig__title p{
+    font-size: clamp(3.2rem, 6.5vw, 4.8rem);
+  }
+
+  /* 프로필 레이아웃: 위/아래 한 컬럼 */
+  .ig-hd{
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+  .ig-hd__avatar{
+    margin-inline: auto;
+  }
+
+  .ig-hd__row{
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ig-actions{
+    justify-content: center;
+  }
+
+  .ig-counters{
+    justify-content: center;
+  }
+
+  .ig-bio{
+    align-items: center;
+  }
+
+  /* 탭 간격 줄이기 */
+  .ig-tabs{
+    gap: 24px;
+  }
+  .ig-tab{
+    font-size: 11px;
+    letter-spacing: .06em;
+  }
+  .ig-tabs__underline{
+    width: 70px;
+  }
+
+  /* 그리드 여백 살짝 키우기 */
+  .ig__grid{
+    gap: .6rem;
+  }
+
+  .post-meta{
+    padding: .8rem .9rem .9rem;
+    font-size: 1.2rem;
+  }
+  .post-meta .brand{
+    font-size: 1.25rem;
+  }
+}
+
+/* 3) 작은 모바일 (폰 폭 매우 좁을 때) */
+@media (max-width: 560px) {
+
+  /* 이미 1열로 바뀌는 상태. 카드 여백·텍스트 다시 정리 */
+  .ig{
+    padding-top: 3rem;
+  }
+
+  .ig__container{
+    padding-inline: 1.2rem;
+    gap: 1.6rem;
+  }
+
+  .ig__title strong{
+    font-size: clamp(2.8rem, 8vw, 3.6rem);
+  }
+  .ig__title p{
+    font-size: clamp(2.4rem, 7vw, 3.2rem);
+  }
+
+  .ig-hd__avatar{
+    width: 120px;
+    height: 120px;
+  }
+
+  .ig-hd__username{
+    font-size: 1.9rem;
+  }
+
+  .ig-btn{
+    height: 30px;
+    font-size: 1.3rem;
+    padding: 0 8px;
+  }
+
+  .ig-counters{
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+  }
+  .ig-counters strong,
+  .ig-counters span{
+    font-size: 1.3rem;
+  }
+
+  .ig-bio__name{
+    font-size: 1.35rem;
+  }
+  .ig-bio__desc{
+    font-size: 1.4rem;
+  }
+
+  /* 피드 카드 */
+  .post-card{
+    border-radius: .6rem;
+  }
+  .post-meta{
+    padding: .7rem .8rem .9rem;
+    font-size: 1.15rem;
+  }
+  .post-meta .brand{
+    font-size: 1.2rem;
+  }
+
+  /* “Tap for view” 위치 살짝 위로 */
+  .post-thumb::after{
+    bottom: 14px;
+    font-size: 11px;
+    padding: .5rem .9rem;
+  }
+}
+
+/* 4) 극소형 화면 (320px 근처) – 타이틀/버튼 더 컴팩트하게 */
+@media (max-width: 360px){
+
+  .ig__title strong,
+  .ig__title p{
+    font-size: 2.4rem;
+  }
+
+  .ig-actions{
+    flex-wrap: wrap;
+    row-gap: .4rem;
+  }
+
+  .ig-btn{
+    flex: 1 1 auto;
+    justify-content: center;
+  }
 }
 
 
@@ -1775,498 +2899,220 @@ button:hover ~ #cursorSun,
 }
 
 
+/* ===========================
+   CREATOR / FOOTER / CONTACT
+   Responsive
+=========================== */
 
+/* 1) 태블릿 이하 (<= 1024px) */
+@media (max-width: 1024px) {
 
-/* ===========================================
-   📱 Responsive only (Tablet / Smartphone)
-   — Design is preserved, sizes scale down
-=========================================== */
-
-/* ---------- Tablet (<= 1024px) ---------- */
-@media (max-width: 1024px){
-
-  /* Global rhythm */
-  :root{
-    --gutter: clamp(1.6rem, 4vw, 4rem);
+  .creator-statement{
+    padding: 7rem 2rem;
+  }
+  .creator__headline{
+    font-size: clamp(3rem, 4vw, 3.6rem);
+  }
+  .creator__desc{
+    font-size: 1.7rem;
   }
 
-  /* Hero */
-  .logo{ font-size: clamp(4.8rem, 6.2vw, 9.6rem); }
-  .search-wrap{ width: min(96vw, 90rem); }
-  .hero{ padding: 4rem 0 3rem; }
-
-  /* About CV map: already uses --cv-scale; just give it a touch more room */
-  .about-cvmap{ --cv-scale: clamp(.66, (100vw - 2*var(--gutter)) / var(--cv-w), .95); }
-
-  /* Projects section spacing */
-  .projects{
-    margin: 28rem 0;
-    height: 200vh;
+  .p-footer{
+    min-height: 70vh;
   }
-  .projects-title{ font-size: clamp(6.4rem, 7vw, 9rem); margin-bottom: 26rem; }
-
-  /* ===== iMac mock (proportional downscale) ===== */
-  .device--imac{ --imac-scale: .9; }  /* only scale factor changes */
-
-  /* Floating window stays readable but tighter */
-  .floating-window{ width: 380px; }
-
-  /* ===== Glossier phones ===== */
-  #glossier-phones{
-    grid-template-columns: minmax(52rem, 60rem) minmax(30rem, 1fr);
-    gap: 2rem;
+  .footer-inner{
+    padding: 5rem var(--gutter);
   }
-  #glossier-phones .phone-pair{
-    grid-template-columns: 30rem 30rem;
-    gap: 2rem;
+  .contact__title{
+    font-size: clamp(4rem, 5vw, 4.6rem);
   }
-  .phone-glossier.frame-base{ width: 30rem; height: 62.4rem; }
-  .phone-glossier .layer2{ width: 28.9rem; height: 61.1rem; }
-  .phone-glossier .screen{ width: 27rem; height: 58.6rem; top: 1.2rem; }
 
-  .g-card-meta.phone-meta{ max-width: 60rem; margin-top: 8rem; }
-
-
-  /* ===== 29CM ===== */
-  .cm-layout{
-    grid-template-columns: 1fr min(40rem, 44%);
-    gap: 2rem;
+  /* 블러 원 살짝 축소 */
+  .sun-dot--1{
+    width: 16rem; height: 16rem;
+    top: 2rem; left: 1.5rem;
   }
-  .cm-swiper.swiper{ width: min(50rem, 86%); height: 62rem; }
-  .cm-section-29 .cm-row{ --gap: 6rem; }
-  .cm-section-29 .cm-phone{ width: 23rem; }
+  .sun-dot--2{
+    width: 26rem; height: 26rem;
+    top: 18rem; left: 10rem;
+  }
+  .sun-dot--3{
+    width: 8rem; height: 8rem;
+    top: 10rem; left: 60%;
+  }
+  .sun-dot--4{
+    width: 16rem; height: 16rem;
+    top: 16rem; left: auto; right: 3rem;
+  }
 
-  /* ===== Instagram-like ===== */
-  .ig-hd{ grid-template-columns: 132px 1fr; gap: 18px; }
-  .ig-hd__avatar{ width:132px; height:132px; }
-  .ig__title strong, .ig__title p{ font-size: 7.2rem; }
-
-  /* ===== Contact / Footer ===== */
-  .creator__headline{ font-size: 3.2rem; }
-  .creator__desc{ font-size: 1.6rem; }
-
-  .contact__title{ font-size: clamp(4.2rem, 6vw, 6.8rem); }
-  .contact__subtitle{ font-size: clamp(1.5rem, 2vw, 1.9rem); }
-
-  .contact-chips .chip{
-    --chip-pad-y: .8rem; --chip-pad-x: 1.2rem;
-    font-size: 1.35rem;
+  .contact-chips{
+    padding: 3.6rem 0 4.4rem;
   }
 }
+/* =========================================================
+   📱 2) 모바일 기본 (<= 768px)
+========================================================= */
+@media (max-width: 768px) {
 
-/* ---------- Smartphone (<= 560px) ---------- */
-@media (max-width: 560px){
-
-  /* Global rhythm */
-  html{ font-size: 58.5%; }                 /* rem slightly smaller */
-  :root{ --gutter: clamp(1.2rem, 5vw, 2rem); }
-
-  /* Hero */
-  .hero{ min-height: 92vh; padding: 3rem 0 2.4rem; }
-  .logo{ font-size: clamp(3.6rem, 9vw, 6.8rem); letter-spacing: -.1em; }
-  .search-wrap{ width: 94vw; padding: .4rem; }
-  .search-bar{ padding: .6rem; border-width: .4rem; }
-  .input-area input, .typing-ghost{ font-size: clamp(1.5rem, 4vw, 1.8rem); }
-  .hero__subcopy{ font-size: 1.6rem; }
-
-  /* About CV map */
-  .about-cvmap{ --cv-scale: clamp(.54, (100vw - 2*var(--gutter)) / var(--cv-w), .8); }
-  .bubble__label{ font-size: 2.6rem; }
-  .list-plain li{ font-size: 1.6rem; }
-
-  /* Projects section */
-  .projects{
-    margin: 16rem 0;
-    height: auto;     /* mobile doesn’t need fixed tall canvas */
-  }
-  .projects-title{ font-size: clamp(4rem, 10vw, 6rem); margin-bottom: 12rem; }
-
-  /* ===== iMac mock ===== */
-  .device--imac{ --imac-scale: .62; }
-  .floating-window{ width: 92vw; right: auto; left: 50%; transform: translateX(-50%); }
-
-  /* ===== Glossier phones ===== */
-  #glossier-phones{
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  #glossier-phones .phone-pair{
-    grid-template-columns: 1fr;
-    justify-items: center;
-    gap: 1.6rem;
-  }
-  .phone-glossier.frame-base{ width: 27.6rem; height: 57.4rem; }
-  .phone-glossier .layer2{ width: 26.4rem; height: 56.1rem; }
-  .phone-glossier .screen{ width: 24.9rem; height: 53.6rem; top: 1.1rem; }
-
-  .g-card-meta.phone-meta{
-    max-width: 94vw;
-    margin: 3rem auto 0;
-    padding: 1.8rem 1.6rem;
-    font-size: 1.4rem;
-  }
-  .g-card-meta h3{ font-size: 1.8rem; }
-  .g-card-meta .meta-desc{ font-size: 1.4rem; }
-
-  /* ===== Zigzag ===== */
-
-  /* ===== 29CM ===== */
-  .cm-layout{
-    grid-template-columns: 1fr;
-    gap: 1.6rem;
-  }
-  .cm-swiper.swiper{ width: min(92vw, 44rem); height: 58rem; }
-  .cm-right{ grid-template-columns: repeat(2,1fr); gap: 1rem; }
-  .cm-section-29 .cm-row{
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2rem;
-  }
-  .cm-section-29 .cm-phone{ width: 20rem; }
-  .phone-meta--29cm{
-    width: 92vw;
-    max-width: none;
-    margin: 3.6rem auto 0;
-    padding: 1.8rem 1.4rem;
+  .creator-statement{
+    padding: 6rem 2.4rem 7rem;
   }
 
-  /* ===== Instagram-like ===== */
-  .ig-hd{
-    grid-template-columns: 96px 1fr;
-    gap: 14px;
-  }
-  .ig-hd__avatar{ width:96px; height:96px; }
-  .ig-hd__username{ font-size: 20px; }
-  .ig-counters strong, .ig-counters span{ font-size: 14px; }
-  .ig__title strong, .ig__title p{ font-size: 4.8rem; }
-
-  /* ===== Contact / Footer ===== */
-  .creator-statement{ padding: 6rem 1.6rem; }
-  .creator__headline{ font-size: 2.6rem; }
-  .creator__desc{ font-size: 1.5rem; }
-
-  .p-footer{ min-height: 72vh; }
-  .footer-inner{ padding: 4rem var(--gutter); }
-  .contact__title{ font-size: clamp(3.6rem, 8.6vw, 5.2rem); }
-  .contact__subtitle{ font-size: clamp(1.4rem, 3.6vw, 1.7rem); }
-
-  .contact-chips{ padding: clamp(2.4rem, 6vw, 3.6rem) 0; }
-  .contact-chips .chip{
-    --chip-pad-y: .7rem; --chip-pad-x: 1.1rem;
-    font-size: 1.3rem;
+  .creator__inner{
+    max-width: 72rem;
+    text-align: center;
   }
 
-  /* Footer background dots — keep performance-friendly */
-  .sun-dot--1{ width:160px; height:160px; }
-  .sun-dot--2{ width:260px; height:260px; }
-  .sun-dot--3{ width:80px;  height:80px; }
-  .sun-dot--4{ width:160px; height:160px; }
-}
-
-/* ---------- Very small phones (<= 390px) ---------- */
-
-/* ===== 모바일 최적 축소 (<=560px) ===== */
-@media (max-width:560px){
-
-  /* iMac: 가로·세로 중 더 빡센 쪽에 맞춰 자동 스케일 */
-  .device--imac{
-    /* 기준 크기 그대로 사용 */
-    --imac-w-base: 120rem;
-    --imac-h-base: 90.4rem;
-
-    /* 가용폭/높이에 따른 스케일을 동적으로 계산 */
-    --imac-scale-w: calc((100vw - 2*var(--gutter)) / var(--imac-w-base));
-    /* 상단/하단 여백 합계(헤더 간격 등) 여유 12rem 정도 확보 */
-    --imac-scale-h: calc((100svh - 12rem) / var(--imac-h-base));
-
-    /* 둘 중 더 작은 값으로 최종 스케일 결정 (너무 커지는 것 방지용 상한도 함께) */
-    --imac-scale: min(var(--imac-scale-w), var(--imac-scale-h), .7);
+  .creator__headline{
+    font-size: 2.6rem;
+    line-height: 1.3;
+    margin-bottom: 1.8rem;
   }
 
-  /* 팝업(플로팅 윈도우): 화면 고정 + 가운데 하단 정렬 + 폭 유연 */
-  .floating-window{
-    position: fixed !important;
-    left: 50% !important; right: auto !important;
-    top: auto !important;
-    bottom: max(12px, env(safe-area-inset-bottom, 12px)) !important;
-    transform: translateX(-50%) !important;
-    width: clamp(280px, 92vw, 380px) !important;
-    max-height: 60svh;                 /* 너무 길면 스크롤 */
-    overflow: auto;
-    z-index: 9999;
-  }
-  /* 기존 위치 유틸을 쓰고 있었다면 리셋 */
-  .floating-window--imac-br{ inset: auto !important; }
-
-  /* iMac 주변 여백 살짝 축소(전체가 한눈에 들어오도록) */
-  .projects-title{ margin-bottom: 10rem; }
-}
-
-/* ===== 초소형 단말 추가 보정 (<=390px) ===== */
-@media (max-width:390px){
-  .device--imac{
-    /* 더 타이트하게 높이에 맞춤 */
-    --imac-scale-h: calc((100svh - 8rem) / var(--imac-h-base));
-    --imac-scale: min(var(--imac-scale-w), var(--imac-scale-h), .64);
-  }
-  .floating-window{ width: clamp(260px, 94vw, 340px) !important; }
-}
-/* ===== 모바일 최적화 (<=560px) ===== */
-@media (max-width:560px){
-
-  /* 1) 불필요한 세로 여백 제거 */
-  .projects{
-    height:auto !important;
-    margin:8rem 0 !important;      /* 섹션 간격만 소폭 유지 */
-  }
-  .projects-title{ margin-bottom:12rem !important; }
-
-  /* 2) iMac 전체가 화면 안에 들어오도록 자동 축소 */
-  .device--imac{
-    /* 기준 크기 (기존과 동일) */
-    --imac-w-base: 120rem;
-    --imac-h-base: 90.4rem;
-
-    /* 가로/세로 중 더 빡센 쪽에 맞춤 */
-    --imac-scale-w: calc((100vw - 2*var(--gutter)) / var(--imac-w-base));
-    /* 상하 여유 16rem 확보(타이틀·여백) */
-    --imac-scale-h: calc((100svh - 16rem) / var(--imac-h-base));
-
-    /* 최종 스케일: 과축소 방지 하한 .42, 과대 방지 상한 .66 */
-    --imac-scale: clamp(.42, min(var(--imac-scale-w), var(--imac-scale-h)), .66);
-
-    /* 래퍼 자체 크기도 스케일에 맞춰 재계산 */
-    width:  calc(var(--imac-w-base) * var(--imac-scale)) !important;
-    height: calc(var(--imac-h-base) * var(--imac-scale)) !important;
-
-    margin-inline:auto;
-  }
-  /* 스케일 강제 적용(이전 선언 덮어쓰기) */
-  .device--imac .imac-shell{
-    transform-origin: top left;
-    transform: scale(var(--imac-scale)) !important;
+  .creator__desc{
+    font-size: 1.55rem;
+    line-height: 1.8;
+    word-break: keep-all;
+    white-space: normal;
+    margin-bottom: 3rem;
   }
 
-  /* 3) 플로팅 팝업: 화면 하단 중앙 고정 + 스크롤 가능 */
-  .floating-window{
-    position: fixed !important;
-    left:50% !important; right:auto !important;
-    bottom: max(12px, env(safe-area-inset-bottom, 12px)) !important;
-    top:auto !important;
-    transform: translateX(-50%) !important;
-    width: clamp(260px, 92vw, 360px) !important;
-    max-height: 60svh; overflow:auto;
-    inset:auto !important;       /* 유틸 클래스 리셋 */
-    z-index: 9999;
-  }
-}
-
-/* ===== 초소형 단말 보정 (<=390px) ===== */
-@media (max-width:390px){
-  .device--imac{
-    --imac-scale-h: calc((100svh - 12rem) / var(--imac-h-base));
-    --imac-scale: clamp(.38, min(var(--imac-scale-w), var(--imac-scale-h)), .6);
-  }
-}
-
-
-
-
-
-/* ===== About Me (cvmap) — 초소형 안전 스케일 ===== */
-@media (max-width: 390px){
-  .about-cvmap{
-    /* 가로·세로 중 더 빡센 쪽에 맞춰 자동 스케일 */
-    --cv-w: var(--design-w);
-    --cv-h: 80rem;
-    --cv-scale-w: calc((100vw - 2*var(--gutter)) / var(--cv-w));
-    --cv-scale-h: calc((100svh - 12rem) / var(--cv-h));
-    /* 과축소/과대 방지: 0.38 ~ 0.62 범위 */
-    --cv-scale: clamp(.38, min(var(--cv-scale-w), var(--cv-scale-h)), .62);
-
-    /* 섹션 자체 높이도 스케일 값에 맞춰 고정 → 스크롤 튀는 것 방지 */
-    height: calc(var(--cv-h) * var(--cv-scale)) !important;
-    transform-origin: top center;
-    transform: scale(var(--cv-scale)) !important;
-    margin-block: 4rem !important;   /* 위아래 여유 */
-  }
-}
-
-
-/* =========================
-   ABOUT ME – 반응형 오버라이드
-   (파일 최하단에 붙이기)
-========================= */
-
-/* 공통: 높이/폭 중 더 빡센 쪽에 맞춰 스케일 계산 */
-.about-cvmap{
-  --cv-w: var(--design-w);
-  --cv-h: 80rem;
-  --cv-scale-w: calc((100vw - 2*var(--gutter)) / var(--cv-w));
-  --cv-scale-h: calc((100svh - 12rem) / var(--cv-h)); /* 상하 여유 */
-  --cv-scale: clamp(.6, var(--cv-scale-w), 1);
-}
-
-/* 태블릿 이하: 높이도 함께 고려 */
-@media (max-width: 1024px){
-  .about-cvmap.about-cvmap{
-    --cv-scale: min(var(--cv-scale-w), var(--cv-scale-h));
-    height: calc(var(--cv-h) * var(--cv-scale)) !important;
-    transform-origin: top center !important;
-    transform: scale(var(--cv-scale)) !important;
-    margin-block: 4rem !important;
-  }
-}
-
-/* 스마트폰(<=560px): 더 타이트하게 맞춤 */
-@media (max-width: 560px){
-  .about-cvmap.about-cvmap{
-    --cv-scale-h: calc((100svh - 10rem) / var(--cv-h));
-    --cv-scale: clamp(.44, min(var(--cv-scale-w), var(--cv-scale-h)), .78);
-    height: calc(var(--cv-h) * var(--cv-scale)) !important;
-    transform: scale(var(--cv-scale)) !important;
-    margin-block: 3.2rem !important;
-  }
-
-  /* 스케일 후 텍스트 가독성 살짝 보정 */
-  .bubble__label{ font-size: 2.6rem; }
-  .list-plain li{ font-size: 1.6rem; }
-  .ink-title-svg{ height: 22rem; }
-}
-
-/* 초소형(<=390px): 세로 우선 피팅 + 글자 크기 추가 보정 */
-@media (max-width: 390px){
-  .about-cvmap.about-cvmap{
-    --cv-scale-h: calc((100svh - 8rem) / var(--cv-h));
-    --cv-scale: clamp(.36, min(var(--cv-scale-w), var(--cv-scale-h)), .64);
-    height: calc(var(--cv-h) * var(--cv-scale)) !important;
-    transform: scale(var(--cv-scale)) !important;
-    margin-block: 2.4rem !important;
-  }
-
-  .bubble__label{ font-size: 2.3rem; }
-  .list-plain li{ font-size: 1.5rem; }
-  .ink-title-svg{ height: 20rem; }
-
-  /* 드문 경우: 초기 등장 애니메이션이 밀어내면 고정 */
-  .cv-center[data-reveal]{ 
-    opacity: 1 !important;
-    transform: translate(-50%, -50%) !important;
-  }
-}
-
-/* 안전 가드: 섹션 박스가 밖으로 잘리지 않도록 */
-.about-cvmap{ overflow: visible !important; }
-
-img[onerror]{ opacity:.9; }
-img.is-fallback{ object-fit: contain; background:#f6f6f6; }
-
-/* ========= Mobile/Tablet responsive for Glossier Phones & Zigzag ========= */
-
-/* 포인터/커서: 터치 환경에서는 커서 숨김 해제 */
-@media (hover: none) and (pointer: coarse){
-  html{ cursor:auto; }
-}
-
-/* 태블릿 이하: 834px */
-@media (max-width: 834px){
-
-  /* 섹션 타이틀 정돈 */
-  .glossier{
-    font-size: clamp(3.6rem, 6vw, 6.4rem);
-    align-items: flex-start;
-    margin-bottom: 1.6rem;
-  }
-
-  /* 좌:아이폰 / 우:메타 → 세로 스택 */
-  #glossier-phones{
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    width: min(100%, 94vw);
-  }
-
-  /* 아이폰 2대: 가로 두 장 → 상황에 따라 한 줄/두 줄 자동 */
-  #glossier-phones .phone-pair{
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.6rem;
+  .contact__strengths{
     justify-content: center;
+    text-align: center;
   }
 
-  /* 프레임 크기 유동화 (고정값 → 뷰포트 기반) */
-  .phone-glossier.frame-base{
-    width: clamp(22rem, 44vw, 30rem);
-    height: auto;
-    aspect-ratio: 9 / 19;
-    border-radius: 3.6rem;
-  }
-  .phone-glossier .layer2{
-    width: calc(100% - 1.3rem);
-    height: calc(100% - 1.3rem);
-    border-radius: 3.2rem;
-    top: .65rem;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  .phone-glossier .screen{
-    width: calc(100% - 3.3rem);
-    height: calc(100% - 4.1rem);
-    top: 1.5rem;
-    border-radius: 3rem;
+  .pill{
+    font-size: 1.4rem;
+    padding: .6rem 1.2rem;
   }
 
-  /* 하드웨어 디테일 위치 스케일 보정 */
-  .phone-glossier .mask{ width: 50%; height: 2.2rem; }
-  .phone-glossier .speaker{ width: 3rem; }
-  .phone-glossier .port{ width: 2.6rem; }
-
-  /* 라이브 임베드 영역은 화면 비에 맞춰 꽉 채움 */
-  .phone-live .phone-embed-wrap{
-    inset: 0;
-    transform: none;
+  .p-footer{
+    min-height: auto;
+    padding: 5.4rem 0 4.8rem;
+    align-items: flex-start;
   }
-  .phone-live .phone-embed{
+  .footer-inner{
+    padding-inline: 1.8rem;
+    text-align: center;
+  }
+  .contact__title{
+    font-size: clamp(3.2rem, 7vw, 3.8rem);
+  }
+  .contact__subtitle{
+    margin-top: 1.6rem;
+    text-align: left;
+  }
+
+  /* ------- 블러 원 축소 ------- */
+  .sun-dot--1{ width: 12rem; height: 12rem; top: 1rem; left: -2rem; }
+  .sun-dot--2{ width: 18rem; height: 18rem; top: 14rem; left: 3rem; }
+  .sun-dot--3{ width: 6rem;  height: 6rem;  top: 7rem;  left: 65%; }
+  .sun-dot--4{ width: 12rem; height: 12rem; top: 18rem; right: -3rem; left:auto; }
+
+  /* ------- contact chips 영역 ------- */
+  .contact-chips__wrap{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .chips{
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
     width: 100%;
-    height: 100%;
-  }
-
-  /* 메타 카드 여백/폭 축소 */
-  .g-card-meta.phone-meta{
-    max-width: 56rem;
-    margin-top: 4rem;
-    padding: 2rem 1.6rem;
-    font-size: 1.45rem;
-  }
-
-/* 폰 사이즈: 480px 이하 */
-@media (max-width: 480px){
-
-  /* 아이폰 2대 → 세로 한 줄 스택 */
-  #glossier-phones .phone-pair{
-    grid-template-columns: 1fr;
     gap: 1.2rem;
   }
 
-  /* 프레임 더 작게 */
-  .phone-glossier.frame-base{
-    width: min(88vw, 30rem);
-    aspect-ratio: 9 / 19;
-    border-radius: 3.2rem;
-  }
-  .phone-glossier .layer2{ border-radius: 2.8rem; }
-  .phone-glossier .screen{ border-radius: 2.4rem; }
+  /* 📱 모바일 칩 레이아웃 (아이콘 왼쪽 + 텍스트 두 줄 중앙) */
+  .chip{
+    width: 90%;
+    max-width: 36rem;
 
-  .g-card-meta.phone-meta{
-    max-width: 100%;
-    margin-top: 2.8rem;
-    padding: 1.6rem 1.4rem;
+    display: grid;
+    grid-template-columns: 2.6rem 1fr;
+    column-gap: 1rem;
+    align-items: center;
+
+    padding: 1.2rem 1.8rem;
+    text-align: left;
     font-size: 1.4rem;
   }
-  .g-card-meta h3{ font-size: 1.8rem; }
-  .g-card-meta .meta-desc{ font-size: 1.4rem; }
 
+  .chip__icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.6rem;
+    transform: translateY(0);
+  }
+
+  .chip__label,
+  .chip__meta{
+    display: block;
+    line-height: 1.35;
+  }
+
+  .chip__label{
+    font-size: 1.45rem;
+    font-weight: 800;
+    margin-bottom: .1rem;
+  }
+
+  .chip__meta{
+    font-size: 1.3rem;
+    color: #6b7280;
+  }
+
+  .chips__note{
+    text-align: center;
+    margin-top: 2rem;
+  }
 }
-/* 초소형: 360px 이하(older Android 대비) */
-@media (max-width: 360px){
-  .glossier{ font-size: 3.2rem; }
-  .g-card-meta.phone-meta{ font-size: 1.3rem; }
-  .g-card-meta h3{ font-size: 1.6rem; }
+
+
+/* =========================================================
+   📱 3) 작은 모바일 (<= 480px)
+========================================================= */
+@media (max-width: 480px) {
+
+  .creator-statement{
+    padding: 5rem 1.6rem 4.2rem;
+  }
+
+  .creator__headline{
+    font-size: 2.4rem;
+  }
+
+  .creator__desc{
+    font-size: 1.5rem;
+  }
+
+  .pill{
+    font-size: 1.3rem;
+  }
+
+  .contact__title{
+    font-size: 2.8rem;
+  }
+
+  .contact__subtitle{
+    font-size: 1.6rem;
+  }
+
+  /* 칩은 이미 grid로 세팅되어 있으므로 폰트 수정만 진행 */
+  .chip__label{
+    font-size: 1.4rem;
+  }
+
+  .chip__meta{
+    font-size: 1.25rem;
+    margin-left: 3.5rem;
+  }
+
+  .chips__note{
+    text-align: center;
+  }
 }
